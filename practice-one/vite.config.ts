@@ -10,6 +10,8 @@ export default defineConfig({
       '@features': '/src/features',
       '@components': '/src/components',
       '@hooks': '/src/hooks',
+      '@constants': '/src/constants',
+      '@services': '/src/services',
     },
   },
 })
