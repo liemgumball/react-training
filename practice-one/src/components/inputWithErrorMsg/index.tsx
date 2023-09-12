@@ -5,7 +5,7 @@ type InputWithLabelProps = {
   id: string
   type: string
   placeholder?: string
-  errorMsg?: string
+  errorMsg?: string | null
 }
 
 const InputWithErrorMsg = forwardRef(
