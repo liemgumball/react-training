@@ -3,6 +3,7 @@ import { login } from './services/login'
 import InputWithErrorMsg from '@components/inputWithErrorMsg'
 import { emailRegex, passwordRegex } from '@constants/regex'
 import { ERROR_MSG } from '@constants/constant'
+import logo from '@assets/big-logo.svg'
 
 type authenticationProps = {
   setIsLoggedIn: Dispatch<
@@ -58,16 +59,7 @@ const Authentication: React.FC<authenticationProps> = ({ setIsLoggedIn }) => {
   return (
     <div className="login-card capitalize bg-white p-8 rounded-lg shadow-lg text-black text-sm text-center flex flex-col gap-y-10 justify-between">
       <div className="flex items-center justify-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="6"
-          height="39"
-          viewBox="0 0 6 39"
-          fill="none"
-          className="mr-5"
-        >
-          <path d="M3 0L3 39" stroke="#F8D442" strokeWidth="6" />
-        </svg>
+        {logo}
         <h1 className="text-3xl uppercase font-semibold">CRUD operations</h1>
       </div>
       <div>
