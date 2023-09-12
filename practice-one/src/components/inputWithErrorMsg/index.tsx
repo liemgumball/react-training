@@ -5,14 +5,13 @@ type InputWithLabelProps = {
   id: string
   type: string
   placeholder?: string
-  errorMsg?: string | null
+  errorMsg?: string
 }
 
 const InputWithErrorMsg = forwardRef(
-  (
-    { name, id, type, placeholder, errorMsg }: InputWithLabelProps,
-    ref: LegacyRef<HTMLInputElement>
-  ) => {
+  (props: InputWithLabelProps, ref: LegacyRef<HTMLInputElement>) => {
+    const { name, id, type, placeholder, errorMsg } = props
+
     return (
       <div className="input-field grid grid-cols-1 mb-5">
         <label htmlFor={id}>{name}</label>
