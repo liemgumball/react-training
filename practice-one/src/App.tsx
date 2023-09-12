@@ -1,6 +1,9 @@
+import Sidebar from '@components/Sidebar'
 import './App.css'
 import LoginPage from './pages/LoginPage'
 import useLocalStorage from '@hooks/useLocalStorage'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import DashBoard from './pages/DashBoard'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage('user', {
@@ -10,7 +13,14 @@ function App() {
   })
 
   return isLoggedIn.isLoggedIn ? (
-    <div className="bg-red-300">React Practice One</div>
+    <Router>
+      <div className="bg-custom-gray">
+        <Sidebar />
+        <Routes>
+          <Route path="/" Component={DashBoard} />
+        </Routes>
+      </div>
+    </Router>
   ) : (
     <LoginPage setIsLoggedIn={setIsLoggedIn} />
   )
