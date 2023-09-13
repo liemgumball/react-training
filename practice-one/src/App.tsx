@@ -3,7 +3,8 @@ import './App.css'
 import LoginPage from './pages/LoginPage'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import DashBoard from './pages/DashBoard'
+import Header from '@components/Header'
+import DashBoardPage from './pages/DashBoardPage'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage('user', {
@@ -14,10 +15,11 @@ function App() {
 
   return isLoggedIn.isLoggedIn ? (
     <Router>
-      <div className="bg-custom-gray">
+      <div className="bg-custom-gray flex h-full overflow-y-scroll capitalize">
         <Sidebar />
+        <Header />
         <Routes>
-          <Route path="/" Component={DashBoard} />
+          <Route path="/dashboard" Component={DashBoardPage} />
         </Routes>
       </div>
     </Router>
