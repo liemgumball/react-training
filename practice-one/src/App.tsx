@@ -5,26 +5,38 @@ import useLocalStorage from '@hooks/useLocalStorage'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from '@components/Header'
 import DashBoardPage from './pages/DashBoardPage'
+import PublicRoutes from './utils/PublicRoutes'
+
+export type authType = {
+  accessToken: string
+  name: string
+}
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useLocalStorage('user', {
-    isLoggedIn: false,
+  const [auth, setAuth] = useLocalStorage('user', {
     accessToken: '',
     name: '',
   })
 
-  return isLoggedIn.isLoggedIn ? (
+  return auth.accessToken ? (
     <Router>
       <div className="bg-custom-gray flex h-full overflow-y-scroll capitalize">
-        <Sidebar />
+        <Sidebar setAuth={setAuth} />
         <Header />
         <Routes>
-          <Route path="/dashboard" Component={DashBoardPage} />
+          <Route path="/" Component={DashBoardPage} />
         </Routes>
       </div>
     </Router>
   ) : (
-    <LoginPage setIsLoggedIn={setIsLoggedIn} />
+    <Router>
+      <PublicRoutes auth={auth} navTo="/login">
+        <Route
+          path="/login"
+          element={<LoginPage setAuth={setAuth}></LoginPage>}
+        />
+      </PublicRoutes>
+    </Router>
   )
 }
 

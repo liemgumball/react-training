@@ -8,8 +8,18 @@ import usdSquare from '@assets/usdSquare.svg'
 import fileChartLine from '@assets/fileChartLine.svg'
 import sliderSquare from '@assets/sliderSquare.svg'
 import signOut from '@assets/signOut.svg'
+import { authType } from 'src/App'
+import { Dispatch, SetStateAction } from 'react'
 
-const Sidebar = () => {
+type SidebarProps = {
+  setAuth: Dispatch<SetStateAction<authType>>
+}
+
+const Sidebar = ({ setAuth }: SidebarProps) => {
+  const logout = () => {
+    setAuth({ accessToken: '', name: '' })
+  }
+
   return (
     <aside className="bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 min-h-screen h-full min-w-max">
       <div className="flex items-center justify-center">
@@ -56,7 +66,10 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      <button className="capitalize">
+      <button
+        className="capitalize px-16 py-3 rounded-lg hover:bg-custom-gray"
+        onClick={logout}
+      >
         logout
         <img src={signOut} alt="sign out" className="inline-block mx-2" />
       </button>

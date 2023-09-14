@@ -1,16 +1,15 @@
 import Authentication from '@features/authentication'
 import { Dispatch, SetStateAction } from 'react'
+import { authType } from 'src/App'
 
 type LoginPageProps = {
-  setIsLoggedIn: Dispatch<
-    SetStateAction<{ isLoggedIn: boolean; accessToken: string; name: string }>
-  >
+  setAuth: Dispatch<SetStateAction<authType>>
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
   return (
     <div className="gradient-custom min-h-screen w-screen flex justify-center items-center">
-      <Authentication setIsLoggedIn={setIsLoggedIn} />
+      <Authentication setAuth={setAuth} />
     </div>
   )
 }
