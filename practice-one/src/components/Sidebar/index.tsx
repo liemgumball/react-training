@@ -13,33 +13,36 @@ import { Dispatch, SetStateAction } from 'react'
 
 type SidebarProps = {
   setAuth: Dispatch<SetStateAction<authType>>
+  username: string
 }
 
-const Sidebar = ({ setAuth }: SidebarProps) => {
+const Sidebar = ({ setAuth, username }: SidebarProps) => {
   const logout = () => {
     setAuth({ accessToken: '', name: '' })
   }
 
   return (
-    <aside className="bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 min-h-screen h-full min-w-max">
+    <aside className="sidebar bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 min-h-screen h-full">
       <div className="flex items-center justify-center">
         <img src={smallLogo} alt="Logo" />
         <h1 className="text-xl uppercase font-semibold">CRUD operations</h1>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">
-          <img
-            src={avatar}
-            alt="avatar"
-            className="rounded-full w-full h-full"
-          />
+          <div className="img-container">
+            <img
+              src={avatar}
+              alt="avatar"
+              className="rounded-full w-full h-full"
+            />
+          </div>
         </div>
-        <h2 className="font-700 text-xl">Karthi Madesh</h2>
+        <h2 className="font-700 text-xl">{username}</h2>
         <p className="text-custom-yellow">Admin</p>
       </div>
       <nav className="p-5">
         <ul>
-          <NavItem pathname="/dashboard">
+          <NavItem pathname="/">
             <img src={house} alt="house" />
             home
           </NavItem>
