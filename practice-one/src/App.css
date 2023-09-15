@@ -1,4 +1,4 @@
-.gradient-custom {
+.bg-gradient-custom {
   background: linear-gradient(71deg, #feaf00 19.35%, #f8d442 90.12%);
 }
 
@@ -15,7 +15,6 @@
   min-height: 128px;
 }
 
-.dashboad-card .img-container {
-  min-width: 48px;
-  min-height: 30px;
+.dashboard-card .img-container {
+  min-height: 40px;
 }

@@ -8,7 +8,7 @@ type LoginPageProps = {
 
 const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
   return (
-    <div className="gradient-custom min-h-screen w-screen flex justify-center items-center">
+    <div className="bg-gradient-custom min-h-screen w-screen flex justify-center items-center">
       <Authentication setAuth={setAuth} />
     </div>
   )
