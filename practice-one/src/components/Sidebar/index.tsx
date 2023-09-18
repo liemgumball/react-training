@@ -25,7 +25,7 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
     <aside className="sidebar bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 min-h-screen h-full">
       <div className="flex items-center justify-center">
         <img src={smallLogo} alt="Logo" />
-        <h1 className="text-xl uppercase font-semibold">CRUD operations</h1>
+        <p className="text-xl uppercase font-semibold">CRUD operations</p>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">
