@@ -1,6 +1,7 @@
-#root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
+.gradient-custom {
+  background: linear-gradient(71deg, #feaf00 19.35%, #f8d442 90.12%);
+}
+
+.login-card {
+  min-width: 500px;
 }
