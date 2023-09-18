@@ -4,14 +4,16 @@ import InputWithErrorMsg from '@components/inputWithErrorMsg'
 import { emailRegex, passwordRegex } from '@constants/regex'
 import { ERROR_MSG } from '@constants/constant'
 import bigLogo from '@assets/bigLogo.svg'
+import { authType } from 'src/App'
+import { useNavigate } from 'react-router-dom'
 
 type authenticationProps = {
-  setIsLoggedIn: Dispatch<
-    SetStateAction<{ isLoggedIn: boolean; accessToken: string; name: string }>
-  >
+  setAuth: Dispatch<SetStateAction<authType>>
 }
 
-const Authentication: React.FC<authenticationProps> = ({ setIsLoggedIn }) => {
+const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
+  const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false)
   const emailRef = useRef<HTMLInputElement | null>(null)
   const [emailError, setEmailError] = useState<string | null>(null)
@@ -46,11 +48,11 @@ const Authentication: React.FC<authenticationProps> = ({ setIsLoggedIn }) => {
         setEmailError(response.message)
         setPasswordError(response.message)
       } else {
-        setIsLoggedIn({
-          isLoggedIn: true,
+        setAuth({
           accessToken: response.accessToken,
           name: response.user.name,
         })
+        navigate('/')
       }
     }
     setLoading(false)
@@ -72,6 +74,7 @@ const Authentication: React.FC<authenticationProps> = ({ setIsLoggedIn }) => {
         className="text-left"
         onSubmit={(e) => {
           e.preventDefault()
+          // console.log('first')
           handleLogin()
         }}
       >
