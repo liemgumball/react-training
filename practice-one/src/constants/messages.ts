@@ -1,14 +1,9 @@
-export const API_GATEWAY = 'http://localhost:3000'
-
-export const DATABASE_RESOURCES = {
-  LOGIN: 'login',
-  STUDENTS: 'students',
-  PAYMENTS: 'payments',
-}
-
 export const ERROR_MSG = {
+  INVALID_NAME: 'Please enter a valid name',
   INVALID_EMAIL: 'Email must be a valid email address',
   INVALID_PASSWORD:
     'At least 6 characters, 1 uppercase, 1 digit and 1 special character',
+  INVALID_PHONENUMBER: 'Please enter a valid international phone number format',
+  INVALID_ENROLLNUMBER: 'Enrollment number must be at least 8 characters',
   WRONG_EMAIL_OR_PASSWORD: 'Wrong email or password',
 }

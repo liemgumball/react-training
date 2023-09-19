@@ -1,4 +1,4 @@
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/constant'
+import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 import List from '@features/list'
 import StudentForm from '@features/studentForm'
 import { useDeferredValue, useState } from 'react'

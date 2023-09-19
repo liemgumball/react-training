@@ -1,11 +1,12 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { login } from './services/login'
 import InputWithErrorMsg from '@components/inputWithErrorMsg'
-import { emailRegex, passwordRegex } from '@constants/regex'
-import { ERROR_MSG } from '@constants/constant'
+import { emailRegex, passwordRegex } from '@constants/regexs'
+import { ERROR_MSG } from '@constants/messages'
 import bigLogo from '@assets/bigLogo.svg'
 import { authType } from 'src/App'
 import { useNavigate } from 'react-router-dom'
+import { PATH_NAME } from '@constants/services'
 
 type authenticationProps = {
   setAuth: Dispatch<SetStateAction<authType>>
@@ -52,7 +53,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           accessToken: response.accessToken,
           name: response.user.name,
         })
-        navigate('/')
+        navigate(PATH_NAME.HOME)
       }
     }
     setLoading(false)
@@ -106,7 +107,10 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         </button>
         <p className="text-center">
           Forgot your password?{' '}
-          <a className="text-custom-yellow underline" href="#">
+          <a
+            className="text-custom-yellow underline"
+            href={PATH_NAME.EMPTY_PAGE}
+          >
             Reset Password
           </a>
         </p>

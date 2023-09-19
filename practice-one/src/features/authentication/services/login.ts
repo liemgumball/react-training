@@ -1,4 +1,5 @@
-import { API_GATEWAY, DATABASE_RESOURCES, ERROR_MSG } from '@constants/constant'
+import { ERROR_MSG } from '@constants/messages'
+import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 import { ApiMethod, apiRequest } from '@services/apiRequest'
 
 type loginResponse = {

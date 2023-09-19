@@ -8,6 +8,7 @@ import DashBoardPage from './pages/DashBoardPage'
 import PublicRoutes from './utils/PublicRoutes'
 import { useState } from 'react'
 import StudentPage from './pages/StudentPage'
+import { PATH_NAME } from '@constants/services'
 
 export type authType = {
   accessToken: string
@@ -29,9 +30,9 @@ function App() {
         <main className="w-full max-h-screen">
           <Header setSearchText={setSearchText} />
           <Routes>
-            <Route path="/" element={<DashBoardPage />} />
+            <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
             <Route
-              path="/students"
+              path={PATH_NAME.STUDENTS}
               element={<StudentPage searchText={searchText} />}
             />
           </Routes>
@@ -40,9 +41,9 @@ function App() {
     </Router>
   ) : (
     <Router>
-      <PublicRoutes auth={auth} navTo="/login">
+      <PublicRoutes auth={auth} navTo={PATH_NAME.LOGIN}>
         <Route
-          path="/login"
+          path={PATH_NAME.LOGIN}
           element={<LoginPage setAuth={setAuth}></LoginPage>}
         />
       </PublicRoutes>
