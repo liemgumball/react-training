@@ -1,3 +1,7 @@
+import pen from '@assets/pen.svg'
+import trash from '@assets/trash.svg'
+import ButtonIcon from '@components/ButtonIcon'
+
 export type TStudent = {
   createdAt: string
   name: string
@@ -16,7 +20,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
   const { data } = props
 
   return (
-    <li className="my-2 grid student border rounded-xl items-center hover:bg-custom-white cursor-pointer font-400 whitespace-no-wrap truncate">
+    <li className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige cursor-pointer font-400 whitespace-no-wrap truncate">
       <div>
         <img
           src={data.avatar}
@@ -31,7 +35,10 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
       <div>{data.phone}</div>
       <div>{data.enrollNumber}</div>
       <div>{new Date(data.createdAt).toDateString()}</div>
-      <div className="action-group"></div>
+      <div className="action-group flex gap-x-2 justify-end">
+        <ButtonIcon iconSrc={trash} alt="trash" />
+        <ButtonIcon iconSrc={pen} alt="pen" />
+      </div>
     </li>
   )
 }
