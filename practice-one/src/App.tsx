@@ -7,6 +7,7 @@ import Header from '@components/Header'
 import DashBoardPage from './pages/DashBoardPage'
 import PublicRoutes from './utils/PublicRoutes'
 import { useState } from 'react'
+import StudentPage from './pages/StudentPage'
 
 export type authType = {
   accessToken: string
@@ -23,14 +24,15 @@ function App() {
 
   return auth.accessToken ? (
     <Router>
-      <div className="bg-white flex h-full overflow-y-scroll capitalize">
+      <div className="bg-white flex capitalize">
         <Sidebar setAuth={setAuth} username={auth.name} />
-        <main className="w-full">
+        <main className="w-full max-h-screen">
           <Header setSearchText={setSearchText} />
           <Routes>
+            <Route path="/" element={<DashBoardPage />} />
             <Route
-              path="/"
-              element={<DashBoardPage searchText={searchText} />}
+              path="/students"
+              element={<StudentPage searchText={searchText} />}
             />
           </Routes>
         </main>

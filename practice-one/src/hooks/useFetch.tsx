@@ -16,6 +16,7 @@ function useFetch<T>(
 
   useEffect(() => {
     const controller = new AbortController()
+
     const fetchData = async () => {
       try {
         setLoading(true)
@@ -23,26 +24,26 @@ function useFetch<T>(
           ...options,
           signal: controller.signal,
         })
-
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
 
         const result = await response.json()
         setData(result)
+        setLoading(false)
+        setError(null)
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
           setError(err as Error)
+          setLoading(false)
         }
-      } finally {
-        setLoading(false)
       }
     }
 
     fetchData()
 
     return () => {
-      controller.abort() // abort the fetch request when the component unmounted.
+      controller.abort() //abort the fetch request when the component unmounted.
     }
   }, [url, options])
 

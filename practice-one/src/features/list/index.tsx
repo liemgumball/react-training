@@ -1,37 +1,34 @@
 import useFetch from '@hooks/useFetch'
-import StudentListItem, { TStudent } from './components/StudentListItem'
-import PaymentListItem, { TPayment } from './components/PaymentListItem'
 
-type ListProps = {
+type ListProps<T> = {
   url: string
-  type: 'students' | 'payments'
+  ItemComponent: React.ComponentType<{ data: T & { id: number } }>
 }
 
-const List = ({ url, type }: ListProps) => {
-  const ItemComponent = type === 'students' ? StudentListItem : PaymentListItem
+const List = <T,>(props: ListProps<T>) => {
+  const { url, ItemComponent } = props
 
-  const { data, error, loading } = useFetch<TStudent[] | TPayment[]>(url)
+  const { data, error, loading } = useFetch<(T & { id: number })[]>(url)
 
-  console.log(data, error, loading)
+  if (error)
+    return <p className="text-red-500 text-sm text-center">{error.message}</p>
 
   return (
-    <>
-      {error && <p>{error.message}</p>}
-      <ul>
-        {loading ? (
-          <li>Loading...</li>
-        ) : data ? (
-          data.map((item, idx) => (
-            <ItemComponent
-              key={item.id || idx}
-              data={item as TStudent & TPayment}
-            />
-          ))
-        ) : (
-          <li>Not found</li>
-        )}
-      </ul>
-    </>
+    <ul className="overflow-y-scroll">
+      {loading ? (
+        <p className="text-custom-dark-gray font-700 m-5 text-center">
+          Loading...
+        </p>
+      ) : data && data.length != 0 ? (
+        data.map((item, idx) => (
+          <ItemComponent key={item.id || idx} data={item} />
+        ))
+      ) : (
+        <p className="text-custom-dark-gray font-700 m-5 text-center">
+          Not found
+        </p>
+      )}
+    </ul>
   )
 }
 

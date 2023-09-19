@@ -16,7 +16,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
   const { data } = props
 
   return (
-    <li className="my-2 grid student border rounded-xl items-center hover:bg-custom-white cursor-pointer">
+    <li className="my-2 grid student border rounded-xl items-center hover:bg-custom-white cursor-pointer font-400 whitespace-no-wrap truncate">
       <div>
         <img
           src={data.avatar}
@@ -27,11 +27,11 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
         />
       </div>
       <div>{data.name}</div>
-      <div className="whitespace-no-wrap truncate">{data.email}</div>
+      <div>{data.email}</div>
       <div>{data.phone}</div>
       <div>{data.enrollNumber}</div>
       <div>{new Date(data.createdAt).toDateString()}</div>
-      <div className="btn-group"></div>
+      <div className="action-group"></div>
     </li>
   )
 }
