@@ -1,20 +1,22 @@
 import { forwardRef, LegacyRef } from 'react'
 
 type InputWithLabelProps = {
+  showLabel?: boolean
   name: string
   id: string
-  type: string
+  type: React.HTMLInputTypeAttribute
+  value?: string
   placeholder?: string
   errorMsg?: string | null
 }
 
 const InputWithErrorMsg = forwardRef(
   (props: InputWithLabelProps, ref: LegacyRef<HTMLInputElement>) => {
-    const { name, id, type, placeholder, errorMsg } = props
+    const { showLabel, name, id, type, placeholder, errorMsg } = props
 
     return (
-      <div className="input-field grid grid-cols-1 mb-5">
-        <label htmlFor={id}>{name}</label>
+      <div className="input-field flex flex-col mb-5">
+        {showLabel && <label htmlFor={id}>{name}</label>}
         <input
           className={`border rounded-md p-3 mt-1 w-full ${
             errorMsg ? 'border-red-500' : 'border-gray-500'

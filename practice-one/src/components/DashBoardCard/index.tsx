@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link, To } from 'react-router-dom'
 
 type DashBoardCardProps = {
   cardName: string
   mainInfo: string
   className: string
-  to: string
+  to: To
   children?: React.ReactNode
 }
 
@@ -17,7 +17,7 @@ const DashBoardCard = (props: DashBoardCardProps) => {
     >
       {children}
       <p className="text mt-2">{cardName}</p>
-      <p className="text-4xl mt-3 text-black font-700 text-end  uppercase">
+      <p className="text-4xl mt-3 text-black font-700 text-end uppercase">
         {mainInfo}
       </p>
     </Link>

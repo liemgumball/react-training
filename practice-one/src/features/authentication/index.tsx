@@ -74,11 +74,11 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         className="text-left"
         onSubmit={(e) => {
           e.preventDefault()
-          // console.log('first')
           handleLogin()
         }}
       >
         <InputWithErrorMsg
+          showLabel
           id="email"
           name="Email"
           type="text"
@@ -87,6 +87,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           errorMsg={emailError}
         />
         <InputWithErrorMsg
+          showLabel
           id="password"
           name="Password"
           type="text"

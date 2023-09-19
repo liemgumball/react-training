@@ -35,7 +35,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
       <div>{data.phone}</div>
       <div>{data.enrollNumber}</div>
       <div>{new Date(data.createdAt).toDateString()}</div>
-      <div className="action-group flex gap-x-5 px-5 justify-end">
+      <div className="action-group flex gap-x-2 justify-end">
         <ButtonIcon iconSrc={trash} alt="trash" />
         <ButtonIcon iconSrc={pen} alt="pen" />
       </div>
