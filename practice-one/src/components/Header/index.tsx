@@ -12,7 +12,7 @@ const Header = ({ setSearchText }: HeaderProps) => {
           type="text"
           name="Search"
           id="search"
-          placeholder="Search..."
+          placeholder="Search by name..."
           className="py-2 px-5 rounded-lg border-2 border-custom-gray text-lg"
           onChange={(e) => {
             e.preventDefault()

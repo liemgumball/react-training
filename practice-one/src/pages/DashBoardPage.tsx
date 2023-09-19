@@ -8,7 +8,7 @@ const DashBoardPage = () => {
   return (
     <article className="p-8 h-auto grid grid-cols-4 gap-8 items-strech">
       <DashBoardCard
-        to="/"
+        to="/students"
         className="bg-custom-light-blue text-custom-dark-gray"
         cardName="students"
         mainInfo="243"
