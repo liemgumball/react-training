@@ -1,8 +1,10 @@
 import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/constant'
 import List from '@features/list'
-import StudentListItem from '@features/list/components/StudentListItem'
 import StudentForm from '@features/studentForm'
 import { useDeferredValue, useState } from 'react'
+import StudentListItem, {
+  TStudent,
+} from '@features/list/components/StudentListItem'
 
 type StudentPageProps = {
   searchText: string
@@ -48,7 +50,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
             <div>date of admission</div>
             <div></div>
           </div>
-          <List url={url} ItemComponent={StudentListItem}></List>
+          <List<TStudent> url={url} ItemComponent={StudentListItem}></List>
         </div>
       </article>
       <div
