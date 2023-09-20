@@ -28,7 +28,7 @@ function App() {
       <div className="bg-white flex capitalize">
         <Sidebar setAuth={setAuth} username={auth.name} />
         <main className="w-full max-h-screen">
-          <Header setSearchText={setSearchText} />
+          <Header searchText={searchText} setSearchText={setSearchText} />
           <Routes>
             <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
             <Route

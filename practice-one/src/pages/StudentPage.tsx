@@ -10,7 +10,7 @@ type StudentPageProps = {
   searchText: string
 }
 
-type FormPopupProps = {
+export type FormPopupProps = {
   show: boolean
   title?: string
 }
@@ -19,9 +19,11 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
   const [formPopup, setFormPopup] = useState({
     show: false,
   } as FormPopupProps)
+  const [updateStudents, setUpdateStudents] = useState(false)
+
   const keywords = useDeferredValue(searchText)
 
-  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?name_like=${keywords}`
+  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&name_like=${keywords}`
 
   return (
     <>
@@ -50,7 +52,11 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
             <div>date of admission</div>
             <div></div>
           </div>
-          <List<TStudent> url={url} ItemComponent={StudentListItem}></List>
+          <List<TStudent>
+            url={url}
+            ItemComponent={StudentListItem}
+            updateTrigger={updateStudents}
+          ></List>
         </div>
       </article>
       <div
@@ -62,7 +68,10 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
           className="fixed inset-0 bg-black opacity-50"
           onClick={() => setFormPopup({ show: false })}
         ></div>
-        <StudentForm />
+        <StudentForm
+          setFormPopup={setFormPopup}
+          setUpdateStudents={setUpdateStudents}
+        />
       </div>
     </>
   )

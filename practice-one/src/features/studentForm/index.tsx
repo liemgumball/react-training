@@ -2,6 +2,8 @@ import InputWithErrorMsg from '@components/inputWithErrorMsg'
 import { TStudent } from '@features/list/components/StudentListItem'
 import { useRef, useState } from 'react'
 import { formvalidate } from './services/formvalidate'
+import { addStudent } from './services/addStudent'
+import { FormPopupProps } from 'src/pages/StudentPage'
 
 export type StudentFormDataType = Pick<
   TStudent,
@@ -11,11 +13,14 @@ export type StudentFormDataType = Pick<
 type StudentFormProps = {
   title?: string
   data?: TStudent
+  setFormPopup: React.Dispatch<React.SetStateAction<FormPopupProps>>
+  setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const StudentForm = (props: StudentFormProps) => {
-  const { title, data } = props
+  const { title, data, setFormPopup, setUpdateStudents } = props
 
+  const [loading, setLoading] = useState(false)
   const nameRef = useRef<HTMLInputElement | null>(null)
   const emailRef = useRef<HTMLInputElement | null>(null)
   const phoneRef = useRef<HTMLInputElement | null>(null)
@@ -28,14 +33,31 @@ const StudentForm = (props: StudentFormProps) => {
     enrollNumber: string
   } | null>(null)
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const data: StudentFormDataType = {
-      name: nameRef.current!.value,
-      email: emailRef.current!.value,
-      phone: phoneRef.current!.value,
-      enrollNumber: +enrollNumberRef.current!.value,
+      name: nameRef.current!.value.trim(),
+      email: emailRef.current!.value.trim(),
+      phone: phoneRef.current!.value.trim(),
+      enrollNumber: +enrollNumberRef.current!.value.trim(),
     }
-    formvalidate(data, setFormError)
+
+    const validation = formvalidate(data, setFormError)
+
+    if (validation) {
+      try {
+        setLoading(true)
+        const responeStudent = await addStudent(data)
+        if (responeStudent) {
+          setFormPopup({ show: false })
+          setUpdateStudents((p) => !p)
+        }
+      } catch (err) {
+        console.log('err')
+        alert((err as Error).message)
+      } finally {
+        setLoading(false)
+      }
+    }
   }
 
   return (
@@ -86,9 +108,11 @@ const StudentForm = (props: StudentFormProps) => {
             e.preventDefault()
             handleSubmit()
           }}
-          className="block mx-auto bg-custom-yellow rounded-lg py-4 px-16 text-xl text-white text-center uppercase hover:shadow-xl"
+          className={`${
+            loading ? 'bg-custom-gray' : 'bg-custom-yellow'
+          } block mx-auto rounded-lg py-4 px-16 text-xl text-white text-center uppercase hover:shadow-xl`}
         >
-          done
+          {loading ? 'loading...' : 'done'}
         </button>
       </form>
     </div>

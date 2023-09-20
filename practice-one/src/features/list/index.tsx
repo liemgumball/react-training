@@ -3,12 +3,18 @@ import useFetch from '@hooks/useFetch'
 type ListProps<T> = {
   url: string
   ItemComponent: React.ComponentType<{ data: T & { id: number } }>
+  requestOptions?: RequestInit
+  updateTrigger?: boolean
 }
 
 const List = <T,>(props: ListProps<T>) => {
-  const { url, ItemComponent } = props
+  const { url, requestOptions, ItemComponent, updateTrigger } = props
 
-  const { data, error, loading } = useFetch<(T & { id: number })[]>(url)
+  const { data, error, loading } = useFetch<(T & { id: number })[]>(
+    url,
+    requestOptions,
+    updateTrigger
+  )
 
   if (error)
     return <p className="text-red-500 text-sm text-center">{error.message}</p>
