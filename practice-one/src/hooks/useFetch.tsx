@@ -8,7 +8,8 @@ interface FetchResult<T> {
 
 function useFetch<T>(
   url: string,
-  options?: RequestInit | null
+  options?: RequestInit | null,
+  recallTrigger?: boolean
 ): FetchResult<T> {
   const [data, setData] = useState<T | null>(null)
   const [error, setError] = useState<Error | null>(null)
@@ -45,7 +46,7 @@ function useFetch<T>(
     return () => {
       controller.abort() //abort the fetch request when the component unmounted.
     }
-  }, [url, options])
+  }, [url, options, recallTrigger])
 
   return { data, error, loading }
 }

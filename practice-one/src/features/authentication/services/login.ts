@@ -1,6 +1,6 @@
 import { ERROR_MSG } from '@constants/messages'
 import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
-import { ApiMethod, apiRequest } from '@services/apiRequest'
+import { apiRequest } from '@services/apiRequest'
 
 type loginResponse = {
   accessToken: string
@@ -20,7 +20,7 @@ export const login = async (email: string, password: string) => {
   try {
     return (await apiRequest<loginBody>(
       `${API_GATEWAY}/${DATABASE_RESOURCES.LOGIN}`,
-      ApiMethod.Post,
+      'POST',
       {
         email: email,
         password: password,
