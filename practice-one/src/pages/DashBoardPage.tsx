@@ -3,12 +3,13 @@ import bookmarkPink from '@assets/bookmarkPink.svg'
 import usdSquareYellow from '@assets/usdSquareYellow.svg'
 import user from '@assets/user.svg'
 import DashBoardCard from '@components/DashBoardCard'
+import { PATH_NAME } from '@constants/services'
 
 const DashBoardPage = () => {
   return (
     <article className="p-8 h-auto grid grid-cols-4 gap-8 items-strech">
       <DashBoardCard
-        to="/students"
+        to={PATH_NAME.STUDENTS}
         className="bg-custom-light-blue text-custom-dark-gray"
         cardName="students"
         mainInfo="243"
@@ -18,7 +19,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to="/"
+        to={PATH_NAME.EMPTY_PAGE}
         className="bg-custom-light-pink text-custom-dark-gray"
         cardName="courses"
         mainInfo="13"
@@ -28,7 +29,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to="/"
+        to={PATH_NAME.PAYMENTS}
         className="bg-custom-light-yellow text-custom-dark-gray"
         cardName="payments"
         mainInfo="inr 556,000"
@@ -38,7 +39,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to="/"
+        to={PATH_NAME.EMPTY_PAGE}
         className="bg-custom-yellow text-white"
         cardName="users"
         mainInfo="3"

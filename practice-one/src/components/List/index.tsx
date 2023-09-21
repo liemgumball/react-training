@@ -21,7 +21,7 @@ const List = <T,>(props: ListProps<T>) => {
     return <p className="text-red-500 text-sm text-center">{error.message}</p>
 
   return (
-    <ul className="overflow-y-scroll" {...rest}>
+    <ul {...rest}>
       {loading ? (
         <p className="text-custom-dark-gray font-700 m-5 text-center">
           Loading...

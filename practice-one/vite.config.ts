@@ -13,6 +13,7 @@ export default defineConfig({
       '@constants': '/src/constants',
       '@services': '/src/services',
       '@assets': '/src/assets',
+      '@utils': '/src/utils',
     },
   },
 })

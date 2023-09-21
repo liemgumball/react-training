@@ -11,7 +11,7 @@ const Header = ({ searchText, setSearchText }: HeaderProps) => {
           type="text"
           name="Search"
           id="search"
-          placeholder="Search by name..."
+          placeholder="Search..."
           className="py-2 px-5 rounded-lg border-2 border-custom-gray text-lg"
           value={searchText}
           onChange={(e) => {

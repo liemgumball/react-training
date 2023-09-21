@@ -15,37 +15,30 @@
   min-height: 40px;
 }
 
-.students ul {
-  /* max-height: 684px; */
-}
-.students ul {
-  overflow-y: auto;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0); /* For Firefox */
-}
-
-/* Webkit (Chrome, Safari) scrollbar styling */
-.students ul::-webkit-scrollbar {
-  width: 0px;
-}
-
-.students ul::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.students ul::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0);
-}
-
 .students .list-heading,
 .students .student {
+  column-gap: 15px;
   padding: 1.25rem 0.75rem;
   grid-template-columns:
     [first]100px
     [var1]minmax(150px, 3fr)
     [var2]minmax(200px, 4fr)
     [var3]minmax(150px, 3fr)
-    [var4]minmax(100px, 3fr)
+    [var4]minmax(100px, 2fr)
     [var5]minmax(200px, 3fr)
-    [last]150px;
+    [last]100px;
+}
+
+.payments .list-heading,
+.payments .payment {
+  column-gap: 10px;
+  padding: 1.25rem 0.75rem;
+  grid-template-columns:
+    [first]minmax(150px, 3fr)
+    [var1]minmax(150px, 3fr)
+    [var2]minmax(150px, 3fr)
+    [var3]minmax(100px, 3fr)
+    [var4]minmax(200px, 3fr)
+    [var5]minmax(200px, 3fr)
+    [last]50px;
 }
