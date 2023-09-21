@@ -1,24 +1,24 @@
 import InputWithErrorMsg from '@components/inputWithErrorMsg'
-import { TStudent } from '@features/list/components/StudentListItem'
-import { useRef, useState } from 'react'
+import { TStudent } from '@features/studentList/components/StudentListItem'
+import { useEffect, useRef, useState } from 'react'
 import { formvalidate } from './services/formvalidate'
-import { addStudent } from './services/addStudent'
-import { FormPopupProps } from 'src/pages/StudentPage'
+import { saveStudent } from './services/saveStudent'
+import { FormActionType } from 'src/pages/StudentPage'
 
 export type StudentFormDataType = Pick<
   TStudent,
-  'name' | 'email' | 'phone' | 'enrollNumber'
+  'name' | 'email' | 'phone' | 'enrollNumber' | 'id'
 >
 
 type StudentFormProps = {
   title?: string
-  data?: TStudent
-  setFormPopup: React.Dispatch<React.SetStateAction<FormPopupProps>>
+  data?: StudentFormDataType
+  setFormAction: React.Dispatch<FormActionType>
   setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const StudentForm = (props: StudentFormProps) => {
-  const { title, data, setFormPopup, setUpdateStudents } = props
+  const { title, data, setFormAction, setUpdateStudents } = props
 
   const [loading, setLoading] = useState(false)
   const nameRef = useRef<HTMLInputElement | null>(null)
@@ -33,37 +33,44 @@ const StudentForm = (props: StudentFormProps) => {
     enrollNumber: string
   } | null>(null)
 
-  const clearForm = () => {
-    nameRef.current!.value = ''
-    emailRef.current!.value = ''
-    phoneRef.current!.value = ''
-    enrollNumberRef.current!.value = ''
+  useEffect(() => {
+    updateForm(data)
+  }, [data])
+
+  const updateForm = (data?: StudentFormDataType) => {
+    nameRef.current!.value = data ? data.name : ''
+    emailRef.current!.value = data ? data.email : ''
+    phoneRef.current!.value = data ? data.phone : ''
+    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : ''
+
+    setFormError(null)
   }
 
   const handleSubmit = async () => {
-    const data: StudentFormDataType = {
+    const student: StudentFormDataType = {
+      id: data?.id,
       name: nameRef.current!.value.trim(),
       email: emailRef.current!.value.trim(),
       phone: phoneRef.current!.value.trim(),
       enrollNumber: +enrollNumberRef.current!.value.trim(),
     }
 
-    const validation = formvalidate(data, setFormError)
+    const validation = formvalidate(student, setFormError)
 
     if (validation) {
       try {
         setLoading(true)
-        const responeStudent = await addStudent(data)
+        const responeStudent = await saveStudent(student)
         if (responeStudent) {
-          setFormPopup({ show: false })
-          setUpdateStudents((p) => !p)
+          setFormAction({ type: 'close' })
+          setUpdateStudents((p) => !p) // trigger rerender list
         }
       } catch (err) {
         console.log('err')
         alert((err as Error).message)
       } finally {
         setLoading(false)
-        clearForm()
+        updateForm()
       }
     }
   }
@@ -73,13 +80,12 @@ const StudentForm = (props: StudentFormProps) => {
       <h2 className="text-3xl font-700 text-center mb-10 uppercase">
         {title ? title : 'student form'}
       </h2>
-      <form>
+      <form data-id={data?.id}>
         <InputWithErrorMsg
           id="name"
           name="Name"
           type="text"
           placeholder="Name"
-          value={data?.name}
           ref={nameRef}
           errorMsg={formError?.name}
         />
@@ -88,7 +94,6 @@ const StudentForm = (props: StudentFormProps) => {
           name="Email"
           type="text"
           placeholder="Email"
-          value={data?.email}
           ref={emailRef}
           errorMsg={formError?.email}
         />
@@ -97,7 +102,6 @@ const StudentForm = (props: StudentFormProps) => {
           name="Phone"
           type="tel"
           placeholder="Phone number"
-          value={data?.phone}
           ref={phoneRef}
           errorMsg={formError?.phone}
         />
@@ -106,7 +110,6 @@ const StudentForm = (props: StudentFormProps) => {
           name="EnrollNumber"
           type="number"
           placeholder="Enroll number"
-          value={data?.enrollNumber.toString()}
           ref={enrollNumberRef}
           errorMsg={formError?.enrollNumber.toString()}
         />

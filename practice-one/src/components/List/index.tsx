@@ -1,14 +1,15 @@
 import useFetch from '@hooks/useFetch'
+import React from 'react'
 
 type ListProps<T> = {
   url: string
-  ItemComponent: React.ComponentType<{ data: T & { id: number } }>
+  ItemComponent: React.ComponentType<{ data: T & { id?: number } }>
   requestOptions?: RequestInit
   updateTrigger?: boolean
-}
+} & React.HTMLAttributes<HTMLUListElement>
 
 const List = <T,>(props: ListProps<T>) => {
-  const { url, requestOptions, ItemComponent, updateTrigger } = props
+  const { url, requestOptions, ItemComponent, updateTrigger, ...rest } = props
 
   const { data, error, loading } = useFetch<(T & { id: number })[]>(
     url,
@@ -20,15 +21,19 @@ const List = <T,>(props: ListProps<T>) => {
     return <p className="text-red-500 text-sm text-center">{error.message}</p>
 
   return (
-    <ul className="overflow-y-scroll">
+    <ul className="overflow-y-scroll" {...rest}>
       {loading ? (
         <p className="text-custom-dark-gray font-700 m-5 text-center">
           Loading...
         </p>
       ) : data && data.length != 0 ? (
-        data.map((item, idx) => (
-          <ItemComponent key={item.id || idx} data={item} />
-        ))
+        data.map((item, idx) =>
+          ItemComponent ? (
+            <ItemComponent key={item.id || idx} data={item} />
+          ) : (
+            <li key={item.id || idx}>{JSON.stringify(item)}</li>
+          )
+        )
       ) : (
         <p className="text-custom-dark-gray font-700 m-5 text-center">
           Not found

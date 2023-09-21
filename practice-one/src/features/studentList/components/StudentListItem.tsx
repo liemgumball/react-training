@@ -9,7 +9,7 @@ export type TStudent = {
   email: string
   phone: string
   enrollNumber: number
-  id: number
+  id?: number
 }
 
 type StudentListItemProps = {
@@ -22,7 +22,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
   return (
     <li
       data-id={data.id}
-      className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige cursor-pointer font-400"
+      className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige font-400"
     >
       <div>
         <img
