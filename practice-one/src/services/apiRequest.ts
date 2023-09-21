@@ -1,10 +1,4 @@
-export enum ApiMethod {
-  Get = 'GET',
-  Post = 'POST',
-  Delete = 'DELETE',
-  Patch = 'PATCH',
-  Put = 'PUT',
-}
+export type ApiMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT'
 
 export const apiRequest = async <T>(
   path: string,
@@ -20,7 +14,7 @@ export const apiRequest = async <T>(
       body: JSON.stringify(body),
     })
     if (!response.ok) {
-      throw new Error(`${response.status}`)
+      throw new Error(`${response.statusText}`)
     }
 
     return await response.json()

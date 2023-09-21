@@ -1,3 +1,4 @@
+import { PATH_NAME } from '@constants/services'
 import { ReactNode, useEffect } from 'react'
 import { Routes, useNavigate } from 'react-router-dom'
 import { authType } from 'src/App'
@@ -10,7 +11,7 @@ type PublicRoutesProps = {
 
 const PublicRoutes = ({
   auth,
-  navTo = '/login',
+  navTo = PATH_NAME.LOGIN,
   children,
 }: PublicRoutesProps) => {
   const nav = useNavigate()

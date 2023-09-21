@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction } from 'react'
-
 type HeaderProps = {
-  setSearchText: Dispatch<SetStateAction<string>>
+  searchText: string
+  setSearchText: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Header = ({ setSearchText }: HeaderProps) => {
+const Header = ({ searchText, setSearchText }: HeaderProps) => {
   return (
     <header className="flex justify-end gx-3 py-5 px-8">
       <div className="input-with-icon relative min-w-max">
@@ -14,6 +13,7 @@ const Header = ({ setSearchText }: HeaderProps) => {
           id="search"
           placeholder="Search..."
           className="py-2 px-5 rounded-lg border-2 border-custom-gray text-lg"
+          value={searchText}
           onChange={(e) => {
             e.preventDefault()
             setSearchText(e.target.value)

@@ -10,6 +10,7 @@ import sliderSquare from '@assets/sliderSquare.svg'
 import signOut from '@assets/signOut.svg'
 import { authType } from 'src/App'
 import { Dispatch, SetStateAction } from 'react'
+import { PATH_NAME } from '@constants/services'
 
 type SidebarProps = {
   setAuth: Dispatch<SetStateAction<authType>>
@@ -17,15 +18,11 @@ type SidebarProps = {
 }
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
-  const logout = () => {
-    setAuth({ accessToken: '', name: '' })
-  }
-
   return (
-    <aside className="sidebar bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 min-h-screen h-full">
+    <aside className="sidebar sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen w-1/5 min-w-max">
       <div className="flex items-center justify-center">
         <img src={smallLogo} alt="Logo" />
-        <h1 className="text-xl uppercase font-semibold">CRUD operations</h1>
+        <p className="text-xl uppercase font-semibold">CRUD operations</p>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">
@@ -42,27 +39,27 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       </div>
       <nav className="p-5">
         <ul>
-          <NavItem pathname="/">
+          <NavItem pathname={PATH_NAME.HOME}>
             <img src={house} alt="house" />
             home
           </NavItem>
-          <NavItem pathname="/course">
+          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
             <img src={bookmark} alt="book mark" />
             course
           </NavItem>
-          <NavItem pathname="/students">
+          <NavItem pathname={PATH_NAME.STUDENTS}>
             <img src={graduationCap} alt="graduation cap" />
             students
           </NavItem>
-          <NavItem pathname="/payment">
+          <NavItem pathname={PATH_NAME.PAYMENTS}>
             <img src={usdSquare} alt="usd square" />
             payment
           </NavItem>
-          <NavItem pathname="/report">
+          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
             <img src={fileChartLine} alt="file chart line" />
             report
           </NavItem>
-          <NavItem pathname="/settings">
+          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
             <img src={sliderSquare} alt="slider square" />
             settings
           </NavItem>
@@ -71,7 +68,7 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
 
       <button
         className="capitalize px-16 py-3 rounded-lg hover:bg-custom-gray"
-        onClick={logout}
+        onClick={() => setAuth({ accessToken: '', name: '' })}
       >
         logout
         <img src={signOut} alt="sign out" className="inline-block mx-2" />
