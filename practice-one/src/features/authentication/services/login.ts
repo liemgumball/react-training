@@ -27,7 +27,7 @@ export const login = async (email: string, password: string) => {
       }
     )) as loginResponse
   } catch (err) {
-    if ((err as Error).message === '400')
+    if ((err as Error).message.toLowerCase() === 'bad request')
       return new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD)
 
     return new Error('Process got failed')

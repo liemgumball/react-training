@@ -14,7 +14,7 @@ export const apiRequest = async <T>(
       body: JSON.stringify(body),
     })
     if (!response.ok) {
-      throw new Error(`${response.status}`)
+      throw new Error(`${response.statusText}`)
     }
 
     return await response.json()
