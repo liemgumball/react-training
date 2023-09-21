@@ -21,7 +21,7 @@ const StudentList = (props: StudentListProps) => {
     setUpdateStudentsTrigger,
   } = props
 
-  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&name_like=${keyword}`
+  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`
 
   const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {
     const dataId = (e.target as HTMLElement)

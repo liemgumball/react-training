@@ -1,7 +1,8 @@
 import StudentForm, { StudentFormDataType } from '@features/studentForm'
-import { useDeferredValue, useReducer, useState } from 'react'
+import { useReducer, useState } from 'react'
 import { TStudent } from '@features/studentList/components/StudentListItem'
 import StudentList from '@features/studentList'
+import useDebound from '@hooks/useDebound'
 
 type StudentPageProps = {
   searchText: string
@@ -44,7 +45,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
 
   const [updatedStudents, setUpdatedStudents] = useState(false)
 
-  const keyword = useDeferredValue(searchText)
+  const keyword = useDebound(searchText)
 
   return (
     <>
@@ -64,7 +65,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
         </header>
         <hr />
         <div className="students py-3 whitespace-no-wrap">
-          <div className="list-heading grid text-custom-medium-gray font-600">
+          <div className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
             <div></div>
             <div>name</div>
             <div>email</div>

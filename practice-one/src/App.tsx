@@ -9,6 +9,7 @@ import PublicRoutes from './utils/PublicRoutes'
 import { useState } from 'react'
 import StudentPage from './pages/StudentPage'
 import { PATH_NAME } from '@constants/services'
+import PaymentPage from './pages/PaymentPage'
 
 export type authType = {
   accessToken: string
@@ -34,6 +35,10 @@ function App() {
             <Route
               path={PATH_NAME.STUDENTS}
               element={<StudentPage searchText={searchText} />}
+            />
+            <Route
+              path={PATH_NAME.PAYMENTS}
+              element={<PaymentPage searchText={searchText} />}
             />
           </Routes>
         </main>
