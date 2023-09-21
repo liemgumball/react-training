@@ -33,6 +33,13 @@ const StudentForm = (props: StudentFormProps) => {
     enrollNumber: string
   } | null>(null)
 
+  const clearForm = () => {
+    nameRef.current!.value = ''
+    emailRef.current!.value = ''
+    phoneRef.current!.value = ''
+    enrollNumberRef.current!.value = ''
+  }
+
   const handleSubmit = async () => {
     const data: StudentFormDataType = {
       name: nameRef.current!.value.trim(),
@@ -56,6 +63,7 @@ const StudentForm = (props: StudentFormProps) => {
         alert((err as Error).message)
       } finally {
         setLoading(false)
+        clearForm()
       }
     }
   }

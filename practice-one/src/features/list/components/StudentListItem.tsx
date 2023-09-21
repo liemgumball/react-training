@@ -20,7 +20,10 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
   const { data } = props
 
   return (
-    <li className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige cursor-pointer font-400 whitespace-no-wrap truncate">
+    <li
+      data-id={data.id}
+      className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige cursor-pointer font-400"
+    >
       <div>
         <img
           src={data.avatar}
@@ -30,14 +33,14 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
           height="60px"
         />
       </div>
-      <div>{data.name}</div>
-      <div>{data.email}</div>
-      <div>{data.phone}</div>
-      <div>{data.enrollNumber}</div>
-      <div>{new Date(data.createdAt).toDateString()}</div>
+      <p className="truncate">{data.name}</p>
+      <p className="truncate normal-case">{data.email}</p>
+      <p className="truncate">{data.phone}</p>
+      <p className="truncate">{data.enrollNumber}</p>
+      <p className="truncate">{new Date(data.createdAt).toDateString()}</p>
       <div className="action-group flex gap-x-2 justify-end">
-        <ButtonIcon iconSrc={trash} alt="trash" />
-        <ButtonIcon iconSrc={pen} alt="pen" />
+        <ButtonIcon iconSrc={trash} alt="trash" className="remove-btn" />
+        <ButtonIcon iconSrc={pen} alt="pen" className="edit-btn" />
       </div>
     </li>
   )

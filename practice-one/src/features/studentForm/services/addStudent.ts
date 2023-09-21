@@ -11,7 +11,7 @@ export const addStudent = async (student: StudentFormDataType) => {
       {
         ...student,
         createdAt: new Date().toISOString(),
-        avatar: 'https://loremflickr.com/640/480', //fake random avatar
+        avatar: 'https://loremflickr.com/60/60', //fake random avatar
       }
     )) as TStudent
   } catch (err) {
