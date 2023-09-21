@@ -12,7 +12,7 @@ type InputWithLabelProps = {
 
 const InputWithErrorMsg = forwardRef(
   (props: InputWithLabelProps, ref: LegacyRef<HTMLInputElement>) => {
-    const { showLabel, name, id, type, placeholder, errorMsg } = props
+    const { showLabel, name, id, type, placeholder, errorMsg, value } = props
 
     return (
       <div className="input-field flex flex-col mb-5">
@@ -26,6 +26,7 @@ const InputWithErrorMsg = forwardRef(
           name={name}
           placeholder={placeholder}
           ref={ref}
+          value={value}
         />
         <p
           className={`error-msg text-sm text-red-500 normal-case ${

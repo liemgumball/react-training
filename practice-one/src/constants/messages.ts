@@ -7,3 +7,7 @@ export const ERROR_MSG = {
   INVALID_ENROLLNUMBER: 'Enrollment number must be at least 8 characters',
   WRONG_EMAIL_OR_PASSWORD: 'Wrong email or password',
 }
+
+export const CONFIRM_MSG = {
+  REMOVE_STUDENT: 'Are you sure you want to remove this student?',
+}

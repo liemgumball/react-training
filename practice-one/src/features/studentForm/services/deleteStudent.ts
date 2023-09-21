@@ -1,13 +1,12 @@
 import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
-import { TStudent } from '@features/studentList/components/StudentListItem'
 import { apiRequest } from '@services/apiRequest'
 
-export const getStudent = async (studentId: string) => {
+export const removeStudent = async (studentId: string) => {
   try {
-    return (await apiRequest(
+    return await apiRequest(
       `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${studentId}`,
-      'GET'
-    )) as TStudent
+      'DELETE'
+    )
   } catch (err) {
     alert((err as Error).message)
   }
