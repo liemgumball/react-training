@@ -22,7 +22,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
   return (
     <li
       data-id={data.id}
-      className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige font-400"
+      className="my-2 grid student border rounded-xl items-center hover:bg-custom-beige font-400 transition"
     >
       <div>
         <img

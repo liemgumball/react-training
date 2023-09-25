@@ -9,7 +9,7 @@ const ButtonIcon = (props: ButtonIconProps) => {
   return (
     <button
       type="button"
-      className={`${className} rounded-lg hover:shadow-lg hover:bg-white p-3`}
+      className={`${className} rounded-lg hover:shadow-lg hover:bg-white p-3 transition`}
       {...rest}
     >
       {children}

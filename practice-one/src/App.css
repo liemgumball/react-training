@@ -24,8 +24,8 @@
     [var1]minmax(150px, 3fr)
     [var2]minmax(200px, 4fr)
     [var3]minmax(150px, 3fr)
-    [var4]minmax(100px, 2fr)
-    [var5]minmax(200px, 3fr)
+    [var4]minmax(150px, 2fr)
+    [var5]minmax(170px, 3fr)
     [last]100px;
 }
 
@@ -35,10 +35,10 @@
   padding: 1.25rem 0.75rem;
   grid-template-columns:
     [first]minmax(150px, 3fr)
-    [var1]minmax(150px, 3fr)
-    [var2]minmax(150px, 3fr)
-    [var3]minmax(100px, 3fr)
-    [var4]minmax(200px, 3fr)
-    [var5]minmax(200px, 3fr)
+    [var1]minmax(180px, 3fr)
+    [var2]minmax(120px, 3fr)
+    [var3]minmax(150px, 3fr)
+    [var4]minmax(180px, 3fr)
+    [var5]minmax(170px, 3fr)
     [last]50px;
 }

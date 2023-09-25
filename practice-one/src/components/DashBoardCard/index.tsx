@@ -13,7 +13,7 @@ const DashBoardCard = (props: DashBoardCardProps) => {
   return (
     <Link
       to={to}
-      className={`${className} dashboard-card p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 w-auto border`}
+      className={`${className} dashboard-card p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 w-auto border transition`}
     >
       {children}
       <p className="text mt-2">{cardName}</p>
