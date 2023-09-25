@@ -85,7 +85,7 @@ npm install
 -   Step 05: Run json-server
 
 ```bash
-json-server --watch src/data/db.json --port 3000 -m .node_modules/json-server-auth
+json-server --watch src/data/db.json --port 3000 -m node_modules/json-server-auth
 
 # or
 json-server-auth --watch src/data/db.json --port 3000
