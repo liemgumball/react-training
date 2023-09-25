@@ -1,17 +1,16 @@
-import Sidebar from '@components/Sidebar'
 import './App.css'
 import LoginPage from './pages/LoginPage'
 import useLocalStorage from '@hooks/useLocalStorage'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Header from '@components/Header'
 import DashBoardPage from './pages/DashBoardPage'
-import PublicRoutes from './utils/PublicRoutes'
 import { useState } from 'react'
 import StudentPage from './pages/StudentPage'
 import { PATH_NAME } from '@constants/services'
 import PaymentPage from './pages/PaymentPage'
+import MainLayout from './layouts/MainLayout'
+import PrivateRoute from '@utils/PrivateRoute'
 
-export type authType = {
+export type AuthType = {
   accessToken: string
   name: string
 }
@@ -24,13 +23,21 @@ function App() {
 
   const [searchText, setSearchText] = useState('')
 
-  return auth.accessToken ? (
+  return (
     <Router>
-      <div className="bg-white flex capitalize">
-        <Sidebar setAuth={setAuth} username={auth.name} />
-        <main className="w-full">
-          <Header searchText={searchText} setSearchText={setSearchText} />
-          <Routes>
+      <Routes>
+        {/* Private routes */}
+        <Route element={<PrivateRoute auth={auth} />}>
+          <Route
+            element={
+              <MainLayout
+                auth={auth}
+                setAuth={setAuth}
+                searchText={searchText}
+                setSearchText={setSearchText}
+              />
+            }
+          >
             <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
             <Route
               path={PATH_NAME.STUDENTS}
@@ -40,18 +47,18 @@ function App() {
               path={PATH_NAME.PAYMENTS}
               element={<PaymentPage searchText={searchText} />}
             />
-          </Routes>
-        </main>
-      </div>
-    </Router>
-  ) : (
-    <Router>
-      <PublicRoutes auth={auth} navTo={PATH_NAME.LOGIN}>
+            <Route
+              path="/*"
+              element={<PaymentPage searchText={searchText} />}
+            />
+          </Route>
+        </Route>
+        {/* Public routes */}
         <Route
           path={PATH_NAME.LOGIN}
-          element={<LoginPage setAuth={setAuth}></LoginPage>}
+          element={<LoginPage setAuth={setAuth} />}
         />
-      </PublicRoutes>
+      </Routes>
     </Router>
   )
 }
