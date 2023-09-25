@@ -8,18 +8,18 @@ import usdSquare from '@assets/usdSquare.svg'
 import fileChartLine from '@assets/fileChartLine.svg'
 import sliderSquare from '@assets/sliderSquare.svg'
 import signOut from '@assets/signOut.svg'
-import { authType } from 'src/App'
+import { AuthType } from 'src/App'
 import { Dispatch, SetStateAction } from 'react'
 import { PATH_NAME } from '@constants/services'
 
 type SidebarProps = {
-  setAuth: Dispatch<SetStateAction<authType>>
+  setAuth: Dispatch<SetStateAction<AuthType>>
   username: string
 }
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
-    <aside className="sidebar sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen w-1/5 min-w-max">
+    <aside className="sidebar sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen min-w-max">
       <div className="flex items-center justify-center">
         <img src={smallLogo} alt="Logo" />
         <p className="text-xl uppercase font-semibold">CRUD operations</p>

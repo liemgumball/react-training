@@ -1,15 +1,15 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { login } from './services/login'
-import InputWithErrorMsg from '@components/inputWithErrorMsg'
+import InputWithErrorMsg from '@components/InputWithErrorMsg'
 import { emailRegex, passwordRegex } from '@constants/regexs'
 import { ERROR_MSG } from '@constants/messages'
 import bigLogo from '@assets/bigLogo.svg'
-import { authType } from 'src/App'
+import { AuthType } from 'src/App'
 import { useNavigate } from 'react-router-dom'
 import { PATH_NAME } from '@constants/services'
 
 type authenticationProps = {
-  setAuth: Dispatch<SetStateAction<authType>>
+  setAuth: Dispatch<SetStateAction<AuthType>>
 }
 
 const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {

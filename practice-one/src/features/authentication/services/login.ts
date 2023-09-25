@@ -2,7 +2,7 @@ import { ERROR_MSG } from '@constants/messages'
 import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 import { apiRequest } from '@services/apiRequest'
 
-type loginResponse = {
+type LoginResponse = {
   accessToken: string
   user: {
     id: number
@@ -11,21 +11,21 @@ type loginResponse = {
   }
 }
 
-type loginBody = {
+type LoginBody = {
   email: string
   password: string
 }
 
 export const login = async (email: string, password: string) => {
   try {
-    return (await apiRequest<loginBody>(
+    return (await apiRequest<LoginBody>(
       `${API_GATEWAY}/${DATABASE_RESOURCES.LOGIN}`,
       'POST',
       {
         email: email,
         password: password,
       }
-    )) as loginResponse
+    )) as LoginResponse
   } catch (err) {
     if ((err as Error).message.toLowerCase() === 'bad request')
       return new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD)

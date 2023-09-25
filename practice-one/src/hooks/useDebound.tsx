@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
-const useDebound = <T,>(initialValue: T, delay: number = 300) => {
-  const [value, setValue] = useState(initialValue)
+const useDebound = <T,>(value: T, delay: number = 300) => {
+  const [debounded, setDebounded] = useState<T>(value)
 
   useEffect(() => {
     const id = setTimeout(() => {
-      setValue(initialValue)
+      setDebounded(value)
     }, delay)
 
     return () => {
@@ -13,7 +13,7 @@ const useDebound = <T,>(initialValue: T, delay: number = 300) => {
     }
   })
 
-  return value
+  return debounded
 }
 
 export default useDebound

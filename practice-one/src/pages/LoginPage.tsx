@@ -1,9 +1,9 @@
 import Authentication from '@features/authentication'
 import { Dispatch, SetStateAction } from 'react'
-import { authType } from 'src/App'
+import { AuthType } from 'src/App'
 
 type LoginPageProps = {
-  setAuth: Dispatch<SetStateAction<authType>>
+  setAuth: Dispatch<SetStateAction<AuthType>>
 }
 
 const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {

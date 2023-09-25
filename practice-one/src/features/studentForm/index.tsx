@@ -1,4 +1,4 @@
-import InputWithErrorMsg from '@components/inputWithErrorMsg'
+import InputWithErrorMsg from '@components/InputWithErrorMsg'
 import { TStudent } from '@features/studentList/components/StudentListItem'
 import { useEffect, useRef, useState } from 'react'
 import { formvalidate } from './services/formvalidate'

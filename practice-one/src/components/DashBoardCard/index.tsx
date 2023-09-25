@@ -17,7 +17,7 @@ const DashBoardCard = (props: DashBoardCardProps) => {
     >
       {children}
       <p className="text mt-2">{cardName}</p>
-      <p className="text-4xl mt-3 text-black font-700 text-end uppercase">
+      <p className="text-4xl mt-3 text-black font-700 text-end uppercase truncate">
         {mainInfo}
       </p>
     </Link>
