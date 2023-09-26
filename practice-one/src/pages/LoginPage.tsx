@@ -1,17 +1,17 @@
-import Authentication from '@features/authentication'
-import { Dispatch, SetStateAction } from 'react'
-import { AuthType } from 'src/App'
+import Authentication from '@features/authentication';
+import { Dispatch, SetStateAction } from 'react';
+import { AuthType } from 'src/App';
 
 type LoginPageProps = {
-  setAuth: Dispatch<SetStateAction<AuthType>>
-}
+  setAuth: Dispatch<SetStateAction<AuthType>>;
+};
 
 const LoginPage: React.FC<LoginPageProps> = ({ setAuth }) => {
   return (
     <div className="bg-gradient-custom min-h-screen flex-center">
       <Authentication setAuth={setAuth} />
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

@@ -1,12 +1,12 @@
-import { Link, LinkProps } from 'react-router-dom'
+import { Link, LinkProps } from 'react-router-dom';
 
 type DashBoardCardProps = {
-  cardName: string
-  mainInfo: string
-} & LinkProps
+  cardName: string;
+  mainInfo: string;
+} & LinkProps;
 
 const DashBoardCard = (props: DashBoardCardProps) => {
-  const { cardName, mainInfo, className, children, ...rest } = props
+  const { cardName, mainInfo, className, children, ...rest } = props;
   return (
     <Link className={`${className} dashboard-card`} {...rest}>
       {children}
@@ -15,7 +15,7 @@ const DashBoardCard = (props: DashBoardCardProps) => {
         {mainInfo}
       </p>
     </Link>
-  )
-}
+  );
+};
 
-export default DashBoardCard
+export default DashBoardCard;

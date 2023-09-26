@@ -1,25 +1,25 @@
-import ButtonIcon from '@components/ButtonIcon'
+import ButtonIcon from '@components/ButtonIcon';
 
 // images
-import pen from '@assets/pen.svg'
-import trash from '@assets/trash.svg'
+import pen from '@assets/pen.svg';
+import trash from '@assets/trash.svg';
 
 export type TStudent = {
-  createdAt: string
-  name: string
-  avatar: string
-  email: string
-  phone: string
-  enrollNumber: number
-  id: number
-}
+  createdAt: string;
+  name: string;
+  avatar: string;
+  email: string;
+  phone: string;
+  enrollNumber: number;
+  id: number;
+};
 
 type StudentListItemProps = {
-  data: TStudent
-}
+  data: TStudent;
+};
 
 const StudentListItem: React.FC<StudentListItemProps> = (props) => {
-  const { data } = props
+  const { data } = props;
 
   return (
     <li data-id={data.id} className="my-2 grid student">
@@ -42,7 +42,7 @@ const StudentListItem: React.FC<StudentListItemProps> = (props) => {
         <ButtonIcon iconSrc={pen} alt="pen" className="edit-btn" />
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default StudentListItem
+export default StudentListItem;

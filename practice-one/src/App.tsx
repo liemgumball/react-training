@@ -1,28 +1,34 @@
-import './App.css'
-import LoginPage from './pages/LoginPage'
-import useLocalStorage from '@hooks/useLocalStorage'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import DashBoardPage from './pages/DashBoardPage'
-import { useState } from 'react'
-import StudentPage from './pages/StudentPage'
-import { PATH_NAME } from '@constants/services'
-import PaymentPage from './pages/PaymentPage'
-import MainLayout from './layouts/MainLayout'
-import PrivateRoute from '@utils/PrivateRoute'
-import EmptyPage from './pages/EmptyPage'
+import './App.css';
+
+// base
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import useLocalStorage from '@hooks/useLocalStorage';
+import PrivateRoute from '@utils/PrivateRoute';
+
+// layout & pages
+import MainLayout from './layouts/MainLayout';
+import LoginPage from './pages/LoginPage';
+import DashBoardPage from './pages/DashBoardPage';
+import StudentPage from './pages/StudentPage';
+import PaymentPage from './pages/PaymentPage';
+import EmptyPage from './pages/EmptyPage';
+
+// constants
+import { PATH_NAME } from '@constants/services';
 
 export type AuthType = {
-  accessToken: string
-  name: string
-}
+  accessToken: string;
+  name: string;
+};
 
 function App() {
   const [auth, setAuth] = useLocalStorage('user', {
     accessToken: '',
     name: '',
-  })
+  });
 
-  const [searchText, setSearchText] = useState<string>('')
+  const [searchText, setSearchText] = useState<string>('');
 
   return (
     <Router>
@@ -58,7 +64,7 @@ function App() {
         />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

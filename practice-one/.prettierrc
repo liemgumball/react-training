@@ -1,9 +1,9 @@
 {
-	"useTabs": false,
-	"trailingComma": "es5",
-	"tabWidth": 2,
-	"semi": false,
-	"singleQuote": true,
-	"linebreak-style": 1,
-	"trim_trailing_whitespace": true
+  "useTabs": false,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "linebreak-style": 1,
+  "trim_trailing_whitespace": true
 }

@@ -1,9 +1,9 @@
-import { Link, LinkProps, useLocation } from 'react-router-dom'
+import { Link, LinkProps, useLocation } from 'react-router-dom';
 
 const NavItem = (props: LinkProps) => {
-  const { to, ...rest } = props
+  const { to, ...rest } = props;
 
-  const location = useLocation()
+  const location = useLocation();
   return (
     <li>
       <Link
@@ -14,7 +14,7 @@ const NavItem = (props: LinkProps) => {
         {...rest}
       ></Link>
     </li>
-  )
-}
+  );
+};
 
-export default NavItem
+export default NavItem;

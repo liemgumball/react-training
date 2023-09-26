@@ -1,10 +1,10 @@
-export const API_GATEWAY = 'http://localhost:3000'
+export const API_GATEWAY = 'http://localhost:3000';
 
 export const DATABASE_RESOURCES = {
   LOGIN: 'login',
   STUDENTS: 'students',
   PAYMENTS: 'payments',
-}
+};
 
 export const PATH_NAME = {
   HOME: '/',
@@ -12,4 +12,4 @@ export const PATH_NAME = {
   STUDENTS: '/students',
   PAYMENTS: '/payments',
   EMPTY_PAGE: '/empty-page',
-}
+};

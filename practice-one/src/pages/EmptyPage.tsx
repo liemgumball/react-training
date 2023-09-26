@@ -5,7 +5,7 @@ const EmptyPage = () => {
         This is a feature in the future
       </h1>
     </div>
-  )
-}
+  );
+};
 
-export default EmptyPage
+export default EmptyPage;

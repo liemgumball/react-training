@@ -1,20 +1,20 @@
-import { ERROR_MSG } from '@constants/messages'
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
-import { apiRequest } from '@services/apiRequest'
+import { ERROR_MSG } from '@constants/messages';
+import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { apiRequest } from '@services/apiRequest';
 
 type LoginResponse = {
-  accessToken: string
+  accessToken: string;
   user: {
-    id: number
-    name: string
-    email: string
-  }
-}
+    id: number;
+    name: string;
+    email: string;
+  };
+};
 
 type LoginBody = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 export const login = async (email: string, password: string) => {
   try {
@@ -25,11 +25,11 @@ export const login = async (email: string, password: string) => {
         email: email,
         password: password,
       }
-    )) as LoginResponse
+    )) as LoginResponse;
   } catch (err) {
     if ((err as Error).message.toLowerCase() === 'bad request')
-      return new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD)
+      return new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD);
 
-    return new Error('Process got failed')
+    return new Error('Process got failed');
   }
-}
+};

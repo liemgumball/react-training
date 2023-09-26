@@ -1,54 +1,54 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 type FetchResult<T> = {
-  data: T | null
-  error: Error | null
-  loading: boolean
-}
+  data: T | null;
+  error: Error | null;
+  loading: boolean;
+};
 
 const useFetch = <T,>(
   url: string,
   options?: RequestInit | null,
   recallTrigger?: boolean
 ): FetchResult<T> => {
-  const [data, setData] = useState<T | null>(null)
-  const [error, setError] = useState<Error | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const controller = new AbortController()
+    const controller = new AbortController();
 
     const fetchData = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await fetch(url, {
           ...options,
           signal: controller.signal,
-        })
+        });
         if (!response.ok) {
-          throw new Error('Network response was not ok')
+          throw new Error('Network response was not ok');
         }
 
-        const result = await response.json()
-        setData(result)
-        setLoading(false)
-        setError(null)
+        const result = await response.json();
+        setData(result);
+        setLoading(false);
+        setError(null);
       } catch (err) {
         if ((err as Error).name !== 'AbortError') {
-          setError(err as Error)
-          setLoading(false)
+          setError(err as Error);
+          setLoading(false);
         }
       }
-    }
+    };
 
-    fetchData()
+    fetchData();
 
     return () => {
-      controller.abort() //abort the fetch request when the component unmounted.
-    }
-  }, [url, options, recallTrigger])
+      controller.abort(); //abort the fetch request when the component unmounted.
+    };
+  }, [url, options, recallTrigger]);
 
-  return { data, error, loading } as const
-}
+  return { data, error, loading } as const;
+};
 
-export default useFetch
+export default useFetch;

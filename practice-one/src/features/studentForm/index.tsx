@@ -1,45 +1,45 @@
-import { useEffect, useRef, useState } from 'react'
-import InputWithErrorMsg from '@components/InputWithErrorMsg'
-import Button from '@components/Button'
-import { saveStudent } from './services/saveStudent'
-import { formValidate } from './services/formValidate'
-import { FormActionType, StudentFormDataType } from './hooks/useStudentForm'
+import { useEffect, useRef, useState } from 'react';
+import InputWithErrorMsg from '@components/InputWithErrorMsg';
+import Button from '@components/Button';
+import { saveStudent } from './services/saveStudent';
+import { formValidate } from './services/formValidate';
+import { FormActionType, StudentFormDataType } from './hooks/useStudentForm';
 
 type StudentFormProps = {
-  title?: string
-  data?: StudentFormDataType
-  setFormAction: React.Dispatch<FormActionType>
-  setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>
-}
+  title?: string;
+  data?: StudentFormDataType;
+  setFormAction: React.Dispatch<FormActionType>;
+  setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const StudentForm = (props: StudentFormProps) => {
-  const { title, data, setFormAction, setUpdateStudents } = props
+  const { title, data, setFormAction, setUpdateStudents } = props;
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const nameRef = useRef<HTMLInputElement | null>(null)
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const phoneRef = useRef<HTMLInputElement | null>(null)
-  const enrollNumberRef = useRef<HTMLInputElement | null>(null)
+  const [loading, setLoading] = useState<boolean>(false);
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const enrollNumberRef = useRef<HTMLInputElement | null>(null);
 
   const [formError, setFormError] = useState<{
-    name: string
-    email: string
-    phone: string
-    enrollNumber: string
-  } | null>(null)
+    name: string;
+    email: string;
+    phone: string;
+    enrollNumber: string;
+  } | null>(null);
 
   useEffect(() => {
-    updateForm(data)
-  }, [data])
+    updateForm(data);
+  }, [data]);
 
   const updateForm = (data?: StudentFormDataType) => {
-    nameRef.current!.value = data ? data.name : ''
-    emailRef.current!.value = data ? data.email : ''
-    phoneRef.current!.value = data ? data.phone : ''
-    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : ''
+    nameRef.current!.value = data ? data.name : '';
+    emailRef.current!.value = data ? data.email : '';
+    phoneRef.current!.value = data ? data.phone : '';
+    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : '';
 
-    setFormError(null)
-  }
+    setFormError(null);
+  };
 
   const handleSubmit = async () => {
     const student: StudentFormDataType = {
@@ -48,27 +48,27 @@ const StudentForm = (props: StudentFormProps) => {
       email: emailRef.current!.value.trim(),
       phone: phoneRef.current!.value.trim(),
       enrollNumber: +enrollNumberRef.current!.value.trim(),
-    }
+    };
 
-    const validation = formValidate(student, setFormError)
+    const validation = formValidate(student, setFormError);
 
     if (validation) {
       try {
-        setLoading(true)
-        const response = await saveStudent(student)
+        setLoading(true);
+        const response = await saveStudent(student);
         if (response) {
-          setFormAction({ type: 'close' })
-          setUpdateStudents((p) => !p) // trigger rerender list
+          setFormAction({ type: 'close' });
+          setUpdateStudents((p) => !p); // trigger rerender list
         }
       } catch (err) {
-        console.log('err')
-        alert((err as Error).message)
+        console.log('err');
+        alert((err as Error).message);
       } finally {
-        setLoading(false)
-        updateForm()
+        setLoading(false);
+        updateForm();
       }
     }
-  }
+  };
 
   return (
     <div className="student-form">
@@ -111,8 +111,8 @@ const StudentForm = (props: StudentFormProps) => {
         <Button
           type="submit"
           onClick={(e) => {
-            e.preventDefault()
-            handleSubmit()
+            e.preventDefault();
+            handleSubmit();
           }}
           className={`${
             loading ? 'bg-custom-gray' : 'bg-custom-yellow'
@@ -122,7 +122,7 @@ const StudentForm = (props: StudentFormProps) => {
         </Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default StudentForm
+export default StudentForm;

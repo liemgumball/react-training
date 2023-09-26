@@ -1,66 +1,66 @@
-import { Dispatch, SetStateAction, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthType } from 'src/App'
-import InputWithErrorMsg from '@components/InputWithErrorMsg'
-import Button from '@components/Button'
-import { login } from './services/login'
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthType } from 'src/App';
+import InputWithErrorMsg from '@components/InputWithErrorMsg';
+import Button from '@components/Button';
+import { login } from './services/login';
 
 // constants
-import { PATH_NAME } from '@constants/services'
-import { ERROR_MSG } from '@constants/messages'
-import { emailRegex, passwordRegex } from '@constants/regex'
-import bigLogo from '@assets/bigLogo.svg'
+import { PATH_NAME } from '@constants/services';
+import { ERROR_MSG } from '@constants/messages';
+import { emailRegex, passwordRegex } from '@constants/regex';
+import bigLogo from '@assets/bigLogo.svg';
 
 type authenticationProps = {
-  setAuth: Dispatch<SetStateAction<AuthType>>
-}
+  setAuth: Dispatch<SetStateAction<AuthType>>;
+};
 
 const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const passwordRef = useRef<HTMLInputElement | null>(null)
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const [formError, setFormError] = useState<{
-    email: string | null
-    password: string | null
-  }>({ email: null, password: null })
+    email: string | null;
+    password: string | null;
+  }>({ email: null, password: null });
 
   const handleLogin = async () => {
-    setLoading(true)
+    setLoading(true);
 
-    const emailValue = emailRef.current!.value.trim()
-    const passwordValue = passwordRef.current!.value.trim()
+    const emailValue = emailRef.current!.value.trim();
+    const passwordValue = passwordRef.current!.value.trim();
 
-    const emailIsValid = emailRegex.test(emailValue)
-    const passwordIsValid = passwordRegex.test(passwordValue)
+    const emailIsValid = emailRegex.test(emailValue);
+    const passwordIsValid = passwordRegex.test(passwordValue);
 
     setFormError({
       email: emailIsValid ? null : ERROR_MSG.INVALID_EMAIL,
       password: passwordIsValid ? null : ERROR_MSG.INVALID_PASSWORD,
-    })
+    });
 
     if (emailIsValid && passwordIsValid) {
-      const response = await login(emailValue, passwordValue)
+      const response = await login(emailValue, passwordValue);
 
       if (response instanceof Error) {
         setFormError({
           email: response.message,
           password: response.message,
-        })
+        });
       } else {
         setAuth({
           accessToken: response.accessToken,
           name: response.user.name,
-        })
-        navigate(PATH_NAME.HOME)
+        });
+        navigate(PATH_NAME.HOME);
       }
     }
 
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <div className="login-card capitalize bg-white p-8 rounded-lg shadow-lg text-black text-sm text-center flex flex-col gap-y-10 justify-between">
@@ -77,8 +77,8 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
       <form
         className="text-left"
         onSubmit={(e) => {
-          e.preventDefault()
-          handleLogin()
+          e.preventDefault();
+          handleLogin();
         }}
       >
         <InputWithErrorMsg
@@ -119,7 +119,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         </p>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Authentication
+export default Authentication;

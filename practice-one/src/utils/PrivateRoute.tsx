@@ -1,18 +1,13 @@
-import { PATH_NAME } from '@constants/services'
-import { Navigate, Outlet, RouteProps } from 'react-router-dom'
-import { AuthType } from 'src/App'
+import { PATH_NAME } from '@constants/services';
+import { Navigate, Outlet, RouteProps } from 'react-router-dom';
+import { AuthType } from 'src/App';
 
 type PrivateRouteProps = RouteProps & {
-  auth: AuthType
-}
+  auth: AuthType;
+};
 
 const PrivateRoute = ({ auth }: PrivateRouteProps) => {
-  if (!auth.accessToken) {
-    // Redirect to the login page if not authenticated
-    return <Navigate to={PATH_NAME.LOGIN} />
-  }
+  return auth.accessToken ? <Outlet /> : <Navigate to={PATH_NAME.LOGIN} />; // navigate to login if not logged in
+};
 
-  return <Outlet />
-}
-
-export default PrivateRoute
+export default PrivateRoute;

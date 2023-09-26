@@ -1,9 +1,9 @@
-import Input from '@components/Input'
+import Input from '@components/Input';
 
 type HeaderProps = {
-  searchText: string
-  setSearchText: React.Dispatch<React.SetStateAction<string>>
-} & React.HTMLAttributes<HTMLElement>
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+} & React.HTMLAttributes<HTMLElement>;
 
 const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
   return (
@@ -20,7 +20,7 @@ const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
         <i className="fa fa-search fa-lg text-custom-gray search-input-icon"></i>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

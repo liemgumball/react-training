@@ -3,5 +3,5 @@ export default function formatAmount(amount: number) {
     style: 'decimal',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  })
+  });
 }

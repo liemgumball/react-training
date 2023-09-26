@@ -1,17 +1,17 @@
-import Header from '@components/Header'
-import Sidebar from '@components/Sidebar'
-import { Outlet } from 'react-router-dom'
-import { AuthType } from 'src/App'
+import Header from '@components/Header';
+import Sidebar from '@components/Sidebar';
+import { Outlet } from 'react-router-dom';
+import { AuthType } from 'src/App';
 
 type MainLayoutProps = {
-  searchText: string
-  setSearchText: React.Dispatch<React.SetStateAction<string>>
-  auth: AuthType
-  setAuth: React.Dispatch<React.SetStateAction<AuthType>>
-}
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  auth: AuthType;
+  setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
+};
 
 const MainLayout = (props: MainLayoutProps) => {
-  const { searchText, setSearchText, auth, setAuth } = props
+  const { searchText, setSearchText, auth, setAuth } = props;
 
   return (
     <div className="bg-white flex capitalize">
@@ -21,7 +21,7 @@ const MainLayout = (props: MainLayoutProps) => {
         <Outlet />
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default MainLayout
+export default MainLayout;

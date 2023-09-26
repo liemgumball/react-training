@@ -1,26 +1,26 @@
-import { TStudent } from '@features/studentList/components/StudentListItem'
-import ButtonIcon from '@components/ButtonIcon'
-import formatAmount from '@utils/formatAmount'
+import { TStudent } from '@features/studentList/components/StudentListItem';
+import ButtonIcon from '@components/ButtonIcon';
+import formatAmount from '@utils/formatAmount';
 
 // images
-import eye from '@assets/eye.svg'
+import eye from '@assets/eye.svg';
 
 export type TPayment = {
-  createdAt: string
-  billNumber: number
-  paid: number
-  balance: number
-  studentId: number
-  id: number
-  student?: TStudent
-}
+  createdAt: string;
+  billNumber: number;
+  paid: number;
+  balance: number;
+  studentId: number;
+  id: number;
+  student?: TStudent;
+};
 
 type PaymentListItemProps = {
-  data: TPayment
-}
+  data: TPayment;
+};
 
 const PaymentListItem = (props: PaymentListItemProps) => {
-  const { data } = props
+  const { data } = props;
 
   return (
     <li data-id={data.id} className="my-2 grid payment">
@@ -34,7 +34,7 @@ const PaymentListItem = (props: PaymentListItemProps) => {
         <ButtonIcon iconSrc={eye} alt="eye" className="view-details-btn" />
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default PaymentListItem
+export default PaymentListItem;

@@ -1,24 +1,24 @@
-import { To } from 'react-router-dom'
-import { AuthType } from 'src/App'
-import NavItem from './NavItem'
-import Button from '@components/Button'
-import { PATH_NAME } from '@constants/services'
+import { To } from 'react-router-dom';
+import { AuthType } from 'src/App';
+import NavItem from './NavItem';
+import Button from '@components/Button';
+import { PATH_NAME } from '@constants/services';
 
 // images
-import avatar from '@assets/avatar.png'
-import smallLogo from '@assets/smallLogo.svg'
-import house from '@assets/house.svg'
-import bookmark from '@assets/bookmark.svg'
-import graduationCap from '@assets/graduationCap.svg'
-import usdSquare from '@assets/usdSquare.svg'
-import fileChartLine from '@assets/fileChartLine.svg'
-import sliderSquare from '@assets/sliderSquare.svg'
-import signOut from '@assets/signOut.svg'
+import avatar from '@assets/avatar.png';
+import smallLogo from '@assets/smallLogo.svg';
+import house from '@assets/house.svg';
+import bookmark from '@assets/bookmark.svg';
+import graduationCap from '@assets/graduationCap.svg';
+import usdSquare from '@assets/usdSquare.svg';
+import fileChartLine from '@assets/fileChartLine.svg';
+import sliderSquare from '@assets/sliderSquare.svg';
+import signOut from '@assets/signOut.svg';
 
 type SidebarProps = {
-  setAuth: React.Dispatch<React.SetStateAction<AuthType>>
-  username: string
-}
+  setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
+  username: string;
+};
 
 const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
   [
@@ -53,7 +53,7 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
       alt: 'slider square',
       innerText: 'settings',
     },
-  ]
+  ];
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
@@ -94,7 +94,7 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
         <img src={signOut} alt="sign out" className="inline-block mx-3" />
       </Button>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

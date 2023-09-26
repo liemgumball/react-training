@@ -1,12 +1,12 @@
-import PaymentList from '@features/paymentList'
-import useDebounce from '@hooks/useDebounce'
+import PaymentList from '@features/paymentList';
+import useDebounce from '@hooks/useDebounce';
 
 type PaymentPageProps = {
-  searchText: string
-}
+  searchText: string;
+};
 
 const PaymentPage = ({ searchText }: PaymentPageProps) => {
-  const keyword = useDebounce(searchText)
+  const keyword = useDebounce(searchText);
 
   return (
     <article className="px-8">
@@ -27,7 +27,7 @@ const PaymentPage = ({ searchText }: PaymentPageProps) => {
         <PaymentList keyword={keyword}></PaymentList>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default PaymentPage
+export default PaymentPage;

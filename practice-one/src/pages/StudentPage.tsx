@@ -1,20 +1,20 @@
-import { useState } from 'react'
-import StudentList from '@features/studentList'
-import StudentForm from '@features/studentForm'
-import useDebounce from '@hooks/useDebounce'
-import useStudentForm from '@features/studentForm/hooks/useStudentForm'
-import Button from '@components/Button'
+import { useState } from 'react';
+import StudentList from '@features/studentList';
+import StudentForm from '@features/studentForm';
+import useDebounce from '@hooks/useDebounce';
+import useStudentForm from '@features/studentForm/hooks/useStudentForm';
+import Button from '@components/Button';
 
 type StudentPageProps = {
-  searchText: string
-}
+  searchText: string;
+};
 
 const StudentPage = ({ searchText }: StudentPageProps) => {
-  const [formState, formAction] = useStudentForm()
+  const [formState, formAction] = useStudentForm();
 
-  const [updatedStudents, setUpdatedStudents] = useState<boolean>(false)
+  const [updatedStudents, setUpdatedStudents] = useState<boolean>(false);
 
-  const keyword = useDebounce(searchText)
+  const keyword = useDebounce(searchText);
 
   return (
     <>
@@ -25,8 +25,8 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
             type="button"
             className="text-white bg-custom-yellow uppercase"
             onClick={(e) => {
-              e.preventDefault()
-              formAction({ type: 'add' })
+              e.preventDefault();
+              formAction({ type: 'add' });
             }}
           >
             add new student
@@ -68,7 +68,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
         />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default StudentPage
+export default StudentPage;

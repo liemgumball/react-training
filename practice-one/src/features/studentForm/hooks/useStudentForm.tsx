@@ -1,34 +1,34 @@
-import { useReducer } from 'react'
-import { TStudent } from '@features/studentList/components/StudentListItem'
+import { useReducer } from 'react';
+import { TStudent } from '@features/studentList/components/StudentListItem';
 
 export type FormActionType = {
-  type: 'add' | 'edit' | 'close'
-  data?: TStudent
-}
+  type: 'add' | 'edit' | 'close';
+  data?: TStudent;
+};
 
 export type StudentFormDataType = Pick<
   TStudent,
   'name' | 'email' | 'phone' | 'enrollNumber'
-> & { id?: number }
+> & { id?: number };
 
 export type StudentFormStates = {
-  show: boolean
-  title?: string
-  data?: StudentFormDataType
-}
+  show: boolean;
+  title?: string;
+  data?: StudentFormDataType;
+};
 
 function reducer(
   state: StudentFormStates,
   action: FormActionType
 ): StudentFormStates {
-  const studentFormData = action.data
+  const studentFormData = action.data;
 
   switch (action.type) {
     case 'add':
-      return { show: true, title: 'add student' }
+      return { show: true, title: 'add student' };
 
     case 'edit':
-      if (!studentFormData) return state
+      if (!studentFormData) return state;
 
       return {
         show: true,
@@ -39,22 +39,22 @@ function reducer(
           phone: studentFormData.phone,
           enrollNumber: studentFormData.enrollNumber,
         },
-      }
+      };
 
     case 'close':
-      return { show: false }
+      return { show: false };
 
     default:
-      return state
+      return state;
   }
 }
 
 const useStudentForm = () => {
   const [formState, formAction] = useReducer(reducer, {
     show: false,
-  })
+  });
 
-  return [formState, formAction] as const
-}
+  return [formState, formAction] as const;
+};
 
-export default useStudentForm
+export default useStudentForm;

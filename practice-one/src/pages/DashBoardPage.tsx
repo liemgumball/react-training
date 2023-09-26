@@ -1,9 +1,9 @@
-import graduationCapBlue from '@assets/graduationCapBlue.svg'
-import bookmarkPink from '@assets/bookmarkPink.svg'
-import usdSquareYellow from '@assets/usdSquareYellow.svg'
-import user from '@assets/user.svg'
-import DashBoardCard from '@components/DashBoardCard'
-import { PATH_NAME } from '@constants/services'
+import graduationCapBlue from '@assets/graduationCapBlue.svg';
+import bookmarkPink from '@assets/bookmarkPink.svg';
+import usdSquareYellow from '@assets/usdSquareYellow.svg';
+import user from '@assets/user.svg';
+import DashBoardCard from '@components/DashBoardCard';
+import { PATH_NAME } from '@constants/services';
 
 const DashBoardPage = () => {
   return (
@@ -49,7 +49,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
     </article>
-  )
-}
+  );
+};
 
-export default DashBoardPage
+export default DashBoardPage;
