@@ -1,14 +1,9 @@
-import InputWithErrorMsg from '@components/InputWithErrorMsg'
-import { TStudent } from '@features/studentList/components/StudentListItem'
 import { useEffect, useRef, useState } from 'react'
-import { formvalidate } from './services/formvalidate'
+import InputWithErrorMsg from '@components/InputWithErrorMsg'
+import Button from '@components/Button'
 import { saveStudent } from './services/saveStudent'
-import { FormActionType } from 'src/pages/StudentPage'
-
-export type StudentFormDataType = Pick<
-  TStudent,
-  'name' | 'email' | 'phone' | 'enrollNumber' | 'id'
->
+import { formValidate } from './services/formValidate'
+import { FormActionType, StudentFormDataType } from './hooks/useStudentForm'
 
 type StudentFormProps = {
   title?: string
@@ -20,7 +15,7 @@ type StudentFormProps = {
 const StudentForm = (props: StudentFormProps) => {
   const { title, data, setFormAction, setUpdateStudents } = props
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState<boolean>(false)
   const nameRef = useRef<HTMLInputElement | null>(null)
   const emailRef = useRef<HTMLInputElement | null>(null)
   const phoneRef = useRef<HTMLInputElement | null>(null)
@@ -55,13 +50,13 @@ const StudentForm = (props: StudentFormProps) => {
       enrollNumber: +enrollNumberRef.current!.value.trim(),
     }
 
-    const validation = formvalidate(student, setFormError)
+    const validation = formValidate(student, setFormError)
 
     if (validation) {
       try {
         setLoading(true)
-        const responeStudent = await saveStudent(student)
-        if (responeStudent) {
+        const response = await saveStudent(student)
+        if (response) {
           setFormAction({ type: 'close' })
           setUpdateStudents((p) => !p) // trigger rerender list
         }
@@ -113,7 +108,7 @@ const StudentForm = (props: StudentFormProps) => {
           ref={enrollNumberRef}
           errorMsg={formError?.enrollNumber.toString()}
         />
-        <button
+        <Button
           type="submit"
           onClick={(e) => {
             e.preventDefault()
@@ -121,10 +116,10 @@ const StudentForm = (props: StudentFormProps) => {
           }}
           className={`${
             loading ? 'bg-custom-gray' : 'bg-custom-yellow'
-          } block mx-auto rounded-lg py-4 px-16 text-xl text-white text-center uppercase hover:shadow-xl`}
+          } block mx-auto px-16 text-white uppercase text-xl`}
         >
           {loading ? 'loading...' : 'done'}
-        </button>
+        </Button>
       </form>
     </div>
   )

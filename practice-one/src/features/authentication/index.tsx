@@ -1,12 +1,15 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
-import { login } from './services/login'
-import InputWithErrorMsg from '@components/InputWithErrorMsg'
-import { emailRegex, passwordRegex } from '@constants/regexs'
-import { ERROR_MSG } from '@constants/messages'
-import bigLogo from '@assets/bigLogo.svg'
-import { AuthType } from 'src/App'
+import { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthType } from 'src/App'
+import InputWithErrorMsg from '@components/InputWithErrorMsg'
+import Button from '@components/Button'
+import { login } from './services/login'
+
+// constants
 import { PATH_NAME } from '@constants/services'
+import { ERROR_MSG } from '@constants/messages'
+import { emailRegex, passwordRegex } from '@constants/regex'
+import bigLogo from '@assets/bigLogo.svg'
 
 type authenticationProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>
@@ -15,39 +18,38 @@ type authenticationProps = {
 const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
   const navigate = useNavigate()
 
-  const [loading, setLoading] = useState(false)
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const [emailError, setEmailError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
+  const emailRef = useRef<HTMLInputElement | null>(null)
   const passwordRef = useRef<HTMLInputElement | null>(null)
-  const [passwordError, setPasswordError] = useState<string | null>(null)
+
+  const [formError, setFormError] = useState<{
+    email: string | null
+    password: string | null
+  }>({ email: null, password: null })
 
   const handleLogin = async () => {
     setLoading(true)
+
     const emailValue = emailRef.current!.value.trim()
     const passwordValue = passwordRef.current!.value.trim()
 
     const emailIsValid = emailRegex.test(emailValue)
     const passwordIsValid = passwordRegex.test(passwordValue)
 
-    if (!emailIsValid) {
-      setEmailError(ERROR_MSG.INVALID_EMAIL)
-    } else {
-      setEmailError(null)
-    }
-
-    if (!passwordIsValid) {
-      setPasswordError(ERROR_MSG.INVALID_PASSWORD)
-    } else {
-      setPasswordError(null)
-    }
+    setFormError({
+      email: emailIsValid ? null : ERROR_MSG.INVALID_EMAIL,
+      password: passwordIsValid ? null : ERROR_MSG.INVALID_PASSWORD,
+    })
 
     if (emailIsValid && passwordIsValid) {
       const response = await login(emailValue, passwordValue)
 
       if (response instanceof Error) {
-        setEmailError(response.message)
-        setPasswordError(response.message)
+        setFormError({
+          email: response.message,
+          password: response.message,
+        })
       } else {
         setAuth({
           accessToken: response.accessToken,
@@ -56,6 +58,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         navigate(PATH_NAME.HOME)
       }
     }
+
     setLoading(false)
   }
 
@@ -85,7 +88,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           type="text"
           placeholder="Enter your email"
           ref={emailRef}
-          errorMsg={emailError}
+          errorMsg={formError?.email}
         />
         <InputWithErrorMsg
           showLabel
@@ -94,17 +97,17 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           type="text"
           placeholder="Enter your password"
           ref={passwordRef}
-          errorMsg={passwordError}
+          errorMsg={formError?.password}
         />
-        <button
+        <Button
           className={`${
             loading ? 'bg-custom-dark-gray' : 'bg-custom-yellow'
-          } w-full mb-5 p-3 font-500 text-white uppercase rounded-md hover:shadow-lg`}
+          } w-full mb-5 text-white uppercase`}
           type="submit"
           disabled={loading}
         >
           {loading ? 'Loading...' : 'Sign in'}
-        </button>
+        </Button>
         <p className="text-center">
           Forgot your password?{' '}
           <a

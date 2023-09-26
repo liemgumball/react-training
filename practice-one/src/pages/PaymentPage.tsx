@@ -10,7 +10,7 @@ const PaymentPage = ({ searchText }: PaymentPageProps) => {
 
   return (
     <article className="px-8">
-      <header className="py-3 flex justify-between items-center sticky top-0 bg-white border-b">
+      <header className="py-3 flex justify-between items-center bg-white border-b">
         <h1 className="text-3xl font-700">payments list</h1>
       </header>
       <hr />
