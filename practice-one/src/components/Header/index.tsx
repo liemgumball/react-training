@@ -17,7 +17,7 @@ const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <i className="fa fa-search fa-lg text-custom-gray absolute right-5 top-1/2 transform -translate-y-1/2"></i>
+        <i className="fa fa-search fa-lg text-custom-gray search-input-icon"></i>
       </div>
     </header>
   )

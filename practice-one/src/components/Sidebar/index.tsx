@@ -57,10 +57,10 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
-    <aside className="sidebar sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen min-w-max">
-      <div className="flex items-center justify-center">
+    <aside className="sidebar min-w-max">
+      <div className="flex-center">
         <img src={smallLogo} alt="Logo" />
-        <p className="text-xl uppercase font-semibold">CRUD operations</p>
+        <p className="text-xl uppercase font-700">CRUD operations</p>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">
@@ -87,7 +87,7 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       </nav>
 
       <Button
-        className="capitalize hover:bg-custom-gray"
+        className="px-16 capitalize hover:bg-custom-gray"
         onClick={() => setAuth({ accessToken: '', name: '' })}
       >
         logout

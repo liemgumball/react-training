@@ -18,7 +18,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
 
   return (
     <>
-      <article className="px-8">
+      <article className="px-8 min-w-max">
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <Button
@@ -33,28 +33,28 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
           </Button>
         </header>
         <hr />
-        <div className="students py-3 whitespace-no-wrap">
-          <div className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
-            <div></div>
-            <div>name</div>
-            <div>email</div>
-            <div>phone</div>
-            <div>enroll number</div>
-            <div>date of admission</div>
-            <div></div>
-          </div>
+        <section className="students py-3 whitespace-no-wrap">
+          <header className="list-heading grid text-custom-medium-gray font-600 truncate">
+            <span />
+            <span>name</span>
+            <span>email</span>
+            <span>phone</span>
+            <span>enroll number</span>
+            <span>date of admission</span>
+            <span />
+          </header>
           <StudentList
             keyword={keyword}
             setFormAction={formAction}
             updateStudentsTrigger={updatedStudents}
             setUpdateStudentsTrigger={setUpdatedStudents}
           ></StudentList>
-        </div>
+        </section>
       </article>
       <div
         className={`${
           formState.show ? '' : 'invisible'
-        } fixed inset-0 flex items-center justify-center`}
+        } fixed inset-0 flex-center`}
       >
         <div
           className="fixed inset-0 bg-black opacity-50"

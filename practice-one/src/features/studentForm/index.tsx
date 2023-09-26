@@ -71,7 +71,7 @@ const StudentForm = (props: StudentFormProps) => {
   }
 
   return (
-    <div className="bg-white p-16 rounded-2xl shadow-lg max-w-2xl w-full relative">
+    <div className="student-form">
       <h2 className="text-3xl font-700 text-center mb-10 uppercase">
         {title ? title : 'student form'}
       </h2>
@@ -116,7 +116,7 @@ const StudentForm = (props: StudentFormProps) => {
           }}
           className={`${
             loading ? 'bg-custom-gray' : 'bg-custom-yellow'
-          } block mx-auto px-16 text-white uppercase text-xl`}
+          } submit-btn`}
         >
           {loading ? 'loading...' : 'done'}
         </Button>

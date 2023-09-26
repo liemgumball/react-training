@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply font-montserrat;
+}
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.sidebar {
+  @apply sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen;
+}
+
+.sidebar .nav-item {
+  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-center gap-2 transition;
+}
+
+.btn {
+  @apply rounded-lg hover:shadow-lg p-3 transition font-500;
+}
+
+.search-input-icon {
+  @apply absolute right-5 top-1/2 transform -translate-y-1/2;
+}
+
+.dashboard-grid {
+  @apply p-8 h-auto grid grid-cols-4 gap-8 items-stretch;
+}
+
+.dashboard-card {
+  @apply p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 w-auto border transition;
+}
+
+.student {
+  @apply border rounded-xl items-center hover:bg-custom-beige font-400 transition;
+}
+
+.student-form {
+  @apply bg-white p-16 rounded-2xl shadow-lg max-w-2xl w-full relative;
+}
+
+.student-form .submit-btn {
+  @apply block mx-auto px-16 text-white uppercase text-xl;
+}
+
+.payment {
+  @apply border rounded-xl items-center hover:bg-custom-beige font-400 transition;
+}

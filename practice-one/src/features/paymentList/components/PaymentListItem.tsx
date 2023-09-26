@@ -23,10 +23,7 @@ const PaymentListItem = (props: PaymentListItemProps) => {
   const { data } = props
 
   return (
-    <li
-      data-id={data.id}
-      className="my-2 grid payment border rounded-xl items-center hover:bg-custom-beige font-400 transition"
-    >
+    <li data-id={data.id} className="my-2 grid payment">
       <p className="truncate">{data.student?.name}</p>
       <p className="truncate">first</p>
       <p className="truncate">{data.billNumber}</p>

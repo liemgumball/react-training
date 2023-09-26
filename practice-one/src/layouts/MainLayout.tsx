@@ -14,9 +14,9 @@ const MainLayout = (props: MainLayoutProps) => {
   const { searchText, setSearchText, auth, setAuth } = props
 
   return (
-    <div className="bg-white flex capitalize font-montserrat">
+    <div className="bg-white flex capitalize">
       <Sidebar setAuth={setAuth} username={auth.name} />
-      <main className="w-full">
+      <main className="w-full min-w-max">
         <Header searchText={searchText} setSearchText={setSearchText} />
         <Outlet />
       </main>

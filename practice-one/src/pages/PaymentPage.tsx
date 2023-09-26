@@ -15,14 +15,14 @@ const PaymentPage = ({ searchText }: PaymentPageProps) => {
       </header>
       <hr />
       <div className="payments py-3 whitespace-no-wrap">
-        <div className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
-          <div>name</div>
-          <div>payment schedule</div>
-          <div>bill number</div>
-          <div>amount paid</div>
-          <div>balance amount</div>
-          <div>date</div>
-          <div></div>
+        <div className="list-heading grid text-custom-medium-gray font-600 truncate">
+          <span>name</span>
+          <span>payment schedule</span>
+          <span>bill number</span>
+          <span>amount paid</span>
+          <span>balance amount</span>
+          <span>date</span>
+          <span></span>
         </div>
         <PaymentList keyword={keyword}></PaymentList>
       </div>
