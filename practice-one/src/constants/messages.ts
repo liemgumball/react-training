@@ -1,4 +1,6 @@
 export const ERROR_MSG = {
+  PROCESS_FAILED: 'Process got failed!',
+  MISSING_ID: 'Missing ID',
   INVALID_NAME: 'Please enter a valid name',
   INVALID_EMAIL: 'Email must be a valid email address',
   INVALID_PASSWORD:

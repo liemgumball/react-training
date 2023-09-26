@@ -1,7 +1,9 @@
-import eye from '@assets/eye.svg'
-import ButtonIcon from '@components/ButtonIcon'
 import { TStudent } from '@features/studentList/components/StudentListItem'
+import ButtonIcon from '@components/ButtonIcon'
 import formatAmount from '@utils/formatAmount'
+
+// images
+import eye from '@assets/eye.svg'
 
 export type TPayment = {
   createdAt: string
@@ -9,7 +11,7 @@ export type TPayment = {
   paid: number
   balance: number
   studentId: number
-  id?: number
+  id: number
   student?: TStudent
 }
 

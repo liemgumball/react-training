@@ -1,6 +1,8 @@
+import ButtonIcon from '@components/ButtonIcon'
+
+// images
 import pen from '@assets/pen.svg'
 import trash from '@assets/trash.svg'
-import ButtonIcon from '@components/ButtonIcon'
 
 export type TStudent = {
   createdAt: string
@@ -9,7 +11,7 @@ export type TStudent = {
   email: string
   phone: string
   enrollNumber: number
-  id?: number
+  id: number
 }
 
 type StudentListItemProps = {

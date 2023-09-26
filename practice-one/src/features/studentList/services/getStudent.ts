@@ -1,6 +1,6 @@
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 import { TStudent } from '@features/studentList/components/StudentListItem'
 import { apiRequest } from '@services/apiRequest'
+import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 
 export const getStudent = async (studentId: string) => {
   try {
