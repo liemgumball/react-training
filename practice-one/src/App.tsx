@@ -22,7 +22,7 @@ function App() {
     name: '',
   })
 
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState<string>('')
 
   return (
     <Router>

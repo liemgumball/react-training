@@ -1,6 +1,12 @@
-import smallLogo from '@assets/smallLogo.svg'
-import avatar from '@assets/avatar.png'
+import { To } from 'react-router-dom'
+import { AuthType } from 'src/App'
 import NavItem from './NavItem'
+import Button from '@components/Button'
+import { PATH_NAME } from '@constants/services'
+
+// images
+import avatar from '@assets/avatar.png'
+import smallLogo from '@assets/smallLogo.svg'
 import house from '@assets/house.svg'
 import bookmark from '@assets/bookmark.svg'
 import graduationCap from '@assets/graduationCap.svg'
@@ -8,14 +14,46 @@ import usdSquare from '@assets/usdSquare.svg'
 import fileChartLine from '@assets/fileChartLine.svg'
 import sliderSquare from '@assets/sliderSquare.svg'
 import signOut from '@assets/signOut.svg'
-import { AuthType } from 'src/App'
-import { Dispatch, SetStateAction } from 'react'
-import { PATH_NAME } from '@constants/services'
 
 type SidebarProps = {
-  setAuth: Dispatch<SetStateAction<AuthType>>
+  setAuth: React.Dispatch<React.SetStateAction<AuthType>>
   username: string
 }
+
+const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
+  [
+    { to: PATH_NAME.HOME, imgSrc: house, alt: 'house', innerText: 'home' },
+    {
+      to: PATH_NAME.EMPTY_PAGE,
+      imgSrc: bookmark,
+      alt: 'book mark',
+      innerText: 'courses',
+    },
+    {
+      to: PATH_NAME.STUDENTS,
+      imgSrc: graduationCap,
+      alt: 'graduation cap',
+      innerText: 'students',
+    },
+    {
+      to: PATH_NAME.PAYMENTS,
+      imgSrc: usdSquare,
+      alt: 'usd square',
+      innerText: 'payments',
+    },
+    {
+      to: PATH_NAME.EMPTY_PAGE,
+      imgSrc: fileChartLine,
+      alt: 'file chart line',
+      innerText: 'reports',
+    },
+    {
+      to: PATH_NAME.EMPTY_PAGE,
+      imgSrc: sliderSquare,
+      alt: 'slider square',
+      innerText: 'settings',
+    },
+  ]
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
@@ -39,40 +77,22 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       </div>
       <nav className="p-5">
         <ul>
-          <NavItem pathname={PATH_NAME.HOME}>
-            <img src={house} alt="house" />
-            home
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={bookmark} alt="book mark" />
-            course
-          </NavItem>
-          <NavItem pathname={PATH_NAME.STUDENTS}>
-            <img src={graduationCap} alt="graduation cap" />
-            students
-          </NavItem>
-          <NavItem pathname={PATH_NAME.PAYMENTS}>
-            <img src={usdSquare} alt="usd square" />
-            payment
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={fileChartLine} alt="file chart line" />
-            report
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={sliderSquare} alt="slider square" />
-            settings
-          </NavItem>
+          {NavList.map((item, index) => (
+            <NavItem key={index} to={item.to}>
+              <img src={item.imgSrc} alt={item.alt} />
+              {item.innerText}
+            </NavItem>
+          ))}
         </ul>
       </nav>
 
-      <button
-        className="capitalize px-16 py-3 rounded-lg hover:bg-custom-gray"
+      <Button
+        className="capitalize hover:bg-custom-gray"
         onClick={() => setAuth({ accessToken: '', name: '' })}
       >
         logout
-        <img src={signOut} alt="sign out" className="inline-block mx-2" />
-      </button>
+        <img src={signOut} alt="sign out" className="inline-block mx-3" />
+      </Button>
     </aside>
   )
 }

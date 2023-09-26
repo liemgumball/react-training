@@ -1,24 +1,27 @@
+import { StudentFormDataType } from '../hooks/useStudentForm'
+
+// constants
 import { ERROR_MSG } from '@constants/messages'
-import { StudentFormDataType } from '..'
 import {
   emailRegex,
   enrollNumberRegex,
   nameRegex,
   phoneNumberRegex,
-} from '@constants/regexs'
+} from '@constants/regex'
+
+type FormErrorType = {
+  name: string
+  email: string
+  phone: string
+  enrollNumber: string
+}
 
 export const formValidate = (
   data: StudentFormDataType,
-  setFormError: React.Dispatch<
-    React.SetStateAction<{
-      name: string
-      email: string
-      phone: string
-      enrollNumber: string
-    } | null>
-  >
+  setFormError: React.Dispatch<React.SetStateAction<FormErrorType | null>>
 ) => {
   const { name, email, phone, enrollNumber } = data
+
   const test = {
     nameIsValid: nameRegex.test(name),
     emailIsValid: emailRegex.test(email),

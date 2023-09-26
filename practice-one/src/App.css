@@ -20,7 +20,7 @@
   column-gap: 15px;
   padding: 1.25rem 0.75rem;
   grid-template-columns:
-    [first]100px
+    [first]80px
     [var1]minmax(150px, 3fr)
     [var2]minmax(200px, 4fr)
     [var3]minmax(150px, 3fr)

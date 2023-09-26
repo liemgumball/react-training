@@ -1,7 +1,9 @@
-import { apiRequest } from '@services/apiRequest'
-import { StudentFormDataType } from '..'
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 import { TStudent } from '@features/studentList/components/StudentListItem'
+import { apiRequest } from '@services/apiRequest'
+import { StudentFormDataType } from '../hooks/useStudentForm'
+
+// constants
+import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services'
 
 export const saveStudent = async (student: StudentFormDataType) => {
   try {
