@@ -1,5 +1,4 @@
 import useFetch from '@hooks/useFetch'
-import React from 'react'
 
 type ListProps<T> = {
   url: string

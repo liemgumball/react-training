@@ -17,7 +17,7 @@ export default function useLocalStorage<T>(
   const [value, setValue] = useState<T>(() => getSavedValue(key, initialValue))
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value)) // set value after mount or update
   }, [key, value])
 
   return [value, setValue] as const

@@ -11,14 +11,14 @@ type InputWithLabelProps = {
 }
 
 const InputWithErrorMsg = forwardRef(
-  (props: InputWithLabelProps, ref: LegacyRef<HTMLInputElement>) => {
+  (props: InputWithLabelProps, ref?: LegacyRef<HTMLInputElement>) => {
     const { showLabel, name, id, type, placeholder, errorMsg, value } = props
 
     return (
       <div className="input-field flex flex-col mb-5">
         {showLabel && <label htmlFor={id}>{name}</label>}
         <input
-          className={`border rounded-md p-3 mt-1 w-full ${
+          className={`border rounded-md py-3 px-5 mt-1 w-full ${
             errorMsg ? 'border-red-500' : 'border-gray-500'
           }`}
           type={type}

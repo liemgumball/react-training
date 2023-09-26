@@ -1,3 +1,5 @@
+import Button from '@components/Button'
+
 type ButtonIconProps = {
   iconSrc: string
   alt: string
@@ -7,14 +9,10 @@ type ButtonIconProps = {
 const ButtonIcon = (props: ButtonIconProps) => {
   const { iconSrc, alt, className, children, ...rest } = props
   return (
-    <button
-      type="button"
-      className={`${className} rounded-lg hover:shadow-lg hover:bg-white p-3 transition`}
-      {...rest}
-    >
+    <Button type="button" className={`${className} hover:bg-white`} {...rest}>
       {children}
       <img src={iconSrc} alt={alt} />
-    </button>
+    </Button>
   )
 }
 

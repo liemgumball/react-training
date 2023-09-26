@@ -1,23 +1,21 @@
+import Input from '@components/Input'
+
 type HeaderProps = {
   searchText: string
   setSearchText: React.Dispatch<React.SetStateAction<string>>
-}
+} & React.HTMLAttributes<HTMLElement>
 
-const Header = ({ searchText, setSearchText }: HeaderProps) => {
+const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
   return (
-    <header className="flex justify-end gx-3 py-5 px-8">
-      <div className="input-with-icon relative min-w-max">
-        <input
+    <header className="flex justify-end gx-3 py-5 px-8" {...rest}>
+      <div className="relative">
+        <Input
           type="text"
           name="Search"
           id="search"
           placeholder="Search..."
-          className="py-2 px-5 rounded-lg border-2 border-custom-gray text-lg"
           value={searchText}
-          onChange={(e) => {
-            e.preventDefault()
-            setSearchText(e.target.value)
-          }}
+          onChange={(e) => setSearchText(e.target.value)}
         />
         <i className="fa fa-search fa-lg text-custom-gray absolute right-5 top-1/2 transform -translate-y-1/2"></i>
       </div>

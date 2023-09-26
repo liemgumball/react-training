@@ -1,12 +1,12 @@
 import PaymentList from '@features/paymentList'
-import useDebound from '@hooks/useDebound'
+import useDebounce from '@hooks/useDebounce'
 
 type PaymentPageProps = {
   searchText: string
 }
 
 const PaymentPage = ({ searchText }: PaymentPageProps) => {
-  const keyword = useDebound(searchText)
+  const keyword = useDebounce(searchText)
 
   return (
     <article className="px-8">

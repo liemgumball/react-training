@@ -7,7 +7,7 @@ import {
   phoneNumberRegex,
 } from '@constants/regexs'
 
-export const formvalidate = (
+export const formValidate = (
   data: StudentFormDataType,
   setFormError: React.Dispatch<
     React.SetStateAction<{

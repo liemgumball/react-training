@@ -7,7 +7,7 @@ import { PATH_NAME } from '@constants/services'
 
 const DashBoardPage = () => {
   return (
-    <article className="p-8 h-auto grid grid-cols-4 gap-8 items-strech">
+    <article className="p-8 h-auto grid grid-cols-4 gap-8 items-stretch">
       <DashBoardCard
         to={PATH_NAME.STUDENTS}
         className="bg-custom-light-blue text-custom-dark-gray"
