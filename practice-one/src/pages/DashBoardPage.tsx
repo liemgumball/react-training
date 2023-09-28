@@ -19,7 +19,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to={PATH_NAME.EMPTY_PAGE}
+        to={PATH_NAME.COURSES}
         className="bg-custom-light-pink text-custom-dark-gray"
         cardName="courses"
         mainInfo="13"
@@ -39,7 +39,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to={PATH_NAME.EMPTY_PAGE}
+        to={PATH_NAME.SETTINGS}
         className="bg-custom-yellow text-white"
         cardName="users"
         mainInfo="3"

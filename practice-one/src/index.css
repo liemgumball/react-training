@@ -11,7 +11,7 @@
 }
 
 .sidebar {
-  @apply sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen;
+  @apply min-w-max h-full min-h-screen bg-custom-beige py-10 px-5 flex flex-col items-center justify-around gap-y-3;
 }
 
 .sidebar .nav-item {

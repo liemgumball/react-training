@@ -102,7 +102,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           showLabel
           id="password"
           name="Password"
-          type="text"
+          type="password"
           placeholder="Enter your password"
           ref={passwordRef}
           errorMsg={formError?.password}

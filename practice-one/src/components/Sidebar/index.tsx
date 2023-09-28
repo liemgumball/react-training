@@ -26,7 +26,7 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
   [
     { to: PATH_NAME.HOME, imgSrc: house, alt: 'house', innerText: 'home' },
     {
-      to: PATH_NAME.EMPTY_PAGE,
+      to: PATH_NAME.COURSES,
       imgSrc: bookmark,
       alt: 'book mark',
       innerText: 'courses',
@@ -44,13 +44,13 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
       innerText: 'payments',
     },
     {
-      to: PATH_NAME.EMPTY_PAGE,
+      to: PATH_NAME.REPORTS,
       imgSrc: fileChartLine,
       alt: 'file chart line',
       innerText: 'reports',
     },
     {
-      to: PATH_NAME.EMPTY_PAGE,
+      to: PATH_NAME.SETTINGS,
       imgSrc: sliderSquare,
       alt: 'slider square',
       innerText: 'settings',
@@ -59,7 +59,7 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
-    <aside className="sidebar min-w-max">
+    <aside className="sidebar">
       <div className="flex-center">
         <img src={smallLogo} alt="Logo" />
         <p className="text-xl uppercase font-700">CRUD operations</p>

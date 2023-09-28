@@ -9,5 +9,8 @@ export const PATH_NAME = {
   LOGIN: '/login',
   STUDENTS: '/students',
   PAYMENTS: '/payments',
+  COURSES: '/courses',
+  REPORTS: '/reports',
+  SETTINGS: '/settings',
   EMPTY_PAGE: '/empty-page',
 };

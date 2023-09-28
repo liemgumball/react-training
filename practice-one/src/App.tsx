@@ -19,7 +19,7 @@ import { PATH_NAME } from '@constants/services';
 import { AuthType } from '@constants/types';
 
 function App() {
-  const [auth, setAuth] = useLocalStorage<AuthType>('_auth', null);
+  const [auth, setAuth] = useLocalStorage<AuthType>('user', null);
 
   const [searchText, setSearchText] = useState<string>('');
 

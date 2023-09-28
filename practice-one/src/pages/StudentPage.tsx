@@ -18,7 +18,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
 
   return (
     <>
-      <article className="px-8 min-w-max">
+      <article className="px-8 min-w-min">
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <Button
