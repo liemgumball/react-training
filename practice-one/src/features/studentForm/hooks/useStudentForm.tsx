@@ -1,21 +1,5 @@
 import { useReducer } from 'react';
-import { TStudent } from '@features/studentList/components/StudentListItem';
-
-export type FormActionType = {
-  type: 'add' | 'edit' | 'close';
-  data?: TStudent;
-};
-
-export type StudentFormDataType = Pick<
-  TStudent,
-  'name' | 'email' | 'phone' | 'enrollNumber'
-> & { id?: number };
-
-export type StudentFormStates = {
-  show: boolean;
-  title?: string;
-  data?: StudentFormDataType;
-};
+import { FormActionType, StudentFormStates } from '@constants/types';
 
 function reducer(
   state: StudentFormStates,
@@ -34,6 +18,7 @@ function reducer(
         show: true,
         title: 'edit student',
         data: {
+          id: studentFormData.id,
           email: studentFormData.email,
           name: studentFormData.name,
           phone: studentFormData.phone,

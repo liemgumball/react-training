@@ -1,14 +1,13 @@
-import { TStudent } from '@features/studentList/components/StudentListItem';
 import { apiRequest } from '@services/apiRequest';
-import { StudentFormDataType } from '../hooks/useStudentForm';
 
 // constants
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { DATABASE_RESOURCES } from '@constants/services';
+import { StudentFormDataType, TStudent } from '@constants/types';
 
 export const saveStudent = async (student: StudentFormDataType) => {
   try {
     return (await apiRequest<StudentFormDataType | TStudent>(
-      `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${
+      `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${
         student.id ? student.id : ''
       }`,
       student.id ? 'PATCH' : 'POST', // method based on student id

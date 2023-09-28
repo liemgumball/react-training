@@ -1,5 +1,4 @@
 import { To } from 'react-router-dom';
-import { AuthType } from 'src/App';
 import NavItem from './NavItem';
 import Button from '@components/Button';
 import { PATH_NAME } from '@constants/services';
@@ -14,6 +13,9 @@ import usdSquare from '@assets/usdSquare.svg';
 import fileChartLine from '@assets/fileChartLine.svg';
 import sliderSquare from '@assets/sliderSquare.svg';
 import signOut from '@assets/signOut.svg';
+
+// constants
+import { AuthType } from '@constants/types';
 
 type SidebarProps = {
   setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
@@ -87,11 +89,11 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       </nav>
 
       <Button
-        className="px-16 capitalize hover:bg-custom-gray"
-        onClick={() => setAuth({ accessToken: '', name: '' })}
+        className="capitalize hover:bg-custom-gray"
+        onClick={() => setAuth(null)}
       >
         logout
-        <img src={signOut} alt="sign out" className="inline-block mx-3" />
+        <img src={signOut} alt="sign out" className="inline-block ml-3" />
       </Button>
     </aside>
   );

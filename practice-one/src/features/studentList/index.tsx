@@ -1,12 +1,12 @@
 import List from '@components/List';
 import StudentListItem from './components/StudentListItem';
-import { FormActionType } from '@features/studentForm/hooks/useStudentForm';
 import { getStudent } from './services/getStudent';
 import { removeStudent } from './services/deleteStudent';
 
 // constants
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { DATABASE_RESOURCES } from '@constants/services';
 import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
+import { FormActionType } from '@constants/types';
 
 type StudentListProps = {
   setFormAction: React.Dispatch<FormActionType>;
@@ -23,7 +23,7 @@ const StudentList = (props: StudentListProps) => {
     setUpdateStudentsTrigger,
   } = props;
 
-  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`;
+  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`;
 
   const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {
     try {

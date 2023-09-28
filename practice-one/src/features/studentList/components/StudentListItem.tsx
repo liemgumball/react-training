@@ -1,18 +1,9 @@
 import ButtonIcon from '@components/ButtonIcon';
+import { TStudent } from '@constants/types';
 
 // images
 import pen from '@assets/pen.svg';
 import trash from '@assets/trash.svg';
-
-export type TStudent = {
-  createdAt: string;
-  name: string;
-  avatar: string;
-  email: string;
-  phone: string;
-  enrollNumber: number;
-  id: number;
-};
 
 type StudentListItemProps = {
   data: TStudent;

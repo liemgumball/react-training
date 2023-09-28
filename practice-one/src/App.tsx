@@ -16,14 +16,10 @@ import EmptyPage from './pages/EmptyPage';
 
 // constants
 import { PATH_NAME } from '@constants/services';
-
-export type AuthType = {
-  accessToken: string;
-  name: string;
-};
+import { AuthType } from '@constants/types';
 
 function App() {
-  const [auth, setAuth] = useLocalStorage('user', {
+  const [auth, setAuth] = useLocalStorage<AuthType>('_auth', {
     accessToken: '',
     name: '',
   });

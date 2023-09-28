@@ -1,5 +1,5 @@
 import { ERROR_MSG } from '@constants/messages';
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { DATABASE_RESOURCES } from '@constants/services';
 import { apiRequest } from '@services/apiRequest';
 
 type LoginResponse = {
@@ -19,7 +19,7 @@ type LoginBody = {
 export const login = async (email: string, password: string) => {
   try {
     return (await apiRequest<LoginBody>(
-      `${API_GATEWAY}/${DATABASE_RESOURCES.LOGIN}`,
+      `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.LOGIN}`,
       'POST',
       {
         email: email,
@@ -27,7 +27,7 @@ export const login = async (email: string, password: string) => {
       }
     )) as LoginResponse;
   } catch (err) {
-    if ((err as Error).message.toLowerCase() === 'bad request')
+    if ((err as Error).message === '400')
       return new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD);
 
     return new Error('Process got failed');

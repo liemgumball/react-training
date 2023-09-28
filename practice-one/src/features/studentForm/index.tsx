@@ -3,7 +3,7 @@ import InputWithErrorMsg from '@components/InputWithErrorMsg';
 import Button from '@components/Button';
 import { saveStudent } from './services/saveStudent';
 import { formValidate } from './services/formValidate';
-import { FormActionType, StudentFormDataType } from './hooks/useStudentForm';
+import { FormActionType, StudentFormDataType } from '@constants/types';
 
 type StudentFormProps = {
   title?: string;
@@ -49,6 +49,7 @@ const StudentForm = (props: StudentFormProps) => {
       phone: phoneRef.current!.value.trim(),
       enrollNumber: +enrollNumberRef.current!.value.trim(),
     };
+    console.log(data);
 
     const validation = formValidate(student, setFormError);
 

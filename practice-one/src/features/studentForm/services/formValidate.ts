@@ -1,5 +1,3 @@
-import { StudentFormDataType } from '../hooks/useStudentForm';
-
 // constants
 import { ERROR_MSG } from '@constants/messages';
 import {
@@ -8,6 +6,7 @@ import {
   nameRegex,
   phoneNumberRegex,
 } from '@constants/regex';
+import { StudentFormDataType } from '@constants/types';
 
 type FormErrorType = {
   name: string;
@@ -32,10 +31,10 @@ export const formValidate = (
   setFormError({
     name: test.nameIsValid ? '' : ERROR_MSG.INVALID_NAME,
     email: test.emailIsValid ? '' : ERROR_MSG.INVALID_EMAIL,
-    phone: test.phoneIsValid ? '' : ERROR_MSG.INVALID_PHONENUMBER,
+    phone: test.phoneIsValid ? '' : ERROR_MSG.INVALID_PHONE_NUMBER,
     enrollNumber: test.enrollNumberIsValid
       ? ''
-      : ERROR_MSG.INVALID_ENROLLNUMBER,
+      : ERROR_MSG.INVALID_ENROLL_NUMBER,
   });
 
   return Object.values(test).every((value) => value);

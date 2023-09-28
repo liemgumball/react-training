@@ -1,7 +1,7 @@
 import Header from '@components/Header';
 import Sidebar from '@components/Sidebar';
 import { Outlet } from 'react-router-dom';
-import { AuthType } from 'src/App';
+import { AuthType } from '@constants/types';
 
 type MainLayoutProps = {
   searchText: string;
@@ -15,7 +15,7 @@ const MainLayout = (props: MainLayoutProps) => {
 
   return (
     <div className="bg-white flex capitalize">
-      <Sidebar setAuth={setAuth} username={auth.name} />
+      <Sidebar setAuth={setAuth} username={auth!.name} />
       <main className="w-full min-w-max">
         <Header searchText={searchText} setSearchText={setSearchText} />
         <Outlet />

@@ -1,19 +1,9 @@
-import { TStudent } from '@features/studentList/components/StudentListItem';
 import ButtonIcon from '@components/ButtonIcon';
 import formatAmount from '@utils/formatAmount';
 
 // images
 import eye from '@assets/eye.svg';
-
-export type TPayment = {
-  createdAt: string;
-  billNumber: number;
-  paid: number;
-  balance: number;
-  studentId: number;
-  id: number;
-  student?: TStudent;
-};
+import { TPayment } from '@constants/types';
 
 type PaymentListItemProps = {
   data: TPayment;

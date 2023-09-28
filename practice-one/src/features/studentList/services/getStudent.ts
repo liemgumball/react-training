@@ -1,11 +1,11 @@
-import { TStudent } from '@features/studentList/components/StudentListItem';
 import { apiRequest } from '@services/apiRequest';
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { DATABASE_RESOURCES } from '@constants/services';
+import { TStudent } from '@constants/types';
 
 export const getStudent = async (studentId: string) => {
   try {
     return (await apiRequest(
-      `${API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${studentId}`,
+      `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${studentId}`,
       'GET'
     )) as TStudent;
   } catch (err) {

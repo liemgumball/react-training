@@ -1,6 +1,6 @@
-import Authentication from '@features/authentication';
 import { Dispatch, SetStateAction } from 'react';
-import { AuthType } from 'src/App';
+import Authentication from '@features/authentication';
+import { AuthType } from '@constants/types';
 
 type LoginPageProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>;

@@ -1,16 +1,10 @@
 import { useState, useEffect } from 'react';
 
-type FetchResult<T> = {
-  data: T | null;
-  error: Error | null;
-  loading: boolean;
-};
-
 const useFetch = <T,>(
   url: string,
   options?: RequestInit | null,
   recallTrigger?: boolean
-): FetchResult<T> => {
+) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -48,7 +42,7 @@ const useFetch = <T,>(
     };
   }, [url, options, recallTrigger]);
 
-  return { data, error, loading } as const;
+  return { data, error, loading };
 };
 
 export default useFetch;

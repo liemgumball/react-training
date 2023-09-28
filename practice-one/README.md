@@ -86,5 +86,5 @@ npx json-server src/data/db.json --port 3000 -m node_modules/json-server-auth --
 - Step 06: Run
 
 ```bash
-npm run dev
+export API_GATEWAY=http://localhost:3000 && npm run dev
 ```

@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthType } from 'src/App';
 import InputWithErrorMsg from '@components/InputWithErrorMsg';
 import Button from '@components/Button';
 import { login } from './services/login';
@@ -10,6 +9,7 @@ import { PATH_NAME } from '@constants/services';
 import { ERROR_MSG } from '@constants/messages';
 import { emailRegex, passwordRegex } from '@constants/regex';
 import bigLogo from '@assets/bigLogo.svg';
+import { AuthType } from '@constants/types';
 
 type authenticationProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>;

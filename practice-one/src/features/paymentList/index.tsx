@@ -2,7 +2,7 @@ import List from '@components/List';
 import PaymentListItem from './components/PaymentListItem';
 
 // constants
-import { API_GATEWAY, DATABASE_RESOURCES } from '@constants/services';
+import { DATABASE_RESOURCES } from '@constants/services';
 
 type PaymentListProps = {
   keyword: string;
@@ -11,7 +11,7 @@ type PaymentListProps = {
 const PaymentList = (props: PaymentListProps) => {
   const { keyword } = props;
 
-  const url = `${API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}?_expand=student&?_sort=createdAt&_order=desc&q=${keyword}`;
+  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}?_expand=student&?_sort=createdAt&_order=desc&q=${keyword}`;
 
   return <List ItemComponent={PaymentListItem} url={url}></List>;
 };
