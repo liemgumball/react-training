@@ -28,6 +28,11 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
     password: string | null;
   }>({ email: null, password: null });
 
+  /**
+   * set Loading state
+   * validate, display error message if not valid
+   * call login request if valid
+   */
   const handleLogin = async () => {
     setLoading(true);
 
@@ -37,6 +42,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
     const emailIsValid = emailRegex.test(emailValue);
     const passwordIsValid = passwordRegex.test(passwordValue);
 
+    // display error message if invalid
     setFormError({
       email: emailIsValid ? null : ERROR_MSG.INVALID_EMAIL,
       password: passwordIsValid ? null : ERROR_MSG.INVALID_PASSWORD,
@@ -45,17 +51,19 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
     if (emailIsValid && passwordIsValid) {
       const response = await login(emailValue, passwordValue);
 
+      //display error message if request failed
       if (response instanceof Error) {
         setFormError({
           email: response.message,
           password: response.message,
         });
       } else {
+        // login success
         setAuth({
           accessToken: response.accessToken,
           name: response.user.name,
         });
-        navigate(PATH_NAME.HOME);
+        navigate(PATH_NAME.HOME); // navigate to home page
       }
     }
 

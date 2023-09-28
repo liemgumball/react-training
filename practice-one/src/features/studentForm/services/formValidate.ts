@@ -15,6 +15,12 @@ type FormErrorType = {
   enrollNumber: string;
 };
 
+/**
+ * validates form data
+ * @param data to validate
+ * @param setFormError used to display error message
+ * @returns if valid or not
+ */
 export const formValidate = (
   data: StudentFormDataType,
   setFormError: React.Dispatch<React.SetStateAction<FormErrorType | null>>

@@ -21,6 +21,7 @@ const StudentForm = (props: StudentFormProps) => {
   const phoneRef = useRef<HTMLInputElement | null>(null);
   const enrollNumberRef = useRef<HTMLInputElement | null>(null);
 
+  // used to display error messages
   const [formError, setFormError] = useState<{
     name: string;
     email: string;
@@ -28,10 +29,15 @@ const StudentForm = (props: StudentFormProps) => {
     enrollNumber: string;
   } | null>(null);
 
+  // set input values every time data changes
   useEffect(() => {
     updateForm(data);
   }, [data]);
 
+  /**
+   * set input values based on data
+   * @param data of student
+   */
   const updateForm = (data?: StudentFormDataType) => {
     nameRef.current!.value = data ? data.name : '';
     emailRef.current!.value = data ? data.email : '';
@@ -41,6 +47,10 @@ const StudentForm = (props: StudentFormProps) => {
     setFormError(null);
   };
 
+  /**
+   * validate, show error message if invalid
+   * call request save student if valid
+   */
   const handleSubmit = async () => {
     const student: StudentFormDataType = {
       id: data?.id,
@@ -49,7 +59,6 @@ const StudentForm = (props: StudentFormProps) => {
       phone: phoneRef.current!.value.trim(),
       enrollNumber: +enrollNumberRef.current!.value.trim(),
     };
-    console.log(data);
 
     const validation = formValidate(student, setFormError);
 
@@ -59,14 +68,14 @@ const StudentForm = (props: StudentFormProps) => {
         const response = await saveStudent(student);
         if (response) {
           setFormAction({ type: 'close' });
-          setUpdateStudents((p) => !p); // trigger rerender list
+          setUpdateStudents((p) => !p); // trigger update list
         }
       } catch (err) {
         console.log('err');
         alert((err as Error).message);
       } finally {
         setLoading(false);
-        updateForm();
+        updateForm(); // set input values to empty
       }
     }
   };

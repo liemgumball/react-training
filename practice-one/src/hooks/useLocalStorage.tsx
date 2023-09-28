@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * get the value in localStorage
+//  * or return the initial value if not already in localStorage
+ * @param key name in local storage
+ * @param initialValue
+ */
 function getSavedValue<T>(key: string, initialValue: T | (() => T)) {
   const savedValue = localStorage.getItem(key);
 
@@ -10,6 +16,11 @@ function getSavedValue<T>(key: string, initialValue: T | (() => T)) {
   return initialValue;
 }
 
+/**
+ * custom hook returns a stateful value connected with localStorage, and a function to update it.
+ * @param key in localStorage
+ * @param initialValue
+ */
 export default function useLocalStorage<T>(
   key: string,
   initialValue: T | (() => T)

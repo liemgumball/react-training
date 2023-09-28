@@ -16,6 +16,12 @@ type LoginBody = {
   password: string;
 };
 
+/**
+ * login request
+ * @param email to login
+ * @param password to login
+ * @returns login response or error if response is not ok
+ */
 export const login = async (email: string, password: string) => {
   try {
     return (await apiRequest<LoginBody>(

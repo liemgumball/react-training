@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * custom hook to fetch data from a specified URL
+ * @param url of request
+ * @param options of request
+ * @param recallTrigger used to trigger recall
+ */
 const useFetch = <T,>(
   url: string,
   options?: RequestInit | null,
@@ -17,7 +23,7 @@ const useFetch = <T,>(
         setLoading(true);
         const response = await fetch(url, {
           ...options,
-          signal: controller.signal,
+          signal: controller.signal, // signal to abort
         });
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -28,6 +34,7 @@ const useFetch = <T,>(
         setLoading(false);
         setError(null);
       } catch (err) {
+        // avoid if it's an aborted request
         if ((err as Error).name !== 'AbortError') {
           setError(err as Error);
           setLoading(false);
@@ -38,7 +45,7 @@ const useFetch = <T,>(
     fetchData();
 
     return () => {
-      controller.abort(); //abort the fetch request when the component unmounted.
+      controller.abort(); // abort the fetch request when the component unmounted or updated.
     };
   }, [url, options, recallTrigger]);
 

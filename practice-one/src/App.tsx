@@ -19,10 +19,7 @@ import { PATH_NAME } from '@constants/services';
 import { AuthType } from '@constants/types';
 
 function App() {
-  const [auth, setAuth] = useLocalStorage<AuthType>('_auth', {
-    accessToken: '',
-    name: '',
-  });
+  const [auth, setAuth] = useLocalStorage<AuthType>('_auth', null);
 
   const [searchText, setSearchText] = useState<string>('');
 
@@ -31,6 +28,7 @@ function App() {
       <Routes>
         {/* Private routes */}
         <Route element={<PrivateRoute auth={auth} />}>
+          {/* Implement the layout */}
           <Route
             element={
               <MainLayout

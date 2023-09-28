@@ -11,6 +11,7 @@ type PaymentListProps = {
 const PaymentList = (props: PaymentListProps) => {
   const { keyword } = props;
 
+  // the request will be called automatically every time this url changes
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}?_expand=student&?_sort=createdAt&_order=desc&q=${keyword}`;
 
   return <List ItemComponent={PaymentListItem} url={url}></List>;
