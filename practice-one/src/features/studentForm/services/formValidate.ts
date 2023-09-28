@@ -26,6 +26,7 @@ export const formValidate = (
   setFormError: React.Dispatch<React.SetStateAction<FormErrorType | null>>
 ) => {
   const { name, email, phone, enrollNumber } = data;
+  console.log(data);
 
   const test = {
     nameIsValid: nameRegex.test(name),
@@ -33,6 +34,7 @@ export const formValidate = (
     phoneIsValid: phoneNumberRegex.test(phone),
     enrollNumberIsValid: enrollNumberRegex.test(enrollNumber.toString()),
   };
+  console.log(test);
 
   setFormError({
     name: test.nameIsValid ? '' : ERROR_MSG.INVALID_NAME,

@@ -16,8 +16,7 @@ const List = <T,>(props: ListProps<T>) => {
     updateTrigger
   );
 
-  if (error)
-    return <p className="text-red-500 text-sm text-center">{error.message}</p>;
+  if (error) return <p className="text-red-500 text-center">{error.message}</p>; // return error message
 
   return (
     <ul {...rest}>

@@ -27,7 +27,8 @@ const StudentList = (props: StudentListProps) => {
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`;
 
   /**
-   * handle the event based on event target
+   * handle the event based on event target,
+   * edit or remove
    * @param e mouse event
    */
   const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {

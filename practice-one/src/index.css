@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 * {
-  @apply font-montserrat;
+  @apply font-montserrat font-500;
 }
 
 .flex-center {
@@ -11,11 +11,11 @@
 }
 
 .sidebar {
-  @apply min-w-max h-full min-h-screen bg-custom-beige py-10 px-5 flex flex-col items-center justify-around gap-y-3;
+  @apply overflow-y-scroll w-1/6 min-w-max h-auto bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
 }
 
 .sidebar .nav-item {
-  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-center gap-2 transition;
+  @apply py-3 px-12 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition;
 }
 
 .btn {
@@ -31,7 +31,7 @@
 }
 
 .dashboard-card {
-  @apply p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 w-auto border transition;
+  @apply p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 w-auto border transition overflow-hidden;
 }
 
 .student {

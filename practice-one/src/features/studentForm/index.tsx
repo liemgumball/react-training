@@ -61,6 +61,7 @@ const StudentForm = (props: StudentFormProps) => {
     };
 
     const validation = formValidate(student, setFormError);
+    console.log(validation);
 
     if (validation) {
       try {

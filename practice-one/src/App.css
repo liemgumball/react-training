@@ -17,28 +17,39 @@
 
 .students .list-heading,
 .students .student {
-  column-gap: 15px;
+  column-gap: 12px;
   padding: 1.25rem 0.75rem;
   grid-template-columns:
-    [first]80px
+    [first]70px
     [var1]minmax(150px, 3fr)
     [var2]minmax(200px, 4fr)
-    [var3]minmax(150px, 3fr)
-    [var4]minmax(150px, 2fr)
-    [var5]minmax(170px, 3fr)
+    [var3]minmax(100px, 3fr)
+    [var4]minmax(130px, 2fr)
+    [var5]minmax(150px, 3fr)
     [last]100px;
 }
 
 .payments .list-heading,
 .payments .payment {
-  column-gap: 10px;
+  column-gap: 15px;
   padding: 1.25rem 0.75rem;
   grid-template-columns:
     [first]minmax(150px, 3fr)
-    [var1]minmax(180px, 3fr)
-    [var2]minmax(120px, 3fr)
-    [var3]minmax(150px, 3fr)
-    [var4]minmax(180px, 3fr)
-    [var5]minmax(170px, 3fr)
+    [var1]minmax(170px, 3fr)
+    [var2]minmax(100px, 3fr)
+    [var3]minmax(120px, 3fr)
+    [var4]minmax(150px, 3fr)
+    [var5]minmax(130px, 3fr)
     [last]50px;
+}
+
+/* Hide scrollbar for all elements */
+.sidebar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit-based browsers (e.g., Chrome, Safari) */
+  scrollbar-width: thin; /* Hide scrollbar for Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit-based browsers (e.g., Chrome, Safari) */
+  scrollbar-width: thin; /* Hide scrollbar for Firefox */
 }

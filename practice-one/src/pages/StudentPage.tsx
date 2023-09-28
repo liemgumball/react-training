@@ -33,8 +33,8 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
           </Button>
         </header>
         <hr />
-        <section className="students py-3 whitespace-no-wrap">
-          <header className="list-heading grid text-custom-medium-gray font-600 truncate">
+        <section className="students py-3">
+          <header className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
             <span />
             <span>name</span>
             <span>email</span>

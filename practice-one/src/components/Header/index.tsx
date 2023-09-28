@@ -1,4 +1,6 @@
 import Input from '@components/Input';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type HeaderProps = {
   searchText: string;
@@ -17,7 +19,10 @@ const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <i className="fa fa-search fa-lg text-custom-gray search-input-icon"></i>
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="text-custom-gray search-input-icon"
+        />
       </div>
     </header>
   );

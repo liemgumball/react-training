@@ -13,3 +13,7 @@ export const ERROR_MSG = {
 export const CONFIRM_MSG = {
   REMOVE_STUDENT: 'Are you sure you want to remove this student?',
 };
+
+export const NOTIFICATION_MESSAGE = {
+  FUTURE_FEATURE: 'This is a feature in the future',
+};
