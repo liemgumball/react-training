@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
  * @param key name in local storage
  * @param initialValue
  */
-function getSavedValue<T>(key: string, initialValue: T | (() => T)) {
+const getSavedValue = <T,>(key: string, initialValue: T | (() => T)) => {
   const savedValue = localStorage.getItem(key);
 
   if (savedValue) return JSON.parse(savedValue) as T;
@@ -14,17 +14,14 @@ function getSavedValue<T>(key: string, initialValue: T | (() => T)) {
   if (initialValue instanceof Function) return initialValue();
 
   return initialValue;
-}
+};
 
 /**
  * custom hook returns a stateful value connected with localStorage, and a function to update it.
  * @param key in localStorage
  * @param initialValue
  */
-export default function useLocalStorage<T>(
-  key: string,
-  initialValue: T | (() => T)
-) {
+const useLocalStorage = <T,>(key: string, initialValue: T | (() => T)) => {
   const [value, setValue] = useState<T>(() => getSavedValue(key, initialValue));
 
   useEffect(() => {
@@ -32,4 +29,6 @@ export default function useLocalStorage<T>(
   }, [key, value]);
 
   return [value, setValue] as const;
-}
+};
+
+export default useLocalStorage;
