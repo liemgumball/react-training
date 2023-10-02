@@ -7,10 +7,10 @@ import { FormActionType, StudentFormStates } from '@constants/types';
  * @param action dispatch action for reducer
  * @returns state of the form
  */
-function reducer(
+const reducer = (
   state: StudentFormStates,
   action: FormActionType
-): StudentFormStates {
+): StudentFormStates => {
   const studentFormData = action.data;
 
   switch (action.type) {
@@ -38,7 +38,7 @@ function reducer(
     default:
       return state;
   }
-}
+};
 
 /**
  * a custom hook create a reducer action for student form

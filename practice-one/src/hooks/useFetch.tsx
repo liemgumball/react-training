@@ -49,7 +49,7 @@ const useFetch = <T,>(
     };
   }, [url, options, recallTrigger]);
 
-  return { data, error, loading };
+  return { data, error, loading } as const;
 };
 
 export default useFetch;

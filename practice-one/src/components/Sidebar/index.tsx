@@ -62,7 +62,7 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
     <aside className="sidebar">
       <div className="flex-center">
         <img src={smallLogo} alt="Logo" />
-        <p className="text-xl uppercase font-700">CRUD operations</p>
+        <p className="ml-3 text-xl uppercase font-700">CRUD operations</p>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">

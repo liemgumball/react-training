@@ -11,11 +11,11 @@
 }
 
 .sidebar {
-  @apply overflow-y-scroll w-1/6 min-w-max h-auto bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
+  @apply overflow-y-scroll w-1/5 min-w-max h-auto bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
 }
 
 .sidebar .nav-item {
-  @apply py-3 px-12 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition;
+  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition;
 }
 
 .btn {
@@ -27,7 +27,7 @@
 }
 
 .dashboard-grid {
-  @apply p-8 h-auto grid grid-cols-4 gap-8 items-stretch;
+  @apply p-8 h-auto grid xl:grid-cols-4 gap-8 items-stretch lg:grid-cols-2 grid-cols-1;
 }
 
 .dashboard-card {
