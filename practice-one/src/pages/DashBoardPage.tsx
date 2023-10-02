@@ -40,7 +40,7 @@ const DashBoardPage = () => {
       </DashBoardCard>
       <DashBoardCard
         to={PATH_NAME.SETTINGS}
-        className="bg-custom-yellow text-white"
+        className="bg-custom-gradient text-white"
         cardName="users"
         mainInfo="3"
       >
