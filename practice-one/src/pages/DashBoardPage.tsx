@@ -1,13 +1,13 @@
-import graduationCapBlue from '@assets/graduationCapBlue.svg'
-import bookmarkPink from '@assets/bookmarkPink.svg'
-import usdSquareYellow from '@assets/usdSquareYellow.svg'
-import user from '@assets/user.svg'
-import DashBoardCard from '@components/DashBoardCard'
-import { PATH_NAME } from '@constants/services'
+import graduationCapBlue from '@assets/graduationCapBlue.svg';
+import bookmarkPink from '@assets/bookmarkPink.svg';
+import usdSquareYellow from '@assets/usdSquareYellow.svg';
+import user from '@assets/user.svg';
+import DashBoardCard from '@components/DashBoardCard';
+import { PATH_NAME } from '@constants/services';
 
 const DashBoardPage = () => {
   return (
-    <article className="p-8 h-auto grid grid-cols-4 gap-8 items-strech">
+    <article className="dashboard-grid">
       <DashBoardCard
         to={PATH_NAME.STUDENTS}
         className="bg-custom-light-blue text-custom-dark-gray"
@@ -19,7 +19,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to={PATH_NAME.EMPTY_PAGE}
+        to={PATH_NAME.COURSES}
         className="bg-custom-light-pink text-custom-dark-gray"
         cardName="courses"
         mainInfo="13"
@@ -39,7 +39,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
       <DashBoardCard
-        to={PATH_NAME.EMPTY_PAGE}
+        to={PATH_NAME.SETTINGS}
         className="bg-custom-yellow text-white"
         cardName="users"
         mainInfo="3"
@@ -49,7 +49,7 @@ const DashBoardPage = () => {
         </div>
       </DashBoardCard>
     </article>
-  )
-}
+  );
+};
 
-export default DashBoardPage
+export default DashBoardPage;

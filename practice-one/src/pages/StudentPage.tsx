@@ -1,105 +1,74 @@
-import StudentForm, { StudentFormDataType } from '@features/studentForm'
-import { useReducer, useState } from 'react'
-import { TStudent } from '@features/studentList/components/StudentListItem'
-import StudentList from '@features/studentList'
-import useDebound from '@hooks/useDebound'
+import { useState } from 'react';
+import StudentList from '@features/studentList';
+import StudentForm from '@features/studentForm';
+import useDebounce from '@hooks/useDebounce';
+import useStudentForm from '@features/studentForm/hooks/useStudentForm';
+import Button from '@components/Button';
 
 type StudentPageProps = {
-  searchText: string
-}
-
-export type FormActionType = {
-  type: string
-  title?: string
-  data?: TStudent
-}
-
-export type StudentFormProps = {
-  show: boolean
-  title?: string
-  data?: StudentFormDataType
-}
-
-function reducer(state: StudentFormProps, action: FormActionType) {
-  switch (action.type) {
-    case 'add':
-      return { show: true, title: action.title }
-    case 'edit':
-      return {
-        show: true,
-        title: action.title,
-        data: action.data,
-      }
-    case 'close':
-      return { show: false }
-
-    default:
-      return state
-  }
-}
+  searchText: string;
+};
 
 const StudentPage = ({ searchText }: StudentPageProps) => {
-  const [formState, dispatch] = useReducer(reducer, {
-    show: false,
-  } as StudentFormProps)
+  const [formState, formAction] = useStudentForm();
 
-  const [updatedStudents, setUpdatedStudents] = useState(false)
+  const [updatedStudents, setUpdatedStudents] = useState<boolean>(false);
 
-  const keyword = useDebound(searchText)
+  const keyword = useDebounce(searchText);
 
   return (
     <>
-      <article className="px-8">
-        <header className="py-3 flex justify-between items-center sticky top-0 bg-white border-b">
+      <article className="px-8 min-w-min">
+        <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
-          <button
+          <Button
             type="button"
-            className="border rounded-lg px-5 py-3 text-white bg-custom-yellow uppercase hover:shadow-lg"
+            className="text-white bg-custom-yellow uppercase"
             onClick={(e) => {
-              e.preventDefault()
-              dispatch({ type: 'add', title: 'add student' })
+              e.preventDefault();
+              formAction({ type: 'add' });
             }}
           >
             add new student
-          </button>
+          </Button>
         </header>
         <hr />
-        <div className="students py-3 whitespace-no-wrap">
-          <div className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
-            <div></div>
-            <div>name</div>
-            <div>email</div>
-            <div>phone</div>
-            <div>enroll number</div>
-            <div>date of admission</div>
-            <div></div>
-          </div>
+        <section className="students py-3">
+          <header className="list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
+            <span />
+            <span>name</span>
+            <span>email</span>
+            <span>phone</span>
+            <span>enroll number</span>
+            <span>date of admission</span>
+            <span />
+          </header>
           <StudentList
             keyword={keyword}
-            setFormAction={dispatch}
+            setFormAction={formAction}
             updateStudentsTrigger={updatedStudents}
             setUpdateStudentsTrigger={setUpdatedStudents}
           ></StudentList>
-        </div>
+        </section>
       </article>
       <div
         className={`${
           formState.show ? '' : 'invisible'
-        } fixed inset-0 flex items-center justify-center`}
+        } fixed inset-0 flex-center`}
       >
         <div
           className="fixed inset-0 bg-black opacity-50"
-          onClick={() => dispatch({ type: 'close' })}
+          onClick={() => formAction({ type: 'close' })}
         ></div>
         <StudentForm
           title={formState.title}
           data={formState.data}
-          setFormAction={dispatch}
+          setFormAction={formAction}
           setUpdateStudents={setUpdatedStudents}
         />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default StudentPage
+export default StudentPage;

@@ -1,51 +1,56 @@
-import InputWithErrorMsg from '@components/inputWithErrorMsg'
-import { TStudent } from '@features/studentList/components/StudentListItem'
-import { useEffect, useRef, useState } from 'react'
-import { formvalidate } from './services/formvalidate'
-import { saveStudent } from './services/saveStudent'
-import { FormActionType } from 'src/pages/StudentPage'
-
-export type StudentFormDataType = Pick<
-  TStudent,
-  'name' | 'email' | 'phone' | 'enrollNumber' | 'id'
->
+import { useEffect, useRef, useState } from 'react';
+import InputWithErrorMsg from '@components/InputWithErrorMsg';
+import Button from '@components/Button';
+import { saveStudent } from './services/saveStudent';
+import { formValidate } from './services/formValidate';
+import { FormActionType, StudentFormDataType } from '@constants/types';
 
 type StudentFormProps = {
-  title?: string
-  data?: StudentFormDataType
-  setFormAction: React.Dispatch<FormActionType>
-  setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>
-}
+  title?: string;
+  data?: StudentFormDataType;
+  setFormAction: React.Dispatch<FormActionType>;
+  setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const StudentForm = (props: StudentFormProps) => {
-  const { title, data, setFormAction, setUpdateStudents } = props
+  const { title, data, setFormAction, setUpdateStudents } = props;
 
-  const [loading, setLoading] = useState(false)
-  const nameRef = useRef<HTMLInputElement | null>(null)
-  const emailRef = useRef<HTMLInputElement | null>(null)
-  const phoneRef = useRef<HTMLInputElement | null>(null)
-  const enrollNumberRef = useRef<HTMLInputElement | null>(null)
+  const [loading, setLoading] = useState<boolean>(false);
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const phoneRef = useRef<HTMLInputElement | null>(null);
+  const enrollNumberRef = useRef<HTMLInputElement | null>(null);
 
+  // used to display error messages
   const [formError, setFormError] = useState<{
-    name: string
-    email: string
-    phone: string
-    enrollNumber: string
-  } | null>(null)
+    name: string;
+    email: string;
+    phone: string;
+    enrollNumber: string;
+  } | null>(null);
 
+  // set input values every time data changes
   useEffect(() => {
-    updateForm(data)
-  }, [data])
+    updateForm(data);
+  }, [data]);
 
+  /**
+   * set input values based on data
+   * @param data of student
+   */
   const updateForm = (data?: StudentFormDataType) => {
-    nameRef.current!.value = data ? data.name : ''
-    emailRef.current!.value = data ? data.email : ''
-    phoneRef.current!.value = data ? data.phone : ''
-    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : ''
+    nameRef.current!.value = data ? data.name : '';
+    emailRef.current!.value = data ? data.email : '';
+    phoneRef.current!.value = data ? data.phone : '';
+    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : '';
 
-    setFormError(null)
-  }
+    setFormError(null);
+  };
 
+  /**
+   * validate, show error message if invalid
+   * call request save student if valid
+   */
   const handleSubmit = async () => {
     const student: StudentFormDataType = {
       id: data?.id,
@@ -53,30 +58,31 @@ const StudentForm = (props: StudentFormProps) => {
       email: emailRef.current!.value.trim(),
       phone: phoneRef.current!.value.trim(),
       enrollNumber: +enrollNumberRef.current!.value.trim(),
-    }
+    };
 
-    const validation = formvalidate(student, setFormError)
+    const validation = formValidate(student, setFormError);
+    console.log(validation);
 
     if (validation) {
       try {
-        setLoading(true)
-        const responeStudent = await saveStudent(student)
-        if (responeStudent) {
-          setFormAction({ type: 'close' })
-          setUpdateStudents((p) => !p) // trigger rerender list
+        setLoading(true);
+        const response = await saveStudent(student);
+        if (response) {
+          setFormAction({ type: 'close' });
+          setUpdateStudents((p) => !p); // trigger update list
         }
       } catch (err) {
-        console.log('err')
-        alert((err as Error).message)
+        console.log('err');
+        alert((err as Error).message);
       } finally {
-        setLoading(false)
-        updateForm()
+        setLoading(false);
+        updateForm(); // set input values to empty
       }
     }
-  }
+  };
 
   return (
-    <div className="bg-white p-16 rounded-2xl shadow-lg max-w-2xl w-full relative">
+    <div className="student-form">
       <h2 className="text-3xl font-700 text-center mb-10 uppercase">
         {title ? title : 'student form'}
       </h2>
@@ -113,21 +119,21 @@ const StudentForm = (props: StudentFormProps) => {
           ref={enrollNumberRef}
           errorMsg={formError?.enrollNumber.toString()}
         />
-        <button
+        <Button
           type="submit"
           onClick={(e) => {
-            e.preventDefault()
-            handleSubmit()
+            e.preventDefault();
+            handleSubmit();
           }}
           className={`${
             loading ? 'bg-custom-gray' : 'bg-custom-yellow'
-          } block mx-auto rounded-lg py-4 px-16 text-xl text-white text-center uppercase hover:shadow-xl`}
+          } submit-btn`}
         >
           {loading ? 'loading...' : 'done'}
-        </button>
+        </Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default StudentForm
+export default StudentForm;

@@ -1,28 +1,68 @@
-import smallLogo from '@assets/smallLogo.svg'
-import avatar from '@assets/avatar.png'
-import NavItem from './NavItem'
-import house from '@assets/house.svg'
-import bookmark from '@assets/bookmark.svg'
-import graduationCap from '@assets/graduationCap.svg'
-import usdSquare from '@assets/usdSquare.svg'
-import fileChartLine from '@assets/fileChartLine.svg'
-import sliderSquare from '@assets/sliderSquare.svg'
-import signOut from '@assets/signOut.svg'
-import { authType } from 'src/App'
-import { Dispatch, SetStateAction } from 'react'
-import { PATH_NAME } from '@constants/services'
+import { To } from 'react-router-dom';
+import NavItem from './NavItem';
+import Button from '@components/Button';
+import { PATH_NAME } from '@constants/services';
+
+// images
+import avatar from '@assets/avatar.png';
+import smallLogo from '@assets/smallLogo.svg';
+import house from '@assets/house.svg';
+import bookmark from '@assets/bookmark.svg';
+import graduationCap from '@assets/graduationCap.svg';
+import usdSquare from '@assets/usdSquare.svg';
+import fileChartLine from '@assets/fileChartLine.svg';
+import sliderSquare from '@assets/sliderSquare.svg';
+import signOut from '@assets/signOut.svg';
+
+// constants
+import { AuthType } from '@constants/types';
 
 type SidebarProps = {
-  setAuth: Dispatch<SetStateAction<authType>>
-  username: string
-}
+  setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
+  username: string;
+};
+
+const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
+  [
+    { to: PATH_NAME.HOME, imgSrc: house, alt: 'house', innerText: 'home' },
+    {
+      to: PATH_NAME.COURSES,
+      imgSrc: bookmark,
+      alt: 'book mark',
+      innerText: 'courses',
+    },
+    {
+      to: PATH_NAME.STUDENTS,
+      imgSrc: graduationCap,
+      alt: 'graduation cap',
+      innerText: 'students',
+    },
+    {
+      to: PATH_NAME.PAYMENTS,
+      imgSrc: usdSquare,
+      alt: 'usd square',
+      innerText: 'payments',
+    },
+    {
+      to: PATH_NAME.REPORTS,
+      imgSrc: fileChartLine,
+      alt: 'file chart line',
+      innerText: 'reports',
+    },
+    {
+      to: PATH_NAME.SETTINGS,
+      imgSrc: sliderSquare,
+      alt: 'slider square',
+      innerText: 'settings',
+    },
+  ];
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
   return (
-    <aside className="sidebar sticky top-0 left-0 bg-custom-beige p-5 flex flex-col items-center justify-around gap-y-10 h-screen w-1/5 min-w-max">
-      <div className="flex items-center justify-center">
+    <aside className="sidebar">
+      <div className="flex-center">
         <img src={smallLogo} alt="Logo" />
-        <p className="text-xl uppercase font-semibold">CRUD operations</p>
+        <p className="ml-3 text-xl uppercase font-700">CRUD operations</p>
       </div>
       <div className="flex flex-col items-center gap-y-2">
         <div className="w-32 h-32">
@@ -39,42 +79,24 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       </div>
       <nav className="p-5">
         <ul>
-          <NavItem pathname={PATH_NAME.HOME}>
-            <img src={house} alt="house" />
-            home
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={bookmark} alt="book mark" />
-            course
-          </NavItem>
-          <NavItem pathname={PATH_NAME.STUDENTS}>
-            <img src={graduationCap} alt="graduation cap" />
-            students
-          </NavItem>
-          <NavItem pathname={PATH_NAME.PAYMENTS}>
-            <img src={usdSquare} alt="usd square" />
-            payment
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={fileChartLine} alt="file chart line" />
-            report
-          </NavItem>
-          <NavItem pathname={PATH_NAME.EMPTY_PAGE}>
-            <img src={sliderSquare} alt="slider square" />
-            settings
-          </NavItem>
+          {NavList.map((item, index) => (
+            <NavItem key={index} to={item.to}>
+              <img src={item.imgSrc} alt={item.alt} />
+              {item.innerText}
+            </NavItem>
+          ))}
         </ul>
       </nav>
 
-      <button
-        className="capitalize px-16 py-3 rounded-lg hover:bg-custom-gray"
-        onClick={() => setAuth({ accessToken: '', name: '' })}
+      <Button
+        className="capitalize hover:bg-custom-gray"
+        onClick={() => setAuth(null)}
       >
         logout
-        <img src={signOut} alt="sign out" className="inline-block mx-2" />
-      </button>
+        <img src={signOut} alt="sign out" className="inline-block ml-3" />
+      </Button>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

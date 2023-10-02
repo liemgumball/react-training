@@ -1,30 +1,19 @@
-import eye from '@assets/eye.svg'
-import ButtonIcon from '@components/ButtonIcon'
-import { TStudent } from '@features/studentList/components/StudentListItem'
-import formatAmount from '@utils/formatAmount'
+import ButtonIcon from '@components/ButtonIcon';
+import formatAmount from '@utils/formatAmount';
 
-export type TPayment = {
-  createdAt: string
-  billNumber: number
-  paid: number
-  balance: number
-  studentId: number
-  id?: number
-  student?: TStudent
-}
+// images
+import eye from '@assets/eye.svg';
+import { TPayment } from '@constants/types';
 
 type PaymentListItemProps = {
-  data: TPayment
-}
+  data: TPayment;
+};
 
 const PaymentListItem = (props: PaymentListItemProps) => {
-  const { data } = props
+  const { data } = props;
 
   return (
-    <li
-      data-id={data.id}
-      className="my-2 grid payment border rounded-xl items-center hover:bg-custom-beige font-400"
-    >
+    <li data-id={data.id} className="my-2 grid payment">
       <p className="truncate">{data.student?.name}</p>
       <p className="truncate">first</p>
       <p className="truncate">{data.billNumber}</p>
@@ -35,7 +24,7 @@ const PaymentListItem = (props: PaymentListItemProps) => {
         <ButtonIcon iconSrc={eye} alt="eye" className="view-details-btn" />
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default PaymentListItem
+export default PaymentListItem;

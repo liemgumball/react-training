@@ -1,4 +1,4 @@
-export type ApiMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT'
+export type ApiMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT';
 
 export const apiRequest = async <T>(
   path: string,
@@ -12,14 +12,14 @@ export const apiRequest = async <T>(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
-    })
+    });
     if (!response.ok) {
-      throw new Error(`${response.statusText}`)
+      throw new Error(`${response.status}`);
     }
 
-    return await response.json()
+    return await response.json();
   } catch (err) {
-    console.error('An error occurred in request:', err)
-    throw err
+    console.error('An error occurred in request:', err);
+    throw err;
   }
-}
+};

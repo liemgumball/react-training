@@ -1,36 +1,44 @@
-import Sidebar from '@components/Sidebar'
-import './App.css'
-import LoginPage from './pages/LoginPage'
-import useLocalStorage from '@hooks/useLocalStorage'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Header from '@components/Header'
-import DashBoardPage from './pages/DashBoardPage'
-import PublicRoutes from './utils/PublicRoutes'
-import { useState } from 'react'
-import StudentPage from './pages/StudentPage'
-import { PATH_NAME } from '@constants/services'
-import PaymentPage from './pages/PaymentPage'
+import './App.css';
 
-export type authType = {
-  accessToken: string
-  name: string
-}
+// base
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import useLocalStorage from '@hooks/useLocalStorage';
+import PrivateRoute from '@utils/PrivateRoute';
+
+// layout & pages
+import MainLayout from './layouts/MainLayout';
+import LoginPage from './pages/LoginPage';
+import DashBoardPage from './pages/DashBoardPage';
+import StudentPage from './pages/StudentPage';
+import PaymentPage from './pages/PaymentPage';
+import EmptyPage from './pages/EmptyPage';
+
+// constants
+import { PATH_NAME } from '@constants/services';
+import { AuthType } from '@constants/types';
 
 function App() {
-  const [auth, setAuth] = useLocalStorage('user', {
-    accessToken: '',
-    name: '',
-  })
+  const [auth, setAuth] = useLocalStorage<AuthType>('user', null);
 
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState<string>('');
 
-  return auth.accessToken ? (
+  return (
     <Router>
-      <div className="bg-white flex capitalize">
-        <Sidebar setAuth={setAuth} username={auth.name} />
-        <main className="w-full">
-          <Header searchText={searchText} setSearchText={setSearchText} />
-          <Routes>
+      <Routes>
+        {/* Private routes */}
+        <Route element={<PrivateRoute auth={auth} />}>
+          {/* Implement the layout */}
+          <Route
+            element={
+              <MainLayout
+                auth={auth}
+                setAuth={setAuth}
+                searchText={searchText}
+                setSearchText={setSearchText}
+              />
+            }
+          >
             <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
             <Route
               path={PATH_NAME.STUDENTS}
@@ -40,20 +48,17 @@ function App() {
               path={PATH_NAME.PAYMENTS}
               element={<PaymentPage searchText={searchText} />}
             />
-          </Routes>
-        </main>
-      </div>
-    </Router>
-  ) : (
-    <Router>
-      <PublicRoutes auth={auth} navTo={PATH_NAME.LOGIN}>
+            <Route path="/*" element={<EmptyPage />} />
+          </Route>
+        </Route>
+        {/* Public routes */}
         <Route
           path={PATH_NAME.LOGIN}
-          element={<LoginPage setAuth={setAuth}></LoginPage>}
+          element={<LoginPage setAuth={setAuth} />}
         />
-      </PublicRoutes>
+      </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

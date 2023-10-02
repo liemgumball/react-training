@@ -1,21 +1,19 @@
+import Button from '@components/Button';
+
 type ButtonIconProps = {
-  iconSrc: string
-  alt: string
-  children?: React.ReactNode
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+  iconSrc: string;
+  alt: string;
+  children?: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const ButtonIcon = (props: ButtonIconProps) => {
-  const { iconSrc, alt, className, children, ...rest } = props
+  const { iconSrc, alt, className, children, ...rest } = props;
   return (
-    <button
-      type="button"
-      className={`${className} rounded-lg hover:shadow-lg hover:bg-white p-3`}
-      {...rest}
-    >
+    <Button type="button" className={`${className} hover:bg-white`} {...rest}>
       {children}
       <img src={iconSrc} alt={alt} />
-    </button>
-  )
-}
+    </Button>
+  );
+};
 
-export default ButtonIcon
+export default ButtonIcon;
