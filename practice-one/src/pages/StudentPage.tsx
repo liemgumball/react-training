@@ -1,20 +1,61 @@
 import { useState } from 'react';
-import StudentList from '@features/studentList';
 import StudentForm from '@features/studentForm';
 import useDebounce from '@hooks/useDebounce';
 import useStudentForm from '@features/studentForm/hooks/useStudentForm';
 import Button from '@components/Button';
+import List from '@features/list';
+import { DATABASE_RESOURCES } from '@constants/services';
+import StudentListItem from '@features/list/components/StudentListItem';
+import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
+import { getStudent } from '@features/list/services/getStudent';
+import { removeStudent } from '@features/list/services/deleteStudent';
+import { TStudent } from '@utils/types';
 
 type StudentPageProps = {
   searchText: string;
 };
 
 const StudentPage = ({ searchText }: StudentPageProps) => {
-  const [formState, formAction] = useStudentForm();
+  const [formState, setFormAction] = useStudentForm();
 
   const [updatedStudents, setUpdatedStudents] = useState<boolean>(false);
 
   const keyword = useDebounce(searchText);
+
+  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`;
+
+  const handleAddStudent = () => setFormAction({ type: 'add' });
+
+  const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {
+    try {
+      const dataId = (e.target as HTMLElement)
+        .closest('li')
+        ?.getAttribute('data-id');
+
+      const btn = (e.target as HTMLUListElement).closest('button');
+
+      if (btn && btn.classList.contains('edit-btn')) {
+        if (!dataId) {
+          throw new Error(ERROR_MSG.MISSING_ID);
+        }
+        // popup form edit
+        setFormAction({
+          type: 'edit',
+          data: await getStudent(dataId),
+        });
+      }
+
+      if (btn && btn.classList.contains('remove-btn')) {
+        // require confirmation by user
+        if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
+          await removeStudent(dataId!);
+          setUpdatedStudents((p) => !p); //trigger update List of students
+        }
+      }
+    } catch (err) {
+      alert((err as Error).message);
+    }
+  };
 
   return (
     <>
@@ -24,10 +65,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
           <Button
             type="button"
             className="text-white bg-custom-yellow uppercase"
-            onClick={(e) => {
-              e.preventDefault();
-              formAction({ type: 'add' });
-            }}
+            onClick={handleAddStudent}
           >
             add new student
           </Button>
@@ -43,12 +81,12 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
             <span>date of admission</span>
             <span />
           </header>
-          <StudentList
-            keyword={keyword}
-            setFormAction={formAction}
-            updateStudentsTrigger={updatedStudents}
-            setUpdateStudentsTrigger={setUpdatedStudents}
-          ></StudentList>
+          <List<TStudent>
+            url={url}
+            ItemComponent={StudentListItem}
+            updateTrigger={updatedStudents}
+            onClick={handleClick}
+          />
         </section>
       </article>
       <div
@@ -58,12 +96,12 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
       >
         <div
           className="fixed inset-0 bg-black opacity-50"
-          onClick={() => formAction({ type: 'close' })}
+          onClick={() => setFormAction({ type: 'close' })}
         ></div>
         <StudentForm
           title={formState.title}
           data={formState.data}
-          setFormAction={formAction}
+          setFormAction={setFormAction}
           setUpdateStudents={setUpdatedStudents}
         />
       </div>

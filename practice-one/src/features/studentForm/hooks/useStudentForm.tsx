@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { FormActionType, StudentFormStates } from '@constants/types';
+import { FormActionType, StudentFormStates } from '@utils/types';
 
 /**
  * invoked multiples sub-values of complex state to optimize performance for component

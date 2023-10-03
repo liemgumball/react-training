@@ -15,11 +15,15 @@
 }
 
 .sidebar .nav-item {
-  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition;
+  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition hover:bg-custom-gray;
+}
+
+.sidebar .nav-item.active {
+  @apply bg-custom-yellow;
 }
 
 .btn {
-  @apply rounded-lg hover:shadow-lg p-3 transition font-500;
+  @apply rounded-lg hover:shadow-lg p-3 transition font-500 disabled:shadow-none;
 }
 
 .search-input-icon {

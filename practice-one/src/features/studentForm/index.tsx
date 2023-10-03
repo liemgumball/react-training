@@ -3,7 +3,7 @@ import InputWithErrorMsg from '@components/InputWithErrorMsg';
 import Button from '@components/Button';
 import { saveStudent } from './services/saveStudent';
 import { formValidate } from './services/formValidate';
-import { FormActionType, StudentFormDataType } from '@constants/types';
+import { FormActionType, StudentFormDataType } from '@utils/types';
 
 type StudentFormProps = {
   title?: string;
@@ -51,7 +51,10 @@ const StudentForm = (props: StudentFormProps) => {
    * validate, show error message if invalid
    * call request save student if valid
    */
-  const handleSubmit = async () => {
+  const handleSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
     const student: StudentFormDataType = {
       id: data?.id,
       name: nameRef.current!.value.trim(),
@@ -121,13 +124,11 @@ const StudentForm = (props: StudentFormProps) => {
         />
         <Button
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
+          onClick={handleSubmit}
           className={`${
             loading ? 'bg-custom-gray' : 'bg-custom-yellow'
           } submit-btn`}
+          disabled={loading}
         >
           {loading ? 'loading...' : 'done'}
         </Button>

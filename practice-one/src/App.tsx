@@ -16,7 +16,7 @@ import EmptyPage from './pages/EmptyPage';
 
 // constants
 import { PATH_NAME } from '@constants/services';
-import { AuthType } from '@constants/types';
+import { AuthType } from '@utils/types';
 
 function App() {
   const [auth, setAuth] = useLocalStorage<AuthType>('user', null);

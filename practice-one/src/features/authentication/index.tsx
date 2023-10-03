@@ -9,7 +9,7 @@ import { PATH_NAME } from '@constants/services';
 import { ERROR_MSG } from '@constants/messages';
 import { emailRegex, passwordRegex } from '@constants/regex';
 import bigLogo from '@assets/bigLogo.svg';
-import { AuthType } from '@constants/types';
+import { AuthType } from '@utils/types';
 
 type authenticationProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>;
@@ -90,7 +90,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         }}
       >
         <InputWithErrorMsg
-          showLabel
+          labeled
           id="email"
           name="Email"
           type="text"
@@ -99,7 +99,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           errorMsg={formError?.email}
         />
         <InputWithErrorMsg
-          showLabel
+          labeled
           id="password"
           name="Password"
           type="password"

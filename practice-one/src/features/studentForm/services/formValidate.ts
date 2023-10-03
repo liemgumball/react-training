@@ -6,7 +6,7 @@ import {
   nameRegex,
   phoneNumberRegex,
 } from '@constants/regex';
-import { StudentFormDataType } from '@constants/types';
+import { StudentFormDataType } from '@utils/types';
 
 type FormErrorType = {
   name: string;
