@@ -10,7 +10,7 @@ type ListProps<T> = {
 const List = <T,>(props: ListProps<T>) => {
   const { url, requestOptions, ItemComponent, updateTrigger, ...rest } = props;
 
-  const { data, error, loading } = useFetch<(T & { id: number })[]>(
+  const [data, error, loading] = useFetch<(T & { id: number })[]>(
     url,
     requestOptions,
     updateTrigger
@@ -25,13 +25,9 @@ const List = <T,>(props: ListProps<T>) => {
           Loading...
         </p>
       ) : data && data.length != 0 ? (
-        data.map((item, idx) =>
-          ItemComponent ? (
-            <ItemComponent key={item.id || idx} data={item} />
-          ) : (
-            <li key={item.id || idx}>{JSON.stringify(item)}</li>
-          )
-        )
+        data.map((item, idx) => (
+          <ItemComponent key={item.id || idx} data={item} />
+        ))
       ) : (
         <p className="text-custom-dark-gray font-700 m-5 text-center">
           Not found

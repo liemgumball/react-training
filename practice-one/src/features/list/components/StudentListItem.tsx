@@ -1,5 +1,5 @@
 import ButtonIcon from '@components/ButtonIcon';
-import { TStudent } from '@constants/types';
+import { TStudent } from '@utils/types';
 
 // images
 import pen from '@assets/pen.svg';
@@ -18,7 +18,6 @@ const StudentListItem = (props: StudentListItemProps) => {
         <img
           src={data.avatar}
           alt="student avatar"
-          loading="lazy"
           width="60px"
           height="60px"
         />

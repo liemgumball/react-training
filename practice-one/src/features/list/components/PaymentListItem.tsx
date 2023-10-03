@@ -3,7 +3,7 @@ import formatAmount from '@utils/formatAmount';
 
 // images
 import eye from '@assets/eye.svg';
-import { TPayment } from '@constants/types';
+import { TPayment } from '@utils/types';
 
 type PaymentListItemProps = {
   data: TPayment;

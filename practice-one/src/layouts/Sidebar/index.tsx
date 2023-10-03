@@ -1,5 +1,4 @@
-import { To } from 'react-router-dom';
-import NavItem from './NavItem';
+import { NavLink, To } from 'react-router-dom';
 import Button from '@components/Button';
 import { PATH_NAME } from '@constants/services';
 
@@ -15,7 +14,7 @@ import sliderSquare from '@assets/sliderSquare.svg';
 import signOut from '@assets/signOut.svg';
 
 // constants
-import { AuthType } from '@constants/types';
+import { AuthType } from '@utils/types';
 
 type SidebarProps = {
   setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
@@ -58,6 +57,8 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
   ];
 
 const Sidebar = ({ setAuth, username }: SidebarProps) => {
+  const handleLogout = () => setAuth(null);
+
   return (
     <aside className="sidebar">
       <div className="flex-center">
@@ -80,17 +81,19 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
       <nav className="p-5">
         <ul>
           {NavList.map((item, index) => (
-            <NavItem key={index} to={item.to}>
-              <img src={item.imgSrc} alt={item.alt} />
-              {item.innerText}
-            </NavItem>
+            <li key={index}>
+              <NavLink className="nav-item" to={item.to}>
+                <img src={item.imgSrc} alt={item.alt} />
+                {item.innerText}
+              </NavLink>
+            </li>
           ))}
         </ul>
       </nav>
 
       <Button
         className="capitalize hover:bg-custom-gray"
-        onClick={() => setAuth(null)}
+        onClick={handleLogout}
       >
         logout
         <img src={signOut} alt="sign out" className="inline-block ml-3" />
