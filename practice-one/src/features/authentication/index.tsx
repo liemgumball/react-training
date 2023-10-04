@@ -97,6 +97,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           placeholder="Enter your email"
           ref={emailRef}
           errorMsg={formError?.email}
+          inValid={Boolean(formError?.email)}
         />
         <InputWithErrorMsg
           labeled
@@ -106,13 +107,13 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           placeholder="Enter your password"
           ref={passwordRef}
           errorMsg={formError?.password}
+          inValid={Boolean(formError?.password)}
         />
         <Button
-          className={`${
-            loading ? 'bg-custom-dark-gray' : 'bg-custom-yellow'
-          } w-full mb-5 text-white uppercase`}
+          className=" w-full mb-5 text-white uppercase"
           type="submit"
-          disabled={loading}
+          primary
+          isLoading={loading}
         >
           {loading ? 'Loading...' : 'Sign in'}
         </Button>

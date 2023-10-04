@@ -4,6 +4,7 @@ import Button from '@components/Button';
 import { saveStudent } from './services/saveStudent';
 import { formValidate } from './services/formValidate';
 import { FormActionType, StudentFormDataType } from '@utils/types';
+import { ERROR_MSG } from '@constants/messages';
 
 type StudentFormProps = {
   title?: string;
@@ -16,18 +17,30 @@ const StudentForm = (props: StudentFormProps) => {
   const { title, data, setFormAction, setUpdateStudents } = props;
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  // Ref
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const phoneRef = useRef<HTMLInputElement | null>(null);
   const enrollNumberRef = useRef<HTMLInputElement | null>(null);
 
+  // form data
+  const [form, setForm] = useState<StudentFormDataType>({
+    name: '',
+    email: '',
+    phone: '',
+    enrollNumber: 0,
+  });
+
   // used to display error messages
   const [formError, setFormError] = useState<{
-    name: string;
-    email: string;
-    phone: string;
-    enrollNumber: string;
-  } | null>(null);
+    name: boolean;
+    email: boolean;
+    phone: boolean;
+    enrollNumber: boolean;
+  }>({ name: false, email: false, phone: false, enrollNumber: false });
+
+  const invalid = Object.values(formError).some((value) => value); // used to disable the submit button
 
   // set input values every time data changes
   useEffect(() => {
@@ -39,12 +52,18 @@ const StudentForm = (props: StudentFormProps) => {
    * @param data of student
    */
   const updateForm = (data?: StudentFormDataType) => {
-    nameRef.current!.value = data ? data.name : '';
-    emailRef.current!.value = data ? data.email : '';
-    phoneRef.current!.value = data ? data.phone : '';
-    enrollNumberRef.current!.value = data ? data.enrollNumber.toString() : '';
+    if (data) {
+      setForm(data);
+    } else {
+      setForm({ name: '', email: '', phone: '', enrollNumber: 0 });
+    }
 
-    setFormError(null);
+    setFormError({
+      name: false,
+      email: false,
+      phone: false,
+      enrollNumber: false,
+    });
   };
 
   /**
@@ -55,16 +74,8 @@ const StudentForm = (props: StudentFormProps) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const student: StudentFormDataType = {
-      id: data?.id,
-      name: nameRef.current!.value.trim(),
-      email: emailRef.current!.value.trim(),
-      phone: phoneRef.current!.value.trim(),
-      enrollNumber: +enrollNumberRef.current!.value.trim(),
-    };
 
-    const validation = formValidate(student, setFormError);
-    console.log(validation);
+    const [validation, student] = handleValidate();
 
     if (validation) {
       try {
@@ -73,15 +84,31 @@ const StudentForm = (props: StudentFormProps) => {
         if (response) {
           setFormAction({ type: 'close' });
           setUpdateStudents((p) => !p); // trigger update list
+          updateForm(); // set input values to empty
         }
       } catch (err) {
-        console.log('err');
+        console.error(err);
         alert((err as Error).message);
       } finally {
         setLoading(false);
-        updateForm(); // set input values to empty
       }
     }
+  };
+
+  const handleValidate = () => {
+    const student: StudentFormDataType = {
+      id: data?.id,
+      name: nameRef.current!.value,
+      email: emailRef.current!.value,
+      phone: phoneRef.current!.value,
+      enrollNumber: +enrollNumberRef.current!.value,
+    };
+
+    setForm(student);
+
+    const validation = formValidate(student, setFormError);
+
+    return [validation, student] as const;
   };
 
   return (
@@ -89,48 +116,55 @@ const StudentForm = (props: StudentFormProps) => {
       <h2 className="text-3xl font-700 text-center mb-10 uppercase">
         {title ? title : 'student form'}
       </h2>
-      <form data-id={data?.id}>
+      <form data-id={data?.id} onChange={handleValidate}>
         <InputWithErrorMsg
           id="name"
           name="Name"
           type="text"
           placeholder="Name"
+          errorMsg={ERROR_MSG.INVALID_NAME}
+          inValid={Boolean(form.name) && formError?.name}
+          value={form.name}
           ref={nameRef}
-          errorMsg={formError?.name}
         />
         <InputWithErrorMsg
           id="email"
           name="Email"
           type="text"
           placeholder="Email"
+          errorMsg={ERROR_MSG.INVALID_EMAIL}
+          inValid={Boolean(form.email) && formError?.email}
+          value={form.email}
           ref={emailRef}
-          errorMsg={formError?.email}
         />
         <InputWithErrorMsg
           id="phone"
           name="Phone"
           type="tel"
           placeholder="Phone number"
+          errorMsg={ERROR_MSG.INVALID_PHONE_NUMBER}
+          inValid={Boolean(form.phone) && formError?.phone}
+          value={form.phone}
           ref={phoneRef}
-          errorMsg={formError?.phone}
         />
         <InputWithErrorMsg
           id="enrollNumber"
           name="EnrollNumber"
           type="number"
           placeholder="Enroll number"
+          errorMsg={ERROR_MSG.INVALID_ENROLL_NUMBER}
+          inValid={Boolean(form.enrollNumber) && formError?.enrollNumber}
+          value={form.enrollNumber.toString()}
           ref={enrollNumberRef}
-          errorMsg={formError?.enrollNumber.toString()}
         />
         <Button
           type="submit"
           onClick={handleSubmit}
-          className={`${
-            loading ? 'bg-custom-gray' : 'bg-custom-yellow'
-          } submit-btn`}
-          disabled={loading}
+          className="submit-btn"
+          isLoading={loading || invalid}
+          primary
         >
-          {loading ? 'loading...' : 'done'}
+          {invalid ? 'invalid' : loading ? 'Loading...' : 'Done'}
         </Button>
       </form>
     </div>

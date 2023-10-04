@@ -64,7 +64,8 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
           <h1 className="text-3xl font-700">students list</h1>
           <Button
             type="button"
-            className="text-white bg-custom-yellow uppercase"
+            className="text-white uppercase"
+            primary
             onClick={handleAddStudent}
           >
             add new student

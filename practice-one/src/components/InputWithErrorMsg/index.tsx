@@ -1,4 +1,4 @@
-import { forwardRef, LegacyRef } from 'react';
+import React, { forwardRef, LegacyRef } from 'react';
 
 type InputWithLabelProps = {
   labeled?: boolean;
@@ -8,18 +8,30 @@ type InputWithLabelProps = {
   value?: string;
   placeholder?: string;
   errorMsg?: string | null;
+  inValid?: boolean;
+  onchange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const InputWithErrorMsg = forwardRef(
   (props: InputWithLabelProps, ref?: LegacyRef<HTMLInputElement>) => {
-    const { labeled, name, id, type, placeholder, errorMsg, value } = props;
+    const {
+      labeled,
+      name,
+      id,
+      type,
+      placeholder,
+      errorMsg,
+      value,
+      onchange,
+      inValid = false,
+    } = props;
 
     return (
       <div className="input-field flex flex-col mb-5">
         {labeled && <label htmlFor={id}>{name}</label>}
         <input
           className={`border rounded-md py-3 px-5 mt-1 w-full ${
-            errorMsg ? 'border-red-500' : 'border-gray-500'
+            inValid ? 'border-red-500' : 'border-gray-500'
           }`}
           type={type}
           id={id}
@@ -27,10 +39,11 @@ const InputWithErrorMsg = forwardRef(
           placeholder={placeholder}
           ref={ref}
           value={value}
+          onChange={onchange}
         />
         <p
           className={`error-msg text-sm text-red-500 normal-case ${
-            errorMsg ? '' : 'invisible'
+            inValid ? '' : 'invisible'
           }`}
         >
           {errorMsg ? errorMsg : 'invalid input'}

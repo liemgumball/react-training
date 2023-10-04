@@ -1,5 +1,4 @@
 // constants
-import { ERROR_MSG } from '@constants/messages';
 import {
   emailRegex,
   enrollNumberRegex,
@@ -9,10 +8,10 @@ import {
 import { StudentFormDataType } from '@utils/types';
 
 type FormErrorType = {
-  name: string;
-  email: string;
-  phone: string;
-  enrollNumber: string;
+  name: boolean;
+  email: boolean;
+  phone: boolean;
+  enrollNumber: boolean;
 };
 
 /**
@@ -23,10 +22,9 @@ type FormErrorType = {
  */
 export const formValidate = (
   data: StudentFormDataType,
-  setFormError: React.Dispatch<React.SetStateAction<FormErrorType | null>>
+  setFormError: React.Dispatch<React.SetStateAction<FormErrorType>>
 ) => {
   const { name, email, phone, enrollNumber } = data;
-  console.log(data);
 
   const test = {
     nameIsValid: nameRegex.test(name),
@@ -34,15 +32,12 @@ export const formValidate = (
     phoneIsValid: phoneNumberRegex.test(phone),
     enrollNumberIsValid: enrollNumberRegex.test(enrollNumber.toString()),
   };
-  console.log(test);
 
   setFormError({
-    name: test.nameIsValid ? '' : ERROR_MSG.INVALID_NAME,
-    email: test.emailIsValid ? '' : ERROR_MSG.INVALID_EMAIL,
-    phone: test.phoneIsValid ? '' : ERROR_MSG.INVALID_PHONE_NUMBER,
-    enrollNumber: test.enrollNumberIsValid
-      ? ''
-      : ERROR_MSG.INVALID_ENROLL_NUMBER,
+    name: !test.nameIsValid,
+    email: !test.emailIsValid,
+    phone: !test.phoneIsValid,
+    enrollNumber: !test.enrollNumberIsValid,
   });
 
   return Object.values(test).every((value) => value);
