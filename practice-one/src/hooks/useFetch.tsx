@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 /**
- * custom hook to fetch data from a specified URL
+ * custom hook to fetch data from a specified URL (automatically abort request if necessary)
  * @param url of request
  * @param options of request
  * @param recallTrigger used to trigger recall
