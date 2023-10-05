@@ -82,7 +82,8 @@ const Sidebar = ({ setAuth, username }: SidebarProps) => {
         <ul>
           {NavList.map((item, index) => (
             <li key={index}>
-              <NavLink className="nav-item" to={item.to}>
+              {/* NavLink already implement active in ClassName */}
+              <NavLink className="nav-link" to={item.to}>
                 <img src={item.imgSrc} alt={item.alt} />
                 {item.innerText}
               </NavLink>

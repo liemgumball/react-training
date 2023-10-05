@@ -10,10 +10,14 @@ type PaymentPageProps = {
 };
 
 const PaymentPage = ({ searchText }: PaymentPageProps) => {
-  const keyword = useDebounce(searchText);
+  const keyword = useDebounce(searchText); // used for Search in list
 
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}?_expand=student&?_sort=createdAt&_order=desc&q=${keyword}`;
 
+  /**
+   * Show message if user clicked on view details button
+   * @param e mouse event
+   */
   const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {
     try {
       const dataId = (e.target as HTMLElement)

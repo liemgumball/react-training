@@ -1,15 +1,14 @@
 type ButtonProps = {
   primary?: boolean;
-  isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ className, primary, isLoading, ...rest }: ButtonProps) => {
+const Button = ({ className, primary, disabled, ...rest }: ButtonProps) => {
   return (
     <button
       className={`${className} btn ${
-        isLoading ? 'bg-custom-dark-gray' : primary ? 'bg-custom-yellow' : ''
+        disabled ? 'bg-custom-dark-gray' : primary ? 'bg-custom-yellow' : ''
       }`}
-      disabled={isLoading}
+      disabled={disabled}
       {...rest}
     ></button>
   );

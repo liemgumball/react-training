@@ -33,6 +33,7 @@ export const formValidate = (
     enrollNumberIsValid: enrollNumberRegex.test(enrollNumber.toString()),
   };
 
+  // show error message if invalid
   setFormError({
     name: !test.nameIsValid,
     email: !test.emailIsValid,
@@ -40,5 +41,5 @@ export const formValidate = (
     enrollNumber: !test.enrollNumberIsValid,
   });
 
-  return Object.values(test).every((value) => value);
+  return Object.values(test).every((value) => value); // if all value is valid
 };

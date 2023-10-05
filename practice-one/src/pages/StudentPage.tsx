@@ -18,14 +18,16 @@ type StudentPageProps = {
 const StudentPage = ({ searchText }: StudentPageProps) => {
   const [formState, setFormAction] = useStudentForm();
 
-  const [updatedStudents, setUpdatedStudents] = useState<boolean>(false);
+  const [updatedStudents, setUpdatedStudents] = useState<boolean>(false); // use to trigger update List of students
 
-  const keyword = useDebounce(searchText);
+  const keyword = useDebounce(searchText); // used for Search in list
 
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${keyword}`;
 
-  const handleAddStudent = () => setFormAction({ type: 'add' });
-
+  /**
+   * Handle if user clicked on remove button or edit button
+   * @param e mouse event
+   */
   const handleClick = async (e: React.MouseEvent<HTMLUListElement>) => {
     try {
       const dataId = (e.target as HTMLElement)
@@ -46,7 +48,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
       }
 
       if (btn && btn.classList.contains('remove-btn')) {
-        // require confirmation by user
+        // show alert confirm message
         if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
           await removeStudent(dataId!);
           setUpdatedStudents((p) => !p); //trigger update List of students
@@ -66,7 +68,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
             type="button"
             className="text-white uppercase"
             primary
-            onClick={handleAddStudent}
+            onClick={() => setFormAction({ type: 'add' })}
           >
             add new student
           </Button>
@@ -109,5 +111,5 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
     </>
   );
 };
-
+StudentPage.whyDidYouRender = true;
 export default StudentPage;

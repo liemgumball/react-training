@@ -48,7 +48,7 @@ const StudentForm = (props: StudentFormProps) => {
   }, [data]);
 
   /**
-   * set input values based on data
+   * Set input values based on data
    * @param data of student
    */
   const updateForm = (data?: StudentFormDataType) => {
@@ -58,6 +58,7 @@ const StudentForm = (props: StudentFormProps) => {
       setForm({ name: '', email: '', phone: '', enrollNumber: 0 });
     }
 
+    // remove form errors messages
     setFormError({
       name: false,
       email: false,
@@ -75,7 +76,7 @@ const StudentForm = (props: StudentFormProps) => {
   ) => {
     e.preventDefault();
 
-    const [validation, student] = handleValidate();
+    const [validation, student] = handleValidate(); // get validation and input data
 
     if (validation) {
       try {
@@ -95,7 +96,13 @@ const StudentForm = (props: StudentFormProps) => {
     }
   };
 
+  /**
+   * Check if input data is valid or not.
+   * And show the error message if invalid
+   * @returns Data of student & Validation of data
+   */
   const handleValidate = () => {
+    //Get input data
     const student: StudentFormDataType = {
       id: data?.id,
       name: nameRef.current!.value,
@@ -106,7 +113,7 @@ const StudentForm = (props: StudentFormProps) => {
 
     setForm(student);
 
-    const validation = formValidate(student, setFormError);
+    const validation = formValidate(student, setFormError); // validate and show error message
 
     return [validation, student] as const;
   };
@@ -122,9 +129,9 @@ const StudentForm = (props: StudentFormProps) => {
           name="Name"
           type="text"
           placeholder="Name"
+          showLabel
           errorMsg={ERROR_MSG.INVALID_NAME}
-          inValid={Boolean(form.name) && formError?.name}
-          value={form.name}
+          inValid={!!form.name && formError?.name}
           ref={nameRef}
         />
         <InputWithErrorMsg
@@ -132,9 +139,9 @@ const StudentForm = (props: StudentFormProps) => {
           name="Email"
           type="text"
           placeholder="Email"
+          showLabel
           errorMsg={ERROR_MSG.INVALID_EMAIL}
-          inValid={Boolean(form.email) && formError?.email}
-          value={form.email}
+          inValid={!!form.email && formError?.email}
           ref={emailRef}
         />
         <InputWithErrorMsg
@@ -142,9 +149,9 @@ const StudentForm = (props: StudentFormProps) => {
           name="Phone"
           type="tel"
           placeholder="Phone number"
+          showLabel
           errorMsg={ERROR_MSG.INVALID_PHONE_NUMBER}
-          inValid={Boolean(form.phone) && formError?.phone}
-          value={form.phone}
+          inValid={!!form.phone && formError?.phone}
           ref={phoneRef}
         />
         <InputWithErrorMsg
@@ -152,19 +159,19 @@ const StudentForm = (props: StudentFormProps) => {
           name="EnrollNumber"
           type="number"
           placeholder="Enroll number"
+          showLabel
           errorMsg={ERROR_MSG.INVALID_ENROLL_NUMBER}
-          inValid={Boolean(form.enrollNumber) && formError?.enrollNumber}
-          value={form.enrollNumber.toString()}
+          inValid={!!form.enrollNumber && formError?.enrollNumber}
           ref={enrollNumberRef}
         />
         <Button
           type="submit"
           onClick={handleSubmit}
           className="submit-btn"
-          isLoading={loading || invalid}
+          disabled={loading || invalid}
           primary
         >
-          {invalid ? 'invalid' : loading ? 'Loading...' : 'Done'}
+          {loading ? 'Loading...' : 'Done'}
         </Button>
       </form>
     </div>

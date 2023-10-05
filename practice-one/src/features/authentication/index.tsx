@@ -90,7 +90,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
         }}
       >
         <InputWithErrorMsg
-          labeled
+          showLabel
           id="email"
           name="Email"
           type="text"
@@ -100,7 +100,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           inValid={Boolean(formError?.email)}
         />
         <InputWithErrorMsg
-          labeled
+          showLabel
           id="password"
           name="Password"
           type="password"
@@ -113,7 +113,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           className=" w-full mb-5 text-white uppercase"
           type="submit"
           primary
-          isLoading={loading}
+          disabled={loading}
         >
           {loading ? 'Loading...' : 'Sign in'}
         </Button>

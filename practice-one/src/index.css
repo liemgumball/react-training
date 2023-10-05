@@ -14,11 +14,11 @@
   @apply overflow-y-scroll w-1/5 min-w-max h-auto bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
 }
 
-.sidebar .nav-item {
+.sidebar .nav-link {
   @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition hover:bg-custom-gray;
 }
 
-.sidebar .nav-item.active {
+.sidebar .nav-link.active {
   @apply bg-custom-yellow;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .student-form .submit-btn {
-  @apply block mx-auto px-16 text-white uppercase text-xl;
+  @apply block mx-auto px-24 text-white uppercase text-lg;
 }
 
 .payment {

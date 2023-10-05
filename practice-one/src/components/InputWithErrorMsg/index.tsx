@@ -1,7 +1,7 @@
 import React, { forwardRef, LegacyRef } from 'react';
 
 type InputWithLabelProps = {
-  labeled?: boolean;
+  showLabel?: boolean;
   name: string;
   id: string;
   type: React.HTMLInputTypeAttribute;
@@ -15,7 +15,7 @@ type InputWithLabelProps = {
 const InputWithErrorMsg = forwardRef(
   (props: InputWithLabelProps, ref?: LegacyRef<HTMLInputElement>) => {
     const {
-      labeled,
+      showLabel,
       name,
       id,
       type,
@@ -28,7 +28,11 @@ const InputWithErrorMsg = forwardRef(
 
     return (
       <div className="input-field flex flex-col mb-5">
-        {labeled && <label htmlFor={id}>{name}</label>}
+        {showLabel && (
+          <label htmlFor={id} className="text-custom-dark-gray mb-1">
+            {name}:
+          </label>
+        )}
         <input
           className={`border rounded-md py-3 px-5 mt-1 w-full ${
             inValid ? 'border-red-500' : 'border-gray-500'
