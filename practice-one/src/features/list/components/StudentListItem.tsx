@@ -1,15 +1,17 @@
-import ButtonIcon from '@components/ButtonIcon';
-import { TStudent } from '@constants/types';
+import { TStudent } from '@utils/types';
 
 // images
 import pen from '@assets/pen.svg';
 import trash from '@assets/trash.svg';
+import Button from '@components/Button';
 
 type StudentListItemProps = {
   data: TStudent;
 };
 
-const StudentListItem = (props: StudentListItemProps) => {
+const StudentListItem: React.FC<StudentListItemProps> = (
+  props: StudentListItemProps
+) => {
   const { data } = props;
 
   return (
@@ -18,7 +20,6 @@ const StudentListItem = (props: StudentListItemProps) => {
         <img
           src={data.avatar}
           alt="student avatar"
-          loading="lazy"
           width="60px"
           height="60px"
         />
@@ -29,8 +30,12 @@ const StudentListItem = (props: StudentListItemProps) => {
       <p className="truncate">{data.enrollNumber}</p>
       <p className="truncate">{new Date(data.createdAt).toDateString()}</p>
       <div className="action-group flex gap-x-2 justify-end">
-        <ButtonIcon iconSrc={trash} alt="trash" className="remove-btn" />
-        <ButtonIcon iconSrc={pen} alt="pen" className="edit-btn" />
+        <Button className="remove-btn hover:bg-white">
+          <img src={trash} alt="trash" />
+        </Button>
+        <Button className="edit-btn hover:bg-white">
+          <img src={pen} alt="pen" />
+        </Button>
       </div>
     </li>
   );

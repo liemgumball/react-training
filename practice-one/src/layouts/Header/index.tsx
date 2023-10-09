@@ -7,7 +7,11 @@ type HeaderProps = {
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
 } & React.HTMLAttributes<HTMLElement>;
 
-const Header = ({ searchText, setSearchText, ...rest }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({
+  searchText,
+  setSearchText,
+  ...rest
+}: HeaderProps) => {
   return (
     <header className="flex justify-end gx-3 py-5 px-8" {...rest}>
       <div className="relative">

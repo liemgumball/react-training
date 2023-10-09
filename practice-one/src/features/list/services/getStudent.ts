@@ -1,6 +1,6 @@
 import { apiRequest } from '@services/apiRequest';
 import { DATABASE_RESOURCES } from '@constants/services';
-import { TStudent } from '@constants/types';
+import { TStudent } from '@utils/types';
 
 export const getStudent = async (studentId: string) => {
   try {

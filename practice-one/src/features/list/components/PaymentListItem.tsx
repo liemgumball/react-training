@@ -1,15 +1,17 @@
-import ButtonIcon from '@components/ButtonIcon';
 import formatAmount from '@utils/formatAmount';
 
 // images
 import eye from '@assets/eye.svg';
-import { TPayment } from '@constants/types';
+import { TPayment } from '@utils/types';
+import Button from '@components/Button';
 
 type PaymentListItemProps = {
   data: TPayment;
 };
 
-const PaymentListItem = (props: PaymentListItemProps) => {
+const PaymentListItem: React.FC<PaymentListItemProps> = (
+  props: PaymentListItemProps
+) => {
   const { data } = props;
 
   return (
@@ -21,7 +23,9 @@ const PaymentListItem = (props: PaymentListItemProps) => {
       <p className="truncate uppercase">inr {formatAmount(data.balance)}</p>
       <p className="truncate">{new Date(data.createdAt).toDateString()}</p>
       <div className="action-group flex gap-x-2 justify-end">
-        <ButtonIcon iconSrc={eye} alt="eye" className="view-details-btn" />
+        <Button className="view-details-btn hover:bg-white">
+          <img src={eye} alt="eye" />
+        </Button>
       </div>
     </li>
   );

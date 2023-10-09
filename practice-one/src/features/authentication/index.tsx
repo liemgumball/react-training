@@ -9,13 +9,13 @@ import { PATH_NAME } from '@constants/services';
 import { ERROR_MSG } from '@constants/messages';
 import { emailRegex, passwordRegex } from '@constants/regex';
 import bigLogo from '@assets/bigLogo.svg';
-import { AuthType } from '@constants/types';
+import { AuthType } from '@utils/types';
 
-type authenticationProps = {
+type AuthenticationProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>;
 };
 
-const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
+const Authentication: React.FC<AuthenticationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -97,6 +97,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           placeholder="Enter your email"
           ref={emailRef}
           errorMsg={formError?.email}
+          inValid={Boolean(formError?.email)}
         />
         <InputWithErrorMsg
           showLabel
@@ -106,12 +107,12 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
           placeholder="Enter your password"
           ref={passwordRef}
           errorMsg={formError?.password}
+          inValid={Boolean(formError?.password)}
         />
         <Button
-          className={`${
-            loading ? 'bg-custom-dark-gray' : 'bg-custom-yellow'
-          } w-full mb-5 text-white uppercase`}
+          className=" w-full mb-5 text-white uppercase"
           type="submit"
+          primary
           disabled={loading}
         >
           {loading ? 'Loading...' : 'Sign in'}
@@ -129,5 +130,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
     </div>
   );
 };
+
+Authentication.whyDidYouRender = true; // works
 
 export default Authentication;

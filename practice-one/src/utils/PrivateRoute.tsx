@@ -1,6 +1,6 @@
 import { Navigate, Outlet, RouteProps } from 'react-router-dom';
 import { PATH_NAME } from '@constants/services';
-import { AuthType } from '@constants/types';
+import { AuthType } from '@utils/types';
 
 type PrivateRouteProps = RouteProps & {
   auth: AuthType;

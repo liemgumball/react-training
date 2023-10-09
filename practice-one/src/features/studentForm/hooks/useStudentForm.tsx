@@ -1,11 +1,13 @@
 import { useReducer } from 'react';
-import { FormActionType, StudentFormStates } from '@constants/types';
+import { FormActionType, StudentFormStates } from '@utils/types';
 
 /**
- * invoked multiples sub-values of complex state to optimize performance for component
- * @param state of the form
- * @param action dispatch action for reducer
- * @returns state of the form
+ * Reducer function to manage the state of the student form.
+ * Optimizes performance by updating multiple sub-values of the complex state.
+ *
+ * @param state - Current state of the form
+ * @param action - Dispatched action for the reducer
+ * @returns Updated state of the form
  */
 const reducer = (
   state: StudentFormStates,
@@ -41,7 +43,9 @@ const reducer = (
 };
 
 /**
- * a custom hook create a reducer action for student form
+ * A custom hook that creates a reducer action for managing the student form state.
+ *
+ * @returns An array containing the form state and form action dispatcher
  */
 const useStudentForm = () => {
   const [formState, formAction] = useReducer(reducer, {

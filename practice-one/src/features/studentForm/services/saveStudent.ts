@@ -2,7 +2,7 @@ import { apiRequest } from '@services/apiRequest';
 
 // constants
 import { DATABASE_RESOURCES } from '@constants/services';
-import { StudentFormDataType, TStudent } from '@constants/types';
+import { StudentFormDataType, TStudent } from '@utils/types';
 
 export const saveStudent = async (student: StudentFormDataType) => {
   try {
