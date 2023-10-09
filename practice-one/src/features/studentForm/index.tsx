@@ -45,6 +45,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
   // set input values every time data changes
   useEffect(() => {
     updateForm(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   /**
@@ -53,7 +54,10 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
    */
   const updateForm = (data?: StudentFormDataType) => {
     if (data) {
-      setForm(data);
+      nameRef.current!.value = data.name;
+      emailRef.current!.value = data.email;
+      phoneRef.current!.value = data.phone;
+      enrollNumberRef.current!.value = data.enrollNumber.toString();
     } else {
       setForm({ name: '', email: '', phone: '', enrollNumber: 0 });
     }
@@ -133,7 +137,6 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_NAME}
           inValid={!!form.name && formError?.name}
           ref={nameRef}
-          value={form.name}
         />
         <InputWithErrorMsg
           id="email"
@@ -144,7 +147,6 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_EMAIL}
           inValid={!!form.email && formError?.email}
           ref={emailRef}
-          value={form.email}
         />
         <InputWithErrorMsg
           id="phone"
@@ -155,7 +157,6 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_PHONE_NUMBER}
           inValid={!!form.phone && formError?.phone}
           ref={phoneRef}
-          value={form.phone}
         />
         <InputWithErrorMsg
           id="enrollNumber"
@@ -166,7 +167,6 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_ENROLL_NUMBER}
           inValid={!!form.enrollNumber && formError?.enrollNumber}
           ref={enrollNumberRef}
-          value={form.enrollNumber.toString()}
         />
         <Button
           type="submit"
@@ -181,5 +181,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
     </div>
   );
 };
+
+StudentForm.whyDidYouRender = true;
 
 export default StudentForm;
