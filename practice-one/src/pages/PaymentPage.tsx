@@ -9,7 +9,9 @@ type PaymentPageProps = {
   searchText: string;
 };
 
-const PaymentPage = ({ searchText }: PaymentPageProps) => {
+const PaymentPage: React.FC<PaymentPageProps> = ({
+  searchText,
+}: PaymentPageProps) => {
   const keyword = useDebounce(searchText); // used for Search in list
 
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}?_expand=student&?_sort=createdAt&_order=desc&q=${keyword}`;

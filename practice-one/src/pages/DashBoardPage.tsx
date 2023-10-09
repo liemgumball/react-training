@@ -5,7 +5,7 @@ import user from '@assets/user.svg';
 import DashBoardCard from '@components/DashBoardCard';
 import { PATH_NAME } from '@constants/services';
 
-const DashBoardPage = () => {
+const DashBoardPage: React.FC = () => {
   return (
     <article className="dashboard-grid">
       <DashBoardCard

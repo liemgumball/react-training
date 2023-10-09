@@ -5,7 +5,9 @@ type DashBoardCardProps = {
   mainInfo: string;
 } & LinkProps;
 
-const DashBoardCard = (props: DashBoardCardProps) => {
+const DashBoardCard: React.FC<DashBoardCardProps> = (
+  props: DashBoardCardProps
+) => {
   const { cardName, mainInfo, className, children, ...rest } = props;
   return (
     <Link className={`${className} dashboard-card`} {...rest}>

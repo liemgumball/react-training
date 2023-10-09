@@ -56,7 +56,10 @@ const NavList: { to: To; imgSrc?: string; alt?: string; innerText: string }[] =
     },
   ];
 
-const Sidebar = ({ setAuth, username }: SidebarProps) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  setAuth,
+  username,
+}: SidebarProps) => {
   const handleLogout = () => setAuth(null);
 
   return (

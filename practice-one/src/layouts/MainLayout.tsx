@@ -10,7 +10,7 @@ type MainLayoutProps = {
   setAuth: React.Dispatch<React.SetStateAction<AuthType>>;
 };
 
-const MainLayout = (props: MainLayoutProps) => {
+const MainLayout: React.FC<MainLayoutProps> = (props: MainLayoutProps) => {
   const { searchText, setSearchText, auth, setAuth } = props;
 
   return (

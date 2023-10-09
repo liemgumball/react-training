@@ -2,7 +2,12 @@ type ButtonProps = {
   primary?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ className, primary, disabled, ...rest }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({
+  className,
+  primary,
+  disabled,
+  ...rest
+}: ButtonProps) => {
   return (
     <button
       className={`${className} btn ${

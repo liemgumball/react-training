@@ -9,7 +9,9 @@ type StudentListItemProps = {
   data: TStudent;
 };
 
-const StudentListItem = (props: StudentListItemProps) => {
+const StudentListItem: React.FC<StudentListItemProps> = (
+  props: StudentListItemProps
+) => {
   const { data } = props;
 
   return (

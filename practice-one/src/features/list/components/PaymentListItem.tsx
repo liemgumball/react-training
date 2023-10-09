@@ -9,7 +9,9 @@ type PaymentListItemProps = {
   data: TPayment;
 };
 
-const PaymentListItem = (props: PaymentListItemProps) => {
+const PaymentListItem: React.FC<PaymentListItemProps> = (
+  props: PaymentListItemProps
+) => {
   const { data } = props;
 
   return (

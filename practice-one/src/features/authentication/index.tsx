@@ -11,11 +11,11 @@ import { emailRegex, passwordRegex } from '@constants/regex';
 import bigLogo from '@assets/bigLogo.svg';
 import { AuthType } from '@utils/types';
 
-type authenticationProps = {
+type AuthenticationProps = {
   setAuth: Dispatch<SetStateAction<AuthType>>;
 };
 
-const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
+const Authentication: React.FC<AuthenticationProps> = ({ setAuth }) => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -130,5 +130,7 @@ const Authentication: React.FC<authenticationProps> = ({ setAuth }) => {
     </div>
   );
 };
+
+Authentication.whyDidYouRender = true; // works
 
 export default Authentication;

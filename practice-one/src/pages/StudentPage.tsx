@@ -15,7 +15,9 @@ type StudentPageProps = {
   searchText: string;
 };
 
-const StudentPage = ({ searchText }: StudentPageProps) => {
+const StudentPage: React.FC<StudentPageProps> = ({
+  searchText,
+}: StudentPageProps) => {
   const [formState, setFormAction] = useStudentForm();
 
   const [updatedStudents, setUpdatedStudents] = useState<boolean>(false); // use to trigger update List of students
@@ -111,5 +113,7 @@ const StudentPage = ({ searchText }: StudentPageProps) => {
     </>
   );
 };
-StudentPage.whyDidYouRender = true;
+
+StudentPage.whyDidYouRender = true; // works
+
 export default StudentPage;

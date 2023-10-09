@@ -13,7 +13,7 @@ type StudentFormProps = {
   setUpdateStudents: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const StudentForm = (props: StudentFormProps) => {
+const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
   const { title, data, setFormAction, setUpdateStudents } = props;
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -133,6 +133,7 @@ const StudentForm = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_NAME}
           inValid={!!form.name && formError?.name}
           ref={nameRef}
+          value={form.name}
         />
         <InputWithErrorMsg
           id="email"
@@ -143,6 +144,7 @@ const StudentForm = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_EMAIL}
           inValid={!!form.email && formError?.email}
           ref={emailRef}
+          value={form.email}
         />
         <InputWithErrorMsg
           id="phone"
@@ -153,6 +155,7 @@ const StudentForm = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_PHONE_NUMBER}
           inValid={!!form.phone && formError?.phone}
           ref={phoneRef}
+          value={form.phone}
         />
         <InputWithErrorMsg
           id="enrollNumber"
@@ -163,6 +166,7 @@ const StudentForm = (props: StudentFormProps) => {
           errorMsg={ERROR_MSG.INVALID_ENROLL_NUMBER}
           inValid={!!form.enrollNumber && formError?.enrollNumber}
           ref={enrollNumberRef}
+          value={form.enrollNumber.toString()}
         />
         <Button
           type="submit"
