@@ -61,6 +61,9 @@ devDependencies:
   '@vitest/coverage-v8':
     specifier: ^0.34.6
     version: 0.34.6(vitest@0.34.6)
+  '@welldone-software/why-did-you-render':
+    specifier: ^7.0.1
+    version: 7.0.1(react@18.2.0)
   eslint:
     specifier: ^8.45.0
     version: 8.52.0
@@ -3972,6 +3975,15 @@ packages:
       diff-sequences: 29.6.3
       loupe: 2.3.7
       pretty-format: 29.7.0
+    dev: true
+
+  /@welldone-software/why-did-you-render@7.0.1(react@18.2.0):
+    resolution: {integrity: sha512-Qe/8Xxa2G+LMdI6VoazescPzjjkHYduCDa8aHOJR50e9Bgs8ihkfMBY+ev7B4oc3N59Zm547Sgjf8h5y0FOyoA==}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+    dependencies:
+      lodash: 4.17.21
+      react: 18.2.0
     dev: true
 
   /@yarnpkg/esbuild-plugin-pnp@3.0.0-rc.15(esbuild@0.18.20):
