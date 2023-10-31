@@ -15,8 +15,10 @@ describe('Input Component', () => {
       />
     );
 
-    expect(screen.getByPlaceholderText('Enter the email')).toEqual(ref.current);
-    expect(screen.getByPlaceholderText('Enter the email')).toHaveFocus();
+    const inputElement = screen.getByPlaceholderText('Enter the email');
+
+    expect(inputElement).toEqual(ref.current);
+    expect(inputElement).toHaveFocus();
 
     act(() => {
       screen.getByPlaceholderText('Enter the email').blur();
@@ -35,12 +37,10 @@ describe('Input Component', () => {
       />
     );
 
-    expect(screen.getByPlaceholderText('Enter the email')).toEqual(ref.current);
-    expect(screen.getByPlaceholderText('Enter the email')).toHaveAttribute(
-      'aria-invalid'
-    );
-    expect(screen.getByPlaceholderText('Enter the email')).toHaveClass(
-      'border-red-500'
-    );
+    const inputElement = screen.getByPlaceholderText('Enter the email');
+
+    expect(inputElement).toEqual(ref.current);
+    expect(inputElement).toHaveAttribute('aria-invalid');
+    expect(inputElement).toHaveClass('border-red-500');
   });
 });

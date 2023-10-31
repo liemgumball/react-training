@@ -9,24 +9,33 @@ export default {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    onClick: { action: 'clicked' },
+    onMouseOver: { action: 'mouseOvered' },
+    variant: { control: 'radio', options: ['primary', ''] },
+  },
 } satisfies Meta<typeof Button>;
 
 type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    primary: true,
+    variant: 'primary',
     disabled: false,
     children: 'Submit',
-    onClick: () => {},
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    primary: false,
     disabled: false,
     children: <img src={react} alt="icon" />,
-    onClick: () => {},
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: 'Disabled',
   },
 };

@@ -1,14 +1,14 @@
 type ButtonProps = {
-  primary?: boolean;
+  variant?: 'primary' | '';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-  const { className, primary, disabled, children, ...rest } = props;
+  const { className, variant, disabled, children, ...rest } = props;
 
   return (
     <button
-      className={`${className} btn ${
-        disabled ? 'bg-custom-dark-gray' : primary ? 'bg-custom-yellow' : ''
+      className={`btn ${className ? className : ''} ${
+        variant ? 'btn-' + variant : ''
       }`}
       disabled={disabled}
       {...rest}
