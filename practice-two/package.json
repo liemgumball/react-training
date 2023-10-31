@@ -10,19 +10,22 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "serve-storybook": "serve storybook-static",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "test:watch": "vitest --watch"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.5.1",
     "@storybook/addon-interactions": "^7.5.1",
     "@storybook/addon-links": "^7.5.1",
     "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/blocks": "^7.5.1",
     "@storybook/react": "^7.5.1",
     "@storybook/react-vite": "^7.5.1",
