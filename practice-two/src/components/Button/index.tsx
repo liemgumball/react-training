@@ -1,5 +1,5 @@
 type ButtonProps = {
-  variant?: 'primary' | '';
+  variant?: 'primary';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {

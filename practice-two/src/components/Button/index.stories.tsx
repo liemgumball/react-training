@@ -12,7 +12,7 @@ export default {
   argTypes: {
     onClick: { action: 'clicked' },
     onMouseOver: { action: 'mouseOvered' },
-    variant: { control: 'radio', options: ['primary', ''] },
+    variant: { control: 'radio', options: ['primary', undefined] },
   },
 } satisfies Meta<typeof Button>;
 
