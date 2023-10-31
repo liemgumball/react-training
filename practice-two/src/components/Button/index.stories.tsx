@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Button from '.';
+import react from '@assets/react.svg';
 
 export default {
   title: 'Components/Button',
@@ -17,6 +18,15 @@ export const Default: Story = {
     primary: true,
     disabled: false,
     children: 'Submit',
+    onClick: () => {},
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    primary: false,
+    disabled: false,
+    children: <img src={react} alt="icon" />,
     onClick: () => {},
   },
 };
