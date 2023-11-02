@@ -12,13 +12,13 @@ export type LoginInputs = {
   password: string;
 };
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const { setAuth } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isSubmitted },
+    formState: { errors, isValid, isSubmitted, isSubmitting },
     setError,
   } = useForm<LoginInputs>({ mode: 'onChange' });
 
@@ -37,12 +37,12 @@ const LoginForm = () => {
   return (
     <form
       role="form"
-      autoComplete="none"
-      className="flex flex-col p-5 capitalize"
+      autoComplete="off"
+      className="flex flex-col text-left"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <label className="mt-5 text-custom-dark-gray" htmlFor="email">
-        email
+      <label className="text-custom-dark-gray capitalize" htmlFor="email">
+        Email
       </label>
       <Input
         id="email"
@@ -59,12 +59,18 @@ const LoginForm = () => {
         })}
       />
       {errors.email && isSubmitted && (
-        <p className="text-red-500" role="alert">
+        <p
+          className="text-red-500 text-xs transition duration-500"
+          role="alert"
+        >
           {errors.email.message}
         </p>
       )}
 
-      <label className="mt-5 text-custom-dark-gray" htmlFor="password">
+      <label
+        className="text-custom-dark-gray mt-10 capitalize"
+        htmlFor="password"
+      >
         password
       </label>
       <Input
@@ -81,7 +87,10 @@ const LoginForm = () => {
         })}
       />
       {errors.password && isSubmitted && (
-        <p className="text-red-500" role="alert">
+        <p
+          className="text-red-500 text-xs transition duration-500"
+          role="alert"
+        >
           {errors.password.message}
         </p>
       )}
@@ -89,10 +98,10 @@ const LoginForm = () => {
       <Button
         variant="primary"
         type="submit"
-        className="mt-5 text-white uppercase text-700"
-        disabled={!isValid && isSubmitted}
+        className="text-white uppercase text-700 mt-8"
+        disabled={(!isValid && isSubmitted) || isSubmitting}
       >
-        sign in
+        {isSubmitting ? 'Loading...' : 'sign in'}
       </Button>
     </form>
   );

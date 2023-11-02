@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
-    inValid: true,
+    inValid: false,
     defaultValue: 'OK',
     placeholder: 'Please enter',
   },

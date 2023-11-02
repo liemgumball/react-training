@@ -11,15 +11,12 @@ interface AuthProviderProps {
 }
 
 export const AuthContext = createContext<{
-  auth: AuthType | undefined;
-  setAuth: Dispatch<SetStateAction<AuthType | undefined>> | undefined;
-}>({ auth: undefined, setAuth: undefined });
+  auth: AuthType | null;
+  setAuth: Dispatch<SetStateAction<AuthType | null>> | undefined;
+}>({ auth: null, setAuth: undefined });
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [auth, setAuth] = useLocalStorage<AuthType | undefined>(
-    '_auth',
-    undefined
-  ); // this state connected with local storage
+  const [auth, setAuth] = useLocalStorage<AuthType | null>('_auth', null); // this state connected with local storage
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

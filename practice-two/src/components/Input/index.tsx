@@ -10,7 +10,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       aria-invalid={inValid}
-      className={`border p-4 my-1 rounded-lg ${
+      className={`border p-4 my-2 rounded-md ${
         inValid ? 'border-red-500' : ''
       }`}
       ref={ref}
