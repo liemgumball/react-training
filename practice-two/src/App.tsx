@@ -1,14 +1,25 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AuthProvider from './contexts/Authentication';
+import PrivateRoutes from '@utils/PrivateRoutes';
+import { PATH_NAME } from '@constants/services';
 import LoginPage from '@pages/LoginPage';
+import HomePage from '@pages/HomePage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <AuthProvider>
-        <LoginPage></LoginPage>
+        <Routes>
+          {/* Private Routes */}
+          <Route element={<PrivateRoutes />}>
+            <Route path={PATH_NAME.HOME} element={<HomePage />} />
+          </Route>
+
+          {/* Public Routes */}
+          <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
+        </Routes>
       </AuthProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
 
