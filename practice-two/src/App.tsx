@@ -4,6 +4,7 @@ import PrivateRoutes from '@utils/PrivateRoutes';
 import { PATH_NAME } from '@constants/services';
 import LoginPage from '@pages/LoginPage';
 import HomePage from '@pages/HomePage';
+import MainLayout from './layouts/MainLayout';
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
         <Routes>
           {/* Private Routes */}
           <Route element={<PrivateRoutes />}>
-            <Route path={PATH_NAME.HOME} element={<HomePage />} />
+            <Route element={<MainLayout />}>
+              <Route path={PATH_NAME.HOME} element={<HomePage />} />
+            </Route>
           </Route>
 
           {/* Public Routes */}
