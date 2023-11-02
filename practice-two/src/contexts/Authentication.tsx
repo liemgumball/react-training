@@ -3,17 +3,21 @@ import useLocalStorage from '@hooks/useLocalStorage';
 
 export type AuthType = {
   accessToken: string;
-  name: string;
+  user: {
+    email: string;
+    name: string;
+    id: number;
+  };
 };
 
-interface AuthProviderProps {
+type AuthProviderProps = {
   children?: ReactNode;
-}
+};
 
 export const AuthContext = createContext<{
   auth: AuthType | null;
-  setAuth: Dispatch<SetStateAction<AuthType | null>> | undefined;
-}>({ auth: null, setAuth: undefined });
+  setAuth: Dispatch<SetStateAction<AuthType | null>>;
+}>({ auth: null, setAuth: () => {} });
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [auth, setAuth] = useLocalStorage<AuthType | null>('_auth', null); // this state connected with local storage
