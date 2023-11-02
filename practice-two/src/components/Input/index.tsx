@@ -1,8 +1,8 @@
-import { HTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
 type InputProps = {
   inValid?: boolean;
-} & HTMLAttributes<HTMLInputElement>;
+} & InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { inValid, ...rest } = props;
@@ -10,7 +10,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       aria-invalid={inValid}
-      className={`border p-4 rounded-lg ${inValid ? 'border-red-500' : ''}`}
+      className={`border p-4 my-1 rounded-lg ${
+        inValid ? 'border-red-500' : ''
+      }`}
       ref={ref}
       {...rest}
     />

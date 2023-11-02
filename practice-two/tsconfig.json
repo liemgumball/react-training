@@ -30,6 +30,7 @@
       "@services/*": ["src/services/*"],
       "@assets/*": ["src/assets/*"],
       "@pages/*": ["src/pages/*"],
+      "@contexts/*": ["src/contexts/*"],
       "@utils/*": ["src/utils/*"]
     }
   },

@@ -24,6 +24,7 @@ export default defineConfig({
       '@assets': '/src/assets',
       '@pages': '/src/pages',
       '@utils': '/src/utils',
+      '@contexts': '/src/contexts',
     },
   },
   define: { 'process.env': process.env },
