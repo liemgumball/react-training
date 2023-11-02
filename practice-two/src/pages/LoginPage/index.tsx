@@ -5,7 +5,7 @@ import LoginForm from './LoginForm';
 
 const LoginPage = () => {
   return (
-    <div className="bg-custom-gradient-yellow h-screen flex justify-center items-center">
+    <div className="bg-custom-gradient-yellow p-10 min-h-screen h-full flex justify-center items-center">
       <main className="login-card">
         <Link to={PATH_NAME.HOME} className="flex items-center justify-center">
           <img
