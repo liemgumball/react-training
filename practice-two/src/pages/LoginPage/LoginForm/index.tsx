@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <label className="text-custom-dark-gray capitalize" htmlFor="email">
-        Email
+        email
       </label>
       <Input
         id="email"

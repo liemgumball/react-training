@@ -10,9 +10,9 @@ const Sidebar = lazy(() => import('./Sidebar'));
 
 const MainLayout = () => {
   return (
-    <div className="bg-white flex capitalize h-full min-h-screen">
+    <div className="bg-white flex capitalize h-screen">
       <Sidebar />
-      <main className="w-full min-w-min relative">
+      <main className="w-full min-w-min relative overflow-y-scroll">
         <SearchQueryProvider>
           <ErrorBoundary
             FallbackComponent={ErrorFallback}

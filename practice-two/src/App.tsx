@@ -1,17 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import Loader from '@utils/Loader';
 
 import AuthProvider from '@contexts/Authentication';
 import PrivateRoutes from '@utils/PrivateRoutes';
+import Loader from '@utils/Loader';
 import { PATH_NAME } from '@constants/services';
 
 // pages & layouts
-const LoginPage = lazy(() => import('@pages/LoginPage'));
 const MainLayout = lazy(() => import('./layouts/MainLayout'));
+const LoginPage = lazy(() => import('@pages/LoginPage'));
 const EmptyPage = lazy(() => import('@pages/EmptyPage'));
-const HomePage = lazy(() => import('@pages/HomePage'));
-const StudentPage = lazy(() => import('@pages/StudentPage'));
+const DashBoardPage = lazy(() => import('@pages/DashBoardPage'));
 
 function App() {
   return (
@@ -22,8 +21,7 @@ function App() {
             {/* Private Routes */}
             <Route element={<PrivateRoutes />}>
               <Route element={<MainLayout />}>
-                <Route path={PATH_NAME.HOME} element={<HomePage />} />
-                <Route path={PATH_NAME.STUDENTS} element={<StudentPage />} />
+                <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
                 <Route path="*" element={<EmptyPage />} />
               </Route>
             </Route>

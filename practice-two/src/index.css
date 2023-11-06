@@ -23,7 +23,7 @@
 }
 
 .sidebar {
-  @apply w-1/6 min-w-max h-full min-h-screen bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
+  @apply w-1/6 min-w-max min-h-min overflow-y-scroll bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-between gap-y-2;
 }
 
 .sidebar .nav-link {
@@ -32,4 +32,28 @@
 
 .sidebar .nav-link.active {
   @apply bg-custom-yellow;
+}
+
+.dashboard-grid {
+  @apply p-8 h-auto grid xl:grid-cols-4 gap-8 items-stretch lg:grid-cols-2 grid-cols-1;
+}
+
+.dashboard-card {
+  @apply block p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 min-w-max border transition overflow-hidden;
+}
+
+.dashboard-card-primary {
+  @apply bg-custom-gradient-yellow text-white;
+}
+
+.dashboard-card-secondary {
+  @apply bg-custom-light-yellow;
+}
+
+.dashboard-card-thirdly {
+  @apply bg-custom-light-pink;
+}
+
+.dashboard-card-fourthly {
+  @apply bg-custom-light-blue;
 }
