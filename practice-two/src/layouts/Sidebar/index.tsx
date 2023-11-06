@@ -80,7 +80,7 @@ const Sidebar: React.FC = () => {
             <li key={index}>
               {/* NavLink already implement active in ClassName */}
               <NavLink className="nav-link" to={item.to}>
-                <img src={item.imgSrc} alt={item.alt} />
+                <img src={item.imgSrc} alt={item.alt} loading="eager" />
                 {item.innerText}
               </NavLink>
             </li>
