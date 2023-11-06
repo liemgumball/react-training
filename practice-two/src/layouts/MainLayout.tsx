@@ -14,10 +14,11 @@ const MainLayout = () => {
       <Sidebar />
       <main className="w-full min-w-min relative overflow-y-scroll">
         <SearchQueryProvider>
+          {/* Error Boundary */}
           <ErrorBoundary
             FallbackComponent={ErrorFallback}
             onReset={() => {
-              window.location.reload();
+              window.location.reload(); // reload window to reset error
             }}
           >
             <Header />

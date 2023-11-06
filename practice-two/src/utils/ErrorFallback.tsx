@@ -6,7 +6,7 @@ type ErrorFallbackProps = {
 };
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error }) => {
-  const { resetBoundary } = useErrorBoundary();
+  const { resetBoundary } = useErrorBoundary(); // reset boundary for hooks
 
   return (
     <div className="absolute inset-0 flex flex-col gap-5 items-center justify-center">
