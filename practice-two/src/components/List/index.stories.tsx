@@ -24,7 +24,7 @@ export default {
 
 type Story = StoryObj<typeof List>;
 
-const data = await api.get(`${process.env.API_GATEWAY}/students?_limit=5`);
+const data = await api.get(`${process.env.API_GATEWAY}/students?_limit=6`);
 
 export const Default: Story = {
   args: {
