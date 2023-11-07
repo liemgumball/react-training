@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import List from '.';
-import api from '@services/apiRequest';
 import { TStudent } from '@utils/types';
 import StudentListItem from '@pages/StudentPage/StudentListItem';
 
@@ -24,7 +23,44 @@ export default {
 
 type Story = StoryObj<typeof List>;
 
-const data = await api.get(`${process.env.API_GATEWAY}/students?_limit=6`);
+const data = [
+  {
+    createdAt: '2023-09-07T23:25:31.357Z',
+    name: 'Verna Senger',
+    avatar: 'https://loremflickr.com/60/60',
+    email: 'Aglae61@yahoo.com',
+    phone: '0931009009',
+    enrollNumber: 768475388,
+    id: 1,
+  },
+  {
+    createdAt: '2023-09-07T19:49:09.602Z',
+    name: 'Andres Rath',
+    avatar: 'https://loremflickr.com/60/60',
+    email: 'Florida63@yahoo.com',
+    phone: '0931009009',
+    enrollNumber: 507549695,
+    id: 2,
+  },
+  {
+    createdAt: '2023-09-07T05:45:23.661Z',
+    name: 'Charlotte Walker',
+    avatar: 'https://loremflickr.com/60/60',
+    email: 'Timmy_Cummerata@yahoo.com',
+    phone: '0931009009',
+    enrollNumber: 413719441,
+    id: 3,
+  },
+  {
+    createdAt: '2023-09-08T02:15:27.377Z',
+    name: 'Otis Strosin',
+    avatar: 'https://loremflickr.com/60/60',
+    email: 'Ryleigh_Barton@hotmail.com',
+    phone: '0931009009',
+    enrollNumber: 271711717,
+    id: 4,
+  },
+];
 
 export const Default: Story = {
   args: {

@@ -15,7 +15,7 @@ const List: React.FC<ListProps> = (props) => {
   if (isError)
     return (
       <p role="alert" className="text-red-500 text-center">
-        {error?.message}
+        {error?.message || 'Unexpected error'}
       </p>
     );
   // loading
