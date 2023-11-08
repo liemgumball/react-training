@@ -7,7 +7,7 @@ import List from '@components/List';
 import { DATABASE_RESOURCES } from '@constants/services';
 import { SearchQueryContext } from '@contexts/SearchQuery';
 import { getStudents } from './services/getStudents';
-import StudentListItem from './StudentListItem';
+import StudentListItem from './components/StudentListItem';
 
 const StudentPage = () => {
   const { searchQuery } = useContext(SearchQueryContext);

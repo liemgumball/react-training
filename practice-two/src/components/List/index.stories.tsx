@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import List from '.';
 import { TStudent } from '@utils/types';
-import StudentListItem from '@pages/StudentPage/StudentListItem';
+import StudentListItem from '@pages/StudentPage/components/StudentListItem';
 
 export default {
   title: 'Components/List',
