@@ -17,3 +17,8 @@ export type TPayment = {
   id: number;
   student?: TStudent;
 };
+
+export type StudentInputs = Pick<
+  TStudent,
+  'id' | 'email' | 'name' | 'phone' | 'enrollNumber'
+>;
