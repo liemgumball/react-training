@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { MouseEvent, useContext } from 'react';
 import { useQuery } from 'react-query';
 import useDebounce from '@hooks/useDebounce';
 
@@ -9,21 +9,57 @@ import { SearchQueryContext } from '@contexts/SearchQuery';
 import { getStudents } from './services/getStudents';
 import StudentListItem from './components/StudentListItem';
 import StudentForm from './components/StudentForm';
+import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
+import useStudentForm from './hooks/useStudentForm';
+import { getStudentById } from './services/getStudentById';
+import { StudentInputs } from '@utils/types';
 
 const StudentPage: React.FC = () => {
-  const [showForm, setShowForm] = useState(false);
-
-  // debounce the search query change
+  // Debounce the search query change
   const { searchQuery } = useContext(SearchQueryContext);
   const debouncedSearchQuery = useDebounce(searchQuery);
 
-  // get students
+  // Get students
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
   const { data, isError, error, isLoading } = useQuery(
     ['students', debouncedSearchQuery],
-    () => getStudents(url),
-    { notifyOnChangeProps: 'tracked' }
+    () => getStudents(url)
   );
+
+  // Student form reducer
+  const [formState, setFormState] = useStudentForm();
+  /**
+   * Delegated onClick handle (edit || remove)
+   * @param event mouse event
+   */
+  const onClick = async (event: MouseEvent) => {
+    try {
+      const dataId = (event.target as HTMLElement)
+        .closest('li')
+        ?.getAttribute('data-id');
+      const btn = (event.target as HTMLUListElement).closest('button');
+
+      if (btn && btn.classList.contains('btn-edit')) {
+        if (dataId) {
+          setFormState({
+            status: 'editing',
+            student: (await getStudentById(dataId)) as StudentInputs,
+          });
+        } else {
+          throw new Error(ERROR_MSG.MISSING_ID);
+        }
+      }
+
+      if (btn && btn.classList.contains('btn-remove')) {
+        // show alert confirm message
+        if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
+          console.log('confirm remove');
+        }
+      }
+    } catch (err) {
+      alert((err as Error).message);
+    }
+  };
 
   return (
     <>
@@ -33,7 +69,7 @@ const StudentPage: React.FC = () => {
           <Button
             className="uppercase"
             variant="primary"
-            onClick={() => setShowForm(true)}
+            onClick={() => setFormState({ status: 'adding' })}
           >
             add new student
           </Button>
@@ -49,7 +85,12 @@ const StudentPage: React.FC = () => {
             <span>date of admission</span>
             <span />
           </header>
-          <List isError={isError} isLoading={isLoading} error={error as Error}>
+          <List
+            isError={isError}
+            isLoading={isLoading}
+            error={error as Error}
+            onClick={onClick}
+          >
             {data && data.length ? (
               data.map((item) => <StudentListItem key={item.id} data={item} />)
             ) : (
@@ -58,7 +99,15 @@ const StudentPage: React.FC = () => {
           </List>
         </section>
       </article>
-      {showForm && <StudentForm setShowForm={setShowForm} state="add" />}
+      {formState.status !== 'closed' && (
+        <StudentForm
+          setFormState={setFormState}
+          state={formState.status}
+          student={
+            formState.status === 'editing' ? formState.student : undefined
+          }
+        />
+      )}
     </>
   );
 };

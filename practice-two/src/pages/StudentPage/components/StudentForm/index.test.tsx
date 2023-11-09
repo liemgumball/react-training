@@ -10,12 +10,12 @@ describe('student form component', () => {
   it('should render the form', async () => {
     const { getByLabelText, getByRole, getAllByRole } = render(
       <QueryClientProvider client={queryClient}>
-        <StudentForm state="add" setShowForm={() => {}} />
+        <StudentForm state="adding" setFormState={() => {}} />
       </QueryClientProvider>
     );
 
     // check heading
-    expect(getByRole('heading')).toHaveTextContent('add student');
+    expect(getByRole('heading')).toHaveTextContent('adding student');
     // Check auto focus
     expect(getByLabelText('Name')).toHaveFocus();
 
@@ -38,7 +38,7 @@ describe('student form component', () => {
   it('should render a valid form', async () => {
     const { getByLabelText, getByRole } = render(
       <QueryClientProvider client={queryClient}>
-        <StudentForm state="add" setShowForm={() => {}} />
+        <StudentForm state="adding" setFormState={() => {}} />
       </QueryClientProvider>
     );
 
