@@ -72,7 +72,7 @@
 }
 
 .dashboard-card {
-  @apply block p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 min-w-max border transition overflow-hidden;
+  @apply block p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 border transition overflow-hidden;
 }
 
 .dashboard-card-primary {

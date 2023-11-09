@@ -20,9 +20,9 @@ const LoginForm: React.FC = () => {
     handleSubmit,
     formState: { errors, isValid, isSubmitted, isSubmitting },
     setError,
-  } = useForm<LoginInputs>({ mode: 'onChange' });
+  } = useForm<LoginInputs>();
 
-  const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
+  const onValid: SubmitHandler<LoginInputs> = async (data) => {
     try {
       const auth = await login(data);
       if (auth && setAuth) setAuth(auth); // if login successfully
@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
       role="form"
       autoComplete="off"
       className="flex flex-col text-left"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onValid)}
     >
       <label className="text-custom-dark-gray capitalize" htmlFor="email">
         email
@@ -49,7 +49,7 @@ const LoginForm: React.FC = () => {
         type="text"
         placeholder="Enter your email"
         autoFocus
-        inValid={!!errors.email && isSubmitted}
+        inValid={!!errors.email}
         {...register('email', {
           required: 'Email is required',
           pattern: {
@@ -58,7 +58,7 @@ const LoginForm: React.FC = () => {
           },
         })}
       />
-      {errors.email && isSubmitted && (
+      {errors.email && (
         <p
           className="text-red-500 text-xs transition duration-500"
           role="alert"
@@ -77,7 +77,7 @@ const LoginForm: React.FC = () => {
         id="password"
         type="password"
         placeholder="Enter your password"
-        inValid={!!errors.password && isSubmitted}
+        inValid={!!errors.password}
         {...register('password', {
           required: 'Password is required',
           pattern: {
@@ -86,7 +86,7 @@ const LoginForm: React.FC = () => {
           },
         })}
       />
-      {errors.password && isSubmitted && (
+      {errors.password && (
         <p
           className="text-red-500 text-xs transition duration-500"
           role="alert"
