@@ -52,11 +52,11 @@ const reducer = (
 };
 
 const useStudentForm = () => {
-  const [formState, setFormAction] = useReducer(reducer, {
+  const [formState, dispatch] = useReducer(reducer, {
     shown: false,
-  } as StudentFormState);
+  });
 
-  return [formState, setFormAction] as const;
+  return [formState, dispatch] as const;
 };
 
 export default useStudentForm;

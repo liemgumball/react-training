@@ -1,65 +1,79 @@
-import { MouseEvent, useContext } from 'react';
-import { useQuery } from 'react-query';
+import { MouseEvent, useCallback, useContext } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useDebounce from '@hooks/useDebounce';
 
 import Button from '@components/Button';
 import List from '@components/List';
 import { DATABASE_RESOURCES } from '@constants/services';
 import { SearchQueryContext } from '@contexts/SearchQuery';
-import { getStudents } from './services/getStudents';
 import StudentListItem from './components/StudentListItem';
 import StudentForm from './components/StudentForm';
 import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
 import useStudentForm from './hooks/useStudentForm';
-import { getStudentById } from './services/getStudentById';
-import { StudentInputs } from '@utils/types';
+import { StudentInputs, TStudent } from '@utils/types';
+import api from '@services/apiRequest';
 
 const StudentPage: React.FC = () => {
+  // Student form reducer
+  const [formState, dispatch] = useStudentForm();
+
   // Debounce the search query change
   const { searchQuery } = useContext(SearchQueryContext);
   const debouncedSearchQuery = useDebounce(searchQuery);
 
   // Get students
-  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
+  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`;
+  const query = `?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
+
   const { data, isError, error, isLoading } = useQuery(
     ['students', debouncedSearchQuery],
-    () => getStudents(url)
+    async () => (await api.get(url + query)) as TStudent[]
   );
 
-  // Student form reducer
-  const [formState, setFormAction] = useStudentForm();
+  // Mutations
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation({
+    mutationFn: (id: string) => api.remove(url + '/' + id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['students'] });
+    },
+  });
+
   /**
    * Delegated onClick handle (edit || remove)
    * @param event mouse event
    */
-  const onClick = async (event: MouseEvent) => {
-    try {
-      const dataId = (event.target as HTMLElement)
-        .closest('li')
-        ?.getAttribute('data-id');
-      const btn = (event.target as HTMLUListElement).closest('button');
+  const onClick = useCallback(
+    async (event: MouseEvent) => {
+      try {
+        const dataId = (event.target as HTMLElement)
+          .closest('li')
+          ?.getAttribute('data-id');
+        const btn = (event.target as HTMLUListElement).closest('button');
 
-      if (btn && btn.classList.contains('btn-edit')) {
-        if (dataId) {
-          setFormAction({
-            status: 'editing',
-            student: (await getStudentById(dataId)) as StudentInputs,
-          });
+        if (dataId && btn) {
+          if (btn.classList.contains('btn-edit')) {
+            dispatch({
+              status: 'editing',
+              student: (await api.get(url + '/' + dataId)) as StudentInputs,
+            });
+          }
+
+          if (btn.classList.contains('btn-remove')) {
+            // show alert confirm message
+            if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
+              await mutateAsync(dataId); // remove and refetch the students
+            }
+          }
         } else {
           throw new Error(ERROR_MSG.MISSING_ID);
         }
+      } catch (err) {
+        alert((err as Error).message);
       }
-
-      if (btn && btn.classList.contains('btn-remove')) {
-        // show alert confirm message
-        if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
-          console.log('confirm remove');
-        }
-      }
-    } catch (err) {
-      alert((err as Error).message);
-    }
-  };
+    },
+    [dispatch, url, mutateAsync]
+  );
 
   return (
     <>
@@ -69,7 +83,7 @@ const StudentPage: React.FC = () => {
           <Button
             className="uppercase"
             variant="primary"
-            onClick={() => setFormAction({ status: 'adding' })}
+            onClick={() => dispatch({ status: 'adding' })}
           >
             add new student
           </Button>
@@ -101,7 +115,7 @@ const StudentPage: React.FC = () => {
       </article>
       {formState.shown && (
         <StudentForm
-          setFormState={setFormAction}
+          setFormState={dispatch}
           title={formState.title}
           student={formState.title === 'edit' ? formState.student : undefined}
         />
