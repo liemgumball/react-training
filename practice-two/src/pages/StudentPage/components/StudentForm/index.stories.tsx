@@ -23,8 +23,8 @@ export const Default: Story = (args: StudentFormProps) => (
 );
 
 Default.args = {
-  state: 'add',
-  setShowForm: () => {},
+  title: 'add',
+  setFormState: () => {},
 };
 
 export const WithDefaultValue: Story = (args: StudentFormProps) => (
@@ -34,8 +34,8 @@ export const WithDefaultValue: Story = (args: StudentFormProps) => (
 );
 
 WithDefaultValue.args = {
-  state: 'edit',
-  setShowForm: () => {},
+  title: 'edit',
+  setFormState: () => {},
   student: {
     id: 0,
     name: 'student',

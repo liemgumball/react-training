@@ -11,19 +11,19 @@ import {
   phoneNumberRegex,
 } from '@constants/regex';
 import { StudentInputs } from '@utils/types';
-import { Dispatch, SetStateAction } from 'react';
-import { StudentFormState } from '@pages/StudentPage/hooks/useStudentForm';
+import { Dispatch } from 'react';
+import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 
 export type StudentFormProps = {
-  state: 'adding' | 'editing';
+  title: 'add' | 'edit';
   student?: StudentInputs;
-  setFormState: Dispatch<SetStateAction<StudentFormState>>;
+  setFormState: Dispatch<StudentFormAction>;
 };
 
 type FormInputs = Omit<StudentInputs, 'id'>;
 
 const StudentForm = (props: StudentFormProps) => {
-  const { state, setFormState, student } = props;
+  const { title, setFormState, student } = props;
 
   // Hook form
   const {
@@ -70,7 +70,7 @@ const StudentForm = (props: StudentFormProps) => {
         onSubmit={handleSubmit(onValid)}
       >
         <h2 className="text-3xl font-700 text-center mb-10 uppercase">
-          {state} student
+          {title} student
         </h2>
 
         {/* Name input */}

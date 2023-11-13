@@ -8,20 +8,20 @@ describe('useStudentForm', () => {
 
     const [state] = result.current;
 
-    expect(state.status).toBe('closed');
+    expect(state.shown).toBe(false);
   });
 
   it('should update status to adding', () => {
     const { result } = renderHook(() => useStudentForm());
 
     act(() => {
-      const [, setState] = result.current;
-      setState({ status: 'adding' });
+      const [, setAction] = result.current;
+      setAction({ status: 'adding' });
     });
 
     const [state] = result.current;
 
-    expect(state.status).toBe('adding');
+    expect(state.shown).toBe(true);
   });
 
   it('should update status to editing with a student', () => {
@@ -36,13 +36,14 @@ describe('useStudentForm', () => {
     };
 
     act(() => {
-      const [, setState] = result.current;
-      setState({ status: 'editing', student: studentData });
+      const [, setAction] = result.current;
+      setAction({ status: 'editing', student: studentData });
     });
 
     const [state] = result.current;
 
-    expect(state.status).toBe('editing');
-    if (state.status === 'editing') expect(state.student).toEqual(studentData);
+    expect(state.shown).toBe(true);
+    if (state.shown && state.title === 'edit')
+      expect(state.student).toEqual(studentData);
   });
 });

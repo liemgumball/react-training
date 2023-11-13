@@ -27,7 +27,7 @@ const StudentPage: React.FC = () => {
   );
 
   // Student form reducer
-  const [formState, setFormState] = useStudentForm();
+  const [formState, setFormAction] = useStudentForm();
   /**
    * Delegated onClick handle (edit || remove)
    * @param event mouse event
@@ -41,7 +41,7 @@ const StudentPage: React.FC = () => {
 
       if (btn && btn.classList.contains('btn-edit')) {
         if (dataId) {
-          setFormState({
+          setFormAction({
             status: 'editing',
             student: (await getStudentById(dataId)) as StudentInputs,
           });
@@ -69,7 +69,7 @@ const StudentPage: React.FC = () => {
           <Button
             className="uppercase"
             variant="primary"
-            onClick={() => setFormState({ status: 'adding' })}
+            onClick={() => setFormAction({ status: 'adding' })}
           >
             add new student
           </Button>
@@ -99,13 +99,11 @@ const StudentPage: React.FC = () => {
           </List>
         </section>
       </article>
-      {formState.status !== 'closed' && (
+      {formState.shown && (
         <StudentForm
-          setFormState={setFormState}
-          state={formState.status}
-          student={
-            formState.status === 'editing' ? formState.student : undefined
-          }
+          setFormState={setFormAction}
+          title={formState.title}
+          student={formState.title === 'edit' ? formState.student : undefined}
         />
       )}
     </>
