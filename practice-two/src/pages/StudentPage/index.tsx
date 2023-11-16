@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useContext } from 'react';
+import { MouseEvent, useCallback, useContext, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import useDebounce from '@hooks/useDebounce';
 
@@ -13,6 +13,10 @@ import useStudentForm from './hooks/useStudentForm';
 import { StudentInputs, TStudent } from '@utils/types';
 import api from '@services/apiRequest';
 
+import sort from '@assets/sort.svg';
+import SortMenu from '@components/SortMenu';
+import SortOption from '@components/SortOption';
+
 const StudentPage: React.FC = () => {
   // Student form reducer
   const [formState, dispatch] = useStudentForm();
@@ -21,12 +25,15 @@ const StudentPage: React.FC = () => {
   const { searchQuery } = useContext(SearchQueryContext);
   const debouncedSearchQuery = useDebounce(searchQuery);
 
+  // Sort field
+  const [sortBy, setSortBy] = useState('name');
+
   // Get students
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`;
-  const query = `?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
+  const query = `?_sort=${sortBy}&_order=inc&q=${debouncedSearchQuery}`;
 
   const { data, isError, error, isLoading } = useQuery(
-    ['students', debouncedSearchQuery],
+    ['students', debouncedSearchQuery, sortBy],
     async () => (await api.get(url + query)) as TStudent[]
   );
 
@@ -43,7 +50,7 @@ const StudentPage: React.FC = () => {
    * Delegated onClick handle (edit || remove)
    * @param event mouse event
    */
-  const onClick = useCallback(
+  const ListOnClick = useCallback(
     async (event: MouseEvent) => {
       try {
         const dataId = (event.target as HTMLElement)
@@ -51,15 +58,15 @@ const StudentPage: React.FC = () => {
           ?.getAttribute('data-id');
         const btn = (event.target as HTMLUListElement).closest('button');
 
-        if (dataId && btn) {
-          if (btn.classList.contains('btn-edit')) {
+        if (dataId) {
+          if (btn && btn.classList.contains('btn-edit')) {
             dispatch({
               status: 'editing',
               student: (await api.get(url + '/' + dataId)) as StudentInputs,
             });
           }
 
-          if (btn.classList.contains('btn-remove')) {
+          if (btn && btn.classList.contains('btn-remove')) {
             // show alert confirm message
             if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
               await mutateAsync(dataId); // remove and refetch the students
@@ -75,18 +82,45 @@ const StudentPage: React.FC = () => {
     [dispatch, url, mutateAsync]
   );
 
+  const DropDownMenuOnClick = (e: React.MouseEvent) => {
+    try {
+      const value = (e.target as HTMLElement)
+        .closest('li')
+        ?.getAttribute('value');
+
+      if (value) {
+        setSortBy(value);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <article className="px-8 min-w-min">
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
-          <Button
-            className="uppercase"
-            variant="primary"
-            onClick={() => dispatch({ status: 'adding' })}
-          >
-            add new student
-          </Button>
+          <span className="action-bar flex gap-5">
+            <SortMenu icon={sort} onClick={DropDownMenuOnClick}>
+              <SortOption value="name" active={sortBy === 'name'}>
+                name
+              </SortOption>
+              <SortOption value="email" active={sortBy === 'email'}>
+                email
+              </SortOption>
+              <SortOption value="createdAt" active={sortBy === 'createdAt'}>
+                date of admission
+              </SortOption>
+            </SortMenu>
+            <Button
+              className="uppercase"
+              variant="primary"
+              onClick={() => dispatch({ status: 'adding' })}
+            >
+              add new student
+            </Button>
+          </span>
         </header>
         <hr />
         <section className="students py-3">
@@ -103,7 +137,7 @@ const StudentPage: React.FC = () => {
             isError={isError}
             isLoading={isLoading}
             error={error as Error}
-            onClick={onClick}
+            onClick={ListOnClick}
           >
             {data && data.length ? (
               data.map((item) => <StudentListItem key={item.id} data={item} />)
