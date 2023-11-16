@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply font-montserrat font-500;
+}
+
 .bg-custom-gradient-yellow {
   background: linear-gradient(71deg, #feaf00 19.35%, #f8d442 90.12%);
+}
+
+.btn {
+  @apply rounded-md hover:shadow-lg border p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
+}
+
+.btn-primary {
+  @apply bg-custom-yellow text-white;
+}
+
+.login-card {
+  @apply w-1/4 min-w-max bg-white py-10 px-8 rounded-2xl shadow-lg text-black text-sm text-center flex flex-col gap-y-10 justify-between;
 }

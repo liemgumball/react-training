@@ -13,4 +13,19 @@ export default defineConfig({
     css: true,
     includeSource: ['src/**/*.{js,ts,jsx,tsx}'],
   },
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@features': '/src/features',
+      '@components': '/src/components',
+      '@hooks': '/src/hooks',
+      '@constants': '/src/constants',
+      '@services': '/src/services',
+      '@assets': '/src/assets',
+      '@pages': '/src/pages',
+      '@utils': '/src/utils',
+      '@contexts': '/src/contexts',
+    },
+  },
+  define: { 'process.env': process.env },
 });
