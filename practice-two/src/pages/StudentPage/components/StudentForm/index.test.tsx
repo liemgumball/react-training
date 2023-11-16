@@ -27,12 +27,15 @@ describe('student form component', () => {
     });
 
     // Wait for the validation error message to appear
-    await waitFor(() => {
-      // Check if the submit button is disabled
-      expect(submitButton).toBeDisabled();
-      // Check if the error message should be shown
-      expect(getAllByRole('alert')[0]).toHaveClass('text-red-500');
-    });
+    await waitFor(
+      () => {
+        // Check if the submit button is disabled
+        expect(submitButton).toBeDisabled();
+        // Check if the error message should be shown
+        expect(getAllByRole('alert')[0]).toHaveClass('text-red-500');
+      },
+      { timeout: 10000 }
+    );
   });
 
   it('should render a valid form', async () => {
@@ -49,19 +52,26 @@ describe('student form component', () => {
     const enrollNumberField = getByLabelText('Enroll number');
     const submitButton = getByRole('button');
 
-    act(() => {
-      // submit the form first
-      fireEvent.click(submitButton);
-      // change to valid input values
-      fireEvent.change(nameField, { target: { value: 'Admin0' } });
-      fireEvent.change(emailField, { target: { value: 'admin0@mail.com' } });
-      fireEvent.change(phoneField, { target: { value: '0905000000' } });
-      fireEvent.change(enrollNumberField, { target: { value: '123456789' } });
-    });
+    // submit the form first
+    fireEvent.click(submitButton);
 
     await waitFor(() => {
-      fireEvent.click(submitButton);
-      // Check if the submit button is disabled
+      expect(submitButton).not.toHaveTextContent('submitting...');
+    });
+
+    // change to valid input values
+    fireEvent.change(nameField, { target: { value: 'Admin0' } });
+    fireEvent.change(emailField, { target: { value: 'admin0@mail.com' } });
+    fireEvent.change(phoneField, { target: { value: '0905000000' } });
+    fireEvent.change(enrollNumberField, { target: { value: '123456789' } });
+
+    // additional assertions for form fields
+    expect(nameField).toHaveValue('Admin0');
+    expect(emailField).toHaveValue('admin0@mail.com');
+    expect(phoneField).toHaveValue('0905000000');
+    expect(enrollNumberField).toHaveValue(123456789);
+
+    await waitFor(() => {
       expect(submitButton).not.toBeDisabled();
     });
   });

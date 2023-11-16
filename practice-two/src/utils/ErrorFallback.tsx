@@ -11,7 +11,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error }) => {
   return (
     <div className="absolute inset-0 flex flex-col gap-5 items-center justify-center">
       <h1 className="font-600 text-4xl">Error Fallback</h1>
-      <pre className="text-red-600">{error.message}</pre>
+      <pre className="text-red-600 normal-case">{error.message}</pre>
       <Button variant="primary" onClick={resetBoundary}>
         Try again
       </Button>

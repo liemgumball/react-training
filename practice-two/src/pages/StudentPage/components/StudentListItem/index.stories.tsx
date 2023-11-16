@@ -13,7 +13,7 @@ const data = {
 } as TStudent;
 
 export default {
-  title: 'Components/StudentListItem',
+  title: 'StudentPage/StudentListItem',
   component: StudentListItem,
   parameters: {
     layout: 'centered',

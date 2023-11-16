@@ -20,21 +20,21 @@
     [var2]minmax(200px, 4fr)
     [var3]minmax(100px, 3fr)
     [var4]minmax(130px, 2fr)
-    [var5]minmax(150px, 3fr)
+    [var5]minmax(150px, 2fr)
     [last]100px;
 }
 
 .payment-list-item,
 .payment-list-heading {
   column-gap: 15px;
-  padding: 1.25rem 0.75rem;
+  padding: 1.25rem 1rem;
   grid-template-columns:
     [first]minmax(150px, 3fr)
     [var1]minmax(170px, 3fr)
     [var2]minmax(100px, 3fr)
     [var3]minmax(120px, 3fr)
     [var4]minmax(150px, 3fr)
-    [var5]minmax(130px, 3fr)
+    [var5]minmax(130px, 2fr)
     [last]50px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .btn {
-  @apply rounded-md hover:shadow-lg border p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
+  @apply rounded-md hover:shadow-lg p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
 }
 
 .btn-primary {
@@ -89,4 +89,16 @@
 
 .dashboard-card-fourthly {
   @apply bg-custom-light-blue;
+}
+
+.sort-menu {
+  @apply block z-10 absolute right-0 bg-white border rounded-lg shadow-md transition;
+}
+
+.sort-option {
+  @apply list-none capitalize py-2 px-3 cursor-pointer w-full min-w-max rounded hover:bg-custom-beige text-xs;
+}
+
+.sort-option.active {
+  @apply bg-custom-yellow;
 }
