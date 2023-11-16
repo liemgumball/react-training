@@ -30,7 +30,7 @@ const StudentPage: React.FC = () => {
 
   // Get students
   const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`;
-  const query = `?_sort=${sortBy}&_order=inc&q=${debouncedSearchQuery}`;
+  const query = `?_sort=${sortBy}&_order=asc&q=${debouncedSearchQuery}`;
 
   const { data, isError, error, isLoading } = useQuery(
     ['students', debouncedSearchQuery, sortBy],

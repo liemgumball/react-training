@@ -7,13 +7,13 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const Header = () => {
   const { searchQuery, setSearchQuery } = useContext(SearchQueryContext);
 
-  if (searchQuery.length > 100) throw new Error('Search query length error');
+  if (searchQuery.length > 50) throw new Error('Search query length error');
 
   return (
     <header className="flex justify-end gx-3 py-5 px-8">
       <div className="relative w-1/6 min-w-fit">
         <Input
-          className="w-full"
+          className="w-full pr-12"
           type="text"
           name="Search"
           id="search"
