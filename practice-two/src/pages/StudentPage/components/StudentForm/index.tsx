@@ -100,7 +100,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
         )}
 
         {/* Email input */}
-        <label className="text-custom-dark-gray mt-5" htmlFor="name">
+        <label className="text-custom-dark-gray mt-5" htmlFor="email">
           Email{' '}
         </label>
         <Input
@@ -125,7 +125,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
         )}
 
         {/* Phone input */}
-        <label className="text-custom-dark-gray mt-5" htmlFor="name">
+        <label className="text-custom-dark-gray mt-5" htmlFor="phone">
           Phone number{' '}
         </label>
         <Input
@@ -150,7 +150,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
         )}
 
         {/* Enroll number input */}
-        <label className="text-custom-dark-gray mt-5" htmlFor="name">
+        <label className="text-custom-dark-gray mt-5" htmlFor="enrollNumber">
           Enroll number{' '}
         </label>
         <Input
