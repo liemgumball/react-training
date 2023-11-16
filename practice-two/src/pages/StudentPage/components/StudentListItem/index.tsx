@@ -3,6 +3,7 @@ import { TStudent } from '@utils/types';
 
 import pen from '@assets/pen.svg';
 import trash from '@assets/trash.svg';
+import { formatDate } from '@utils/formatDate';
 
 type StudentListItemProps = {
   data: TStudent;
@@ -32,11 +33,7 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
       <p className="truncate">{enrollNumber}</p>
       <p className="truncate">
         {/* format createdAt dateString */}
-        {new Date(createdAt).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: '2-digit',
-        })}
+        {formatDate(createdAt)}
       </p>
       <div className="action-group flex gap-x-2 justify-end">
         <Button className="btn-remove hover:bg-white">
