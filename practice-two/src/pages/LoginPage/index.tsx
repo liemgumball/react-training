@@ -1,9 +1,15 @@
 import { PATH_NAME } from '@constants/services';
 import bigLogo from '@assets/bigLogo.svg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import { useContext } from 'react';
+import { AuthContext } from '@contexts/Authentication';
 
 const LoginPage = () => {
+  const { auth } = useContext(AuthContext);
+
+  if (auth) return <Navigate to={PATH_NAME.HOME} />; //navigate to home page if logged in
+
   return (
     <div className="bg-custom-gradient-yellow p-10 min-h-screen h-full flex justify-center items-center">
       <main className="login-card">
