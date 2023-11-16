@@ -5,8 +5,11 @@ import { Suspense, lazy } from 'react';
 import Loader from '@utils/Loader';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '@utils/ErrorFallback';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const Sidebar = lazy(() => import('./Sidebar'));
+
+const queryClient = new QueryClient();
 
 const MainLayout = () => {
   return (
@@ -21,10 +24,14 @@ const MainLayout = () => {
               window.location.reload(); // reload window to reset error
             }}
           >
-            <Header />
-            <Suspense fallback={<Loader />}>
-              <Outlet />
-            </Suspense>
+            {/* Client query  */}
+            <QueryClientProvider client={queryClient}>
+              <Header />
+              {/* Suspense for navigation between pages */}
+              <Suspense fallback={<Loader />}>
+                <Outlet />
+              </Suspense>
+            </QueryClientProvider>
           </ErrorBoundary>
         </SearchQueryProvider>
       </main>

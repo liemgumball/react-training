@@ -10,6 +10,39 @@
   background: linear-gradient(71deg, #feaf00 19.35%, #f8d442 90.12%);
 }
 
+.student-list-item,
+.student-list-heading {
+  column-gap: 12px;
+  padding: 1.25rem 0.75rem;
+  grid-template-columns:
+    [first]70px
+    [var1]minmax(150px, 3fr)
+    [var2]minmax(200px, 4fr)
+    [var3]minmax(100px, 3fr)
+    [var4]minmax(130px, 2fr)
+    [var5]minmax(150px, 3fr)
+    [last]100px;
+}
+
+.payment-list-item,
+.payment-list-heading {
+  column-gap: 15px;
+  padding: 1.25rem 0.75rem;
+  grid-template-columns:
+    [first]minmax(150px, 3fr)
+    [var1]minmax(170px, 3fr)
+    [var2]minmax(100px, 3fr)
+    [var3]minmax(120px, 3fr)
+    [var4]minmax(150px, 3fr)
+    [var5]minmax(130px, 3fr)
+    [last]50px;
+}
+
+.student-list-item,
+.payment-list-item {
+  @apply my-2 grid border rounded-xl items-center hover:bg-custom-beige font-400 transition;
+}
+
 .btn {
   @apply rounded-md hover:shadow-lg border p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
 }

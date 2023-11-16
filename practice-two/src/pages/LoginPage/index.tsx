@@ -1,7 +1,7 @@
 import { PATH_NAME } from '@constants/services';
 import bigLogo from '@assets/bigLogo.svg';
 import { Link, Navigate } from 'react-router-dom';
-import LoginForm from './LoginForm';
+import LoginForm from './components/LoginForm';
 import { useContext } from 'react';
 import { AuthContext } from '@contexts/Authentication';
 

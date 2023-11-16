@@ -1,4 +1,4 @@
-import { LoginInputs } from '../LoginForm';
+import { LoginInputs } from '../components/LoginForm';
 import api from '@services/apiRequest';
 import { AuthType } from '@contexts/Authentication';
 import { ERROR_MSG } from '@constants/messages';
