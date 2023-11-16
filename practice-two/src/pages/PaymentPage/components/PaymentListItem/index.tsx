@@ -28,7 +28,7 @@ const PaymentListItem = ({ data, isFetching }: PaymentListItemProps) => {
       <p className="truncate">{formatDate(createdAt)}</p>
       <div className="action-group flex gap-x-2 justify-end">
         <Button className="view-details-btn hover:bg-white">
-          <img src={eye} alt="eye" />
+          <img src={eye} alt="eye" loading="eager" />
         </Button>
       </div>
     </li>

@@ -16,7 +16,7 @@ const EmptyPage = () => {
           navigate('/');
         }}
       >
-        return to home page
+        return to home
       </Button>
     </div>
   );
