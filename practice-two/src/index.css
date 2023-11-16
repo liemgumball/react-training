@@ -21,3 +21,15 @@
 .login-card {
   @apply w-1/4 min-w-max bg-white py-10 px-8 rounded-2xl shadow-lg text-black text-sm text-center flex flex-col gap-y-10 justify-between;
 }
+
+.sidebar {
+  @apply w-1/6 min-w-max h-full min-h-screen bg-custom-beige py-10 px-3 flex flex-col items-stretch justify-around gap-y-3;
+}
+
+.sidebar .nav-link {
+  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition hover:bg-custom-gray;
+}
+
+.sidebar .nav-link.active {
+  @apply bg-custom-yellow;
+}
