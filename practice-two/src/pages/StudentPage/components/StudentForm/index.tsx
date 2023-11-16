@@ -1,3 +1,4 @@
+import { Dispatch } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { saveStudent } from '@pages/StudentPage/services/saveStudent';
@@ -11,7 +12,6 @@ import {
   phoneNumberRegex,
 } from '@constants/regex';
 import { StudentInputs } from '@utils/types';
-import { Dispatch } from 'react';
 import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 
 export type StudentFormProps = {
@@ -22,7 +22,7 @@ export type StudentFormProps = {
 
 type FormInputs = Omit<StudentInputs, 'id'>;
 
-const StudentForm = (props: StudentFormProps) => {
+const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
   const { title, setFormState, student } = props;
 
   // Hook form
@@ -186,5 +186,7 @@ const StudentForm = (props: StudentFormProps) => {
     </div>
   );
 };
+
+StudentForm.whyDidYouRender = true;
 
 export default StudentForm;
