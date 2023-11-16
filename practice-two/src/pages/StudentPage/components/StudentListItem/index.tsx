@@ -30,7 +30,14 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
       <p className="truncate normal-case">{email}</p>
       <p className="truncate">{phone}</p>
       <p className="truncate">{enrollNumber}</p>
-      <p className="truncate">{new Date(createdAt).toDateString()}</p>
+      <p className="truncate">
+        {/* format createdAt dateString */}
+        {new Date(createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+        })}
+      </p>
       <div className="action-group flex gap-x-2 justify-end">
         <Button className="btn-remove hover:bg-white">
           <img src={trash} alt="trash" />
