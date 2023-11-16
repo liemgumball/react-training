@@ -11,17 +11,19 @@ import {
   phoneNumberRegex,
 } from '@constants/regex';
 import { StudentInputs } from '@utils/types';
+import { Dispatch } from 'react';
+import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 
 export type StudentFormProps = {
-  state: 'add' | 'edit';
+  title: 'add' | 'edit';
   student?: StudentInputs;
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setFormState: Dispatch<StudentFormAction>;
 };
 
 type FormInputs = Omit<StudentInputs, 'id'>;
 
 const StudentForm = (props: StudentFormProps) => {
-  const { state, setShowForm, student } = props;
+  const { title, setFormState, student } = props;
 
   // Hook form
   const {
@@ -36,7 +38,7 @@ const StudentForm = (props: StudentFormProps) => {
   const { mutateAsync } = useMutation({
     mutationFn: saveStudent,
     onSuccess: () => {
-      setShowForm(false); // close form
+      setFormState({ status: 'closed' }); // close form
       // Invalidate and refetch students list
       queryClient.invalidateQueries({ queryKey: ['students'] });
     },
@@ -60,7 +62,7 @@ const StudentForm = (props: StudentFormProps) => {
       {/* Modal close  */}
       <div
         className="fixed inset-0 bg-black opacity-50"
-        onClick={() => setShowForm(false)}
+        onClick={() => setFormState({ status: 'closed' })}
       />
 
       <form
@@ -68,7 +70,7 @@ const StudentForm = (props: StudentFormProps) => {
         onSubmit={handleSubmit(onValid)}
       >
         <h2 className="text-3xl font-700 text-center mb-10 uppercase">
-          {state} student
+          {title} student
         </h2>
 
         {/* Name input */}
