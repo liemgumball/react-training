@@ -36,6 +36,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <form
+      method="post"
       role="form"
       autoComplete="off"
       className="flex flex-col text-left"
@@ -106,5 +107,7 @@ const LoginForm: React.FC = () => {
     </form>
   );
 };
+
+LoginForm.whyDidYouRender = true;
 
 export default LoginForm;

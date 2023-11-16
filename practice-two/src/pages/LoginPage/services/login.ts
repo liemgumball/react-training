@@ -16,10 +16,13 @@ export const login = async (
 
     return response as AuthType;
   } catch (err) {
-    if ((err as Error).message === '400') {
-      throw new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD);
+    switch ((err as Error).message) {
+      case '400':
+        throw new Error(ERROR_MSG.WRONG_EMAIL_OR_PASSWORD);
+      case '404':
+        throw new Error(ERROR_MSG.PROCESS_FAILED);
+      default:
+        throw err;
     }
-
-    throw err;
   }
 };

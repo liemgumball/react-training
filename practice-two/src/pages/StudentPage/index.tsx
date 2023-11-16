@@ -1,21 +1,24 @@
 import { MouseEvent, useCallback, useContext, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useDebounce from '@hooks/useDebounce';
 
-import Button from '@components/Button';
-import List from '@components/List';
-import { DATABASE_RESOURCES } from '@constants/services';
-import { SearchQueryContext } from '@contexts/SearchQuery';
-import StudentListItem from './components/StudentListItem';
-import StudentForm from './components/StudentForm';
-import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
+// hooks
+import useDebounce from '@hooks/useDebounce';
 import useStudentForm from './hooks/useStudentForm';
+
+//context & constants
+import { SearchQueryContext } from '@contexts/SearchQuery';
 import { StudentInputs, TStudent } from '@utils/types';
+import { DATABASE_RESOURCES } from '@constants/services';
+import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
 import api from '@services/apiRequest';
 
-import sort from '@assets/sort.svg';
+//components
+import Button from '@components/Button';
+import List from '@components/List';
 import SortMenu from '@components/SortMenu';
 import SortOption from '@components/SortOption';
+import StudentListItem from './components/StudentListItem';
+import StudentForm from './components/StudentForm';
 
 const StudentPage: React.FC = () => {
   // Student form reducer
@@ -82,9 +85,13 @@ const StudentPage: React.FC = () => {
     [dispatch, url, mutateAsync]
   );
 
-  const DropDownMenuOnClick = (e: React.MouseEvent) => {
+  /**
+   * Delegated onClick to select sort option
+   * @param event Mouse event
+   */
+  const DropDownMenuOnClick = (event: React.MouseEvent) => {
     try {
-      const value = (e.target as HTMLElement)
+      const value = (event.target as HTMLElement)
         .closest('li')
         ?.getAttribute('value');
 
@@ -102,7 +109,7 @@ const StudentPage: React.FC = () => {
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <span className="action-bar flex gap-5">
-            <SortMenu icon={sort} onClick={DropDownMenuOnClick}>
+            <SortMenu onClick={DropDownMenuOnClick}>
               <SortOption value="name" active={sortBy === 'name'}>
                 name
               </SortOption>

@@ -44,7 +44,7 @@
 }
 
 .btn {
-  @apply rounded-md hover:shadow-lg p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
+  @apply border rounded-md hover:shadow-lg p-3 transition disabled:shadow-none disabled:bg-custom-dark-gray;
 }
 
 .btn-primary {

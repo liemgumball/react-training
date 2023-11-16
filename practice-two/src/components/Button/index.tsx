@@ -7,9 +7,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 
   return (
     <button
-      className={`btn ${className ? className : ''} ${
-        variant ? 'btn-' + variant : ''
-      }`}
+      className={`btn ${className || ''} ${variant ? 'btn-' + variant : ''}`}
       disabled={disabled}
       {...rest}
     >
