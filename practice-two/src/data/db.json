@@ -97,60 +97,6 @@
       "phone": "0931009009",
       "enrollNumber": 238807936,
       "id": 10
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707939640,
-      "id": 11
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707942160,
-      "id": 12
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707950920,
-      "id": 13
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707961720,
-      "id": 14
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707994390,
-      "id": 15
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697707996701,
-      "id": 16
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697708052080,
-      "id": 17
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697708062491,
-      "id": 18
-    },
-    {
-      "name": "Test",
-      "avatar": "https://loremflickr.com/60/60",
-      "createdAt": 1697708191010,
-      "id": 19
     }
   ],
   "payments": [
