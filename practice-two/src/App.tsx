@@ -12,6 +12,7 @@ const LoginPage = lazy(() => import('@pages/LoginPage'));
 const EmptyPage = lazy(() => import('@pages/EmptyPage'));
 const DashBoardPage = lazy(() => import('@pages/DashBoardPage'));
 const StudentPage = lazy(() => import('@pages/StudentPage'));
+const PaymentPage = lazy(() => import('@pages/PaymentPage'));
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route element={<MainLayout />}>
                 <Route path={PATH_NAME.HOME} element={<DashBoardPage />} />
                 <Route path={PATH_NAME.STUDENTS} element={<StudentPage />} />
+                <Route path={PATH_NAME.PAYMENTS} element={<PaymentPage />} />
                 <Route path="*" element={<EmptyPage />} />
               </Route>
             </Route>
