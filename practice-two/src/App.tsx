@@ -1,27 +1,38 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthProvider from './contexts/Authentication';
+import { Suspense, lazy } from 'react';
+import Loader from '@utils/Loader';
+
+import AuthProvider from '@contexts/Authentication';
 import PrivateRoutes from '@utils/PrivateRoutes';
 import { PATH_NAME } from '@constants/services';
-import LoginPage from '@pages/LoginPage';
-import HomePage from '@pages/HomePage';
-import MainLayout from './layouts/MainLayout';
+
+// pages & layouts
+const LoginPage = lazy(() => import('@pages/LoginPage'));
+const MainLayout = lazy(() => import('./layouts/MainLayout'));
+const EmptyPage = lazy(() => import('@pages/EmptyPage'));
+const HomePage = lazy(() => import('@pages/HomePage'));
+const StudentPage = lazy(() => import('@pages/StudentPage'));
 
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <Routes>
-          {/* Private Routes */}
-          <Route element={<PrivateRoutes />}>
-            <Route element={<MainLayout />}>
-              <Route path={PATH_NAME.HOME} element={<HomePage />} />
+      <Suspense fallback={<Loader />}>
+        <AuthProvider>
+          <Routes>
+            {/* Private Routes */}
+            <Route element={<PrivateRoutes />}>
+              <Route element={<MainLayout />}>
+                <Route path={PATH_NAME.HOME} element={<HomePage />} />
+                <Route path={PATH_NAME.STUDENTS} element={<StudentPage />} />
+                <Route path="*" element={<EmptyPage />} />
+              </Route>
             </Route>
-          </Route>
 
-          {/* Public Routes */}
-          <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
-        </Routes>
-      </AuthProvider>
+            {/* Public Routes */}
+            <Route path={PATH_NAME.LOGIN} element={<LoginPage />} />
+          </Routes>
+        </AuthProvider>
+      </Suspense>
     </Router>
   );
 }
