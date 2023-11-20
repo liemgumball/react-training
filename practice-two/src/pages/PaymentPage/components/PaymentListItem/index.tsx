@@ -15,7 +15,9 @@ const PaymentListItem = ({ data, isFetching }: PaymentListItemProps) => {
   return (
     <li
       data-id={id}
-      className={`payment-list-item relative ${isFetching ? 'opacity-50' : ''}`}
+      className={`payment-list-item relative group ${
+        isFetching ? 'opacity-50' : ''
+      }`}
     >
       {/* prevent onClick if fetching */}
       {isFetching && <div className="absolute inset-0 z-50"></div>}
@@ -27,7 +29,7 @@ const PaymentListItem = ({ data, isFetching }: PaymentListItemProps) => {
       <p className="truncate uppercase">inr {formatAmount(balance)}</p>
       <p className="truncate">{formatDate(createdAt)}</p>
       <div className="action-group flex gap-x-2 justify-end">
-        <Button className="view-details-btn hover:bg-white">
+        <Button className="view-details-btn group-hover:bg-custom-light-pink group-hover:hover:bg-white">
           <img src={eye} alt="eye" loading="eager" />
         </Button>
       </div>

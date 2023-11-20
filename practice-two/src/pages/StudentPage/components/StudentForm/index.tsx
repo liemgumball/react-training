@@ -15,7 +15,7 @@ import { StudentInputs } from '@utils/types';
 import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 
 export type StudentFormProps = {
-  title: 'add' | 'edit';
+  title?: 'add' | 'edit';
   student?: StudentInputs;
   setFormState: Dispatch<StudentFormAction>;
 };
@@ -70,7 +70,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
         onSubmit={handleSubmit(onValid)}
       >
         <h2 className="text-3xl font-700 text-center mb-10 uppercase">
-          {title} student
+          {title || ''} student
         </h2>
 
         {/* Name input */}

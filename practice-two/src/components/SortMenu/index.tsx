@@ -7,13 +7,13 @@ type SortMenuProps = {
 };
 
 const SortMenu = ({ children, onClick }: SortMenuProps) => {
-  const { isOn, toggle } = useToggle();
+  const { isOn, toggle, reset } = useToggle();
 
   return (
     <div
-      className="relative transition border rounded-lg"
+      className="relative rounded-lg"
       onMouseEnter={toggle}
-      onMouseLeave={toggle}
+      onMouseLeave={reset}
     >
       <img className="p-3" src={sort} alt="sort icon" />
       <ul className={`${isOn ? '' : 'invisible'} sort-menu`} onClick={onClick}>

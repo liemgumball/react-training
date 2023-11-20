@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useContext, useState } from 'react';
+import { MouseEvent, Profiler, useCallback, useContext, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 // hooks
@@ -45,15 +45,46 @@ const StudentPage: React.FC = () => {
   const { mutateAsync } = useMutation({
     mutationFn: (id: string) => api.remove(url + '/' + id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
+      queryClient.invalidateQueries({ queryKey: ['students'] }); // invalidate & refetch on mutation success
     },
   });
 
   /**
-   * Delegated onClick handle (edit || remove)
+   * Profiler on rendering
+   * @param id of Profiler
+   * @param phase of render (mount | update)
+   * @param actualDuration
+   * @param baseDuration
+   * @param startTime
+   * @param commitTime
+   * @param interactions
+   */
+  const profilerRender = (
+    id: string,
+    phase: string,
+    actualDuration: number,
+    baseDuration: number,
+    startTime: number,
+    commitTime: number,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    interactions: any
+  ) => {
+    console.log({
+      id,
+      phase,
+      actualDuration,
+      baseDuration,
+      startTime,
+      commitTime,
+      interactions,
+    });
+  };
+
+  /**
+   * Delegated list onClick handle (edit || remove)
    * @param event mouse event
    */
-  const ListOnClick = useCallback(
+  const listOnClick = useCallback(
     async (event: MouseEvent) => {
       try {
         const dataId = (event.target as HTMLElement)
@@ -82,14 +113,15 @@ const StudentPage: React.FC = () => {
         alert((err as Error).message);
       }
     },
-    [dispatch, url, mutateAsync]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [url]
   );
 
   /**
    * Delegated onClick to select sort option
    * @param event Mouse event
    */
-  const DropDownMenuOnClick = (event: React.MouseEvent) => {
+  const dropDownMenuOnClick = (event: React.MouseEvent) => {
     try {
       const value = (event.target as HTMLElement)
         .closest('li')
@@ -104,12 +136,12 @@ const StudentPage: React.FC = () => {
   };
 
   return (
-    <>
+    <Profiler id="student-page" onRender={profilerRender}>
       <article className="px-8 min-w-min">
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <span className="action-bar flex gap-5">
-            <SortMenu onClick={DropDownMenuOnClick}>
+            <SortMenu onClick={dropDownMenuOnClick}>
               <SortOption value="name" active={sortBy === 'name'}>
                 name
               </SortOption>
@@ -144,7 +176,7 @@ const StudentPage: React.FC = () => {
             isError={isError}
             isLoading={isLoading}
             error={error as Error}
-            onClick={ListOnClick}
+            onClick={listOnClick}
           >
             {data && data.length ? (
               data.map((item) => <StudentListItem key={item.id} data={item} />)
@@ -161,7 +193,7 @@ const StudentPage: React.FC = () => {
           student={formState.title === 'edit' ? formState.student : undefined}
         />
       )}
-    </>
+    </Profiler>
   );
 };
 

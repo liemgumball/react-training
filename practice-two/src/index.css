@@ -38,6 +38,12 @@
     [last]50px;
 }
 
+/* Hide scrollbar for all elements */
+.sidebar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit-based browsers (e.g., Chrome, Safari) */
+  scrollbar-width: thin; /* Hide scrollbar for Firefox */
+}
+
 .student-list-item,
 .payment-list-item {
   @apply my-2 grid border rounded-xl items-center hover:bg-custom-beige font-400 transition;
@@ -60,7 +66,7 @@
 }
 
 .sidebar .nav-link {
-  @apply py-3 px-16 min-w-max block rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition hover:bg-custom-gray;
+  @apply py-3 px-16 min-w-max rounded-lg my-3 flex items-baseline justify-stretch gap-2 transition hover:bg-custom-gray;
 }
 
 .sidebar .nav-link.active {
@@ -72,7 +78,7 @@
 }
 
 .dashboard-card {
-  @apply block p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 border transition overflow-hidden;
+  @apply block p-10 cursor-pointer rounded-lg hover:shadow-2xl hover:shadow-zinc-300 border transition duration-300 delay-75 overflow-hidden;
 }
 
 .dashboard-card-primary {
@@ -92,11 +98,11 @@
 }
 
 .sort-menu {
-  @apply block z-10 absolute right-0 bg-white border rounded-lg shadow-md transition;
+  @apply block z-10 absolute right-0 bg-white border rounded-lg shadow-md transition-all;
 }
 
 .sort-option {
-  @apply list-none capitalize py-2 px-3 cursor-pointer w-full min-w-max rounded hover:bg-custom-beige text-xs;
+  @apply list-none capitalize py-2 px-3 cursor-pointer w-full min-w-max rounded hover:bg-custom-beige text-sm;
 }
 
 .sort-option.active {
