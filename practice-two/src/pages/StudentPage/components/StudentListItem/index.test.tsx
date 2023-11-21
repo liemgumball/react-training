@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import StudentListItem from '.';
-import { TStudent } from '@utils/types';
+import { TStudent } from 'src/types';
 
 const data = {
   createdAt: '2023-09-07T23:25:31.357Z',

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import PaymentListItem from '.';
-import { TPayment } from '@utils/types';
+import { TPayment } from 'src/types';
 
 export default {
   title: 'PaymentPage/PaymentListItem',
@@ -34,11 +34,4 @@ const data = {
 
 export const Default: Story = {
   args: { data: data },
-};
-
-export const IsFetching: Story = {
-  args: {
-    data: data,
-    isFetching: true,
-  },
 };

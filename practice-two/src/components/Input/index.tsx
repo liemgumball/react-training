@@ -1,4 +1,5 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type InputProps = {
   inValid?: boolean;
@@ -10,9 +11,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <input
       aria-invalid={inValid}
-      className={`${className} border p-4 my-2 rounded-md ${
-        inValid ? 'border-red-500' : ''
-      }`}
+      className={twMerge(
+        `border p-4 my-2 rounded-md ${inValid ? 'border-red-500' : ''}`,
+        className
+      )}
       ref={ref}
       {...rest}
     />

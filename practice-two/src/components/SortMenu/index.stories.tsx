@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SortMenu from '.';
-import react from '@assets/react.svg';
 import SortOption from '@components/SortOption';
 
 export default {
@@ -32,7 +31,6 @@ const children = [
 
 export const Default: Story = {
   args: {
-    icon: react,
     children: children.map((child) => (
       <SortOption key={child.value} value={child.value}>
         {child.children}

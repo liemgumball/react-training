@@ -1,3 +1,5 @@
+import { twMerge } from 'tailwind-merge';
+
 type ButtonProps = {
   variant?: 'primary';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -7,9 +9,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 
   return (
     <button
-      className={`btn ${className ? className : ''} ${
-        variant ? 'btn-' + variant : ''
-      }`}
+      className={twMerge(`btn ${variant ? 'btn-' + variant : ''}`, className)}
       disabled={disabled}
       {...rest}
     >

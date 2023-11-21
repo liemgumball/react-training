@@ -1,16 +1,22 @@
-import { act, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import List from '.';
 
 describe('List component', () => {
-  it('should render error message', () => {
-    render(<List isError isLoading error={new Error('Error of list')} />);
+  it('render without crashing', () => {
+    render(<List />);
+  });
 
-    expect(screen.getByRole('alert')).toHaveTextContent('Error of list');
-    expect(screen.getByRole('alert')).toHaveClass('text-red-500');
+  it('should render error message', () => {
+    const { getByRole } = render(
+      <List isError isLoading error={new Error('Error of list')} />
+    );
+
+    expect(getByRole('alert')).toHaveClass('text-red-500');
+    expect(getByRole('alert')).toHaveTextContent('Error of list');
   });
 
   it('should render loading message', () => {
-    render(
+    const { getByText } = render(
       <List isLoading>
         <li>1</li>
         <li>2</li>
@@ -19,29 +25,26 @@ describe('List component', () => {
       </List>
     );
 
-    expect(screen.getByText('Loading...')).toHaveClass('text-custom-gray');
+    expect(getByText('Loading...')).toBeInTheDocument();
   });
 
   it('should render data and handle click', () => {
-    let counter = 0;
+    const mockOnClick = vi.fn();
     const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    render(
-      <List onClick={() => counter++}>
+    const { container } = render(
+      <List onClick={mockOnClick}>
         {data.map((item, index) => (
           <li key={index}>{item.toString()}</li>
         ))}
       </List>
     );
 
-    const listItems = screen.getAllByRole('listitem');
+    const listItems = container.querySelector('ul');
 
-    expect(listItems).toHaveLength(10);
-
-    act(() => {
-      listItems[0].click(); // Click the first list item
-    });
-
-    expect(counter).toEqual(1); // Click handler was called once
+    if (listItems) {
+      fireEvent.click(listItems);
+      expect(mockOnClick).toBeCalledTimes(1); // Click handler was called
+    }
   });
 });

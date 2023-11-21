@@ -1,23 +1,21 @@
 import useToggle from '@hooks/useToggle';
+import sort from '@assets/sort.svg';
 
 type SortMenuProps = {
-  icon: string;
-  children?: React.ReactNode;
   onClick?: (event: React.MouseEvent) => void;
+  children?: React.ReactNode;
 };
 
-const SortMenu = ({ icon, children, onClick }: SortMenuProps) => {
-  const { isOn, toggle } = useToggle();
+const SortMenu = ({ children, onClick }: SortMenuProps) => {
+  const { isOn, toggle, reset } = useToggle();
 
   return (
     <div
-      className="relative transition"
+      className="relative rounded-lg"
       onMouseEnter={toggle}
-      onMouseLeave={toggle}
+      onMouseLeave={reset}
     >
-      <button className="p-3">
-        {icon ? <img src={icon} alt="sort icon" /> : ''}
-      </button>
+      <img className="p-3" src={sort} alt="sort icon" />
       <ul className={`${isOn ? '' : 'invisible'} sort-menu`} onClick={onClick}>
         {children}
       </ul>

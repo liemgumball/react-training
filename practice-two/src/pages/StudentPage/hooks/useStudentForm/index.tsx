@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { StudentInputs } from '@utils/types';
+import { StudentInputs } from 'src/types';
 
 export type StudentFormState =
   | {

@@ -1,21 +1,24 @@
-import { MouseEvent, useCallback, useContext, useState } from 'react';
+import { MouseEvent, Profiler, useCallback, useContext, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import useDebounce from '@hooks/useDebounce';
 
-import Button from '@components/Button';
-import List from '@components/List';
-import { DATABASE_RESOURCES } from '@constants/services';
-import { SearchQueryContext } from '@contexts/SearchQuery';
-import StudentListItem from './components/StudentListItem';
-import StudentForm from './components/StudentForm';
-import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
+// hooks
+import useDebounce from '@hooks/useDebounce';
 import useStudentForm from './hooks/useStudentForm';
-import { StudentInputs, TStudent } from '@utils/types';
+
+//context & constants
+import { SearchQueryContext } from '@contexts/SearchQuery';
+import { StudentInputs, TStudent } from 'src/types';
+import { DATABASE_RESOURCES } from '@constants/services';
+import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
 import api from '@services/apiRequest';
 
-import sort from '@assets/sort.svg';
+//components
+import Button from '@components/Button';
+import List from '@components/List';
 import SortMenu from '@components/SortMenu';
 import SortOption from '@components/SortOption';
+import StudentListItem from './components/StudentListItem';
+import StudentForm from './components/StudentForm';
 
 const StudentPage: React.FC = () => {
   // Student form reducer
@@ -29,8 +32,8 @@ const StudentPage: React.FC = () => {
   const [sortBy, setSortBy] = useState('name');
 
   // Get students
-  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`;
-  const query = `?_sort=${sortBy}&_order=asc&q=${debouncedSearchQuery}`;
+  const url = `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}`;
+  const query = `?_sort=${sortBy}&q=${debouncedSearchQuery}`;
 
   const { data, isError, error, isLoading } = useQuery(
     ['students', debouncedSearchQuery, sortBy],
@@ -42,15 +45,45 @@ const StudentPage: React.FC = () => {
   const { mutateAsync } = useMutation({
     mutationFn: (id: string) => api.remove(url + '/' + id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] });
+      queryClient.invalidateQueries({ queryKey: ['students'] }); // invalidate & refetch on mutation success
     },
   });
 
   /**
-   * Delegated onClick handle (edit || remove)
+   * Profiler on rendering
+   * @param id of Profiler
+   * @param phase of render (mount | update)
+   * @param actualDuration
+   * @param baseDuration
+   * @param startTime
+   * @param commitTime
+   * @param interactions
+   */
+  const profilerRender = (
+    id: string,
+    phase: string,
+    actualDuration: number,
+    baseDuration: number,
+    startTime: number,
+    commitTime: number,
+    interactions: Set<unknown>
+  ) => {
+    console.log({
+      id,
+      phase,
+      actualDuration,
+      baseDuration,
+      startTime,
+      commitTime,
+      interactions,
+    });
+  };
+
+  /**
+   * Delegated list onClick handle (edit || remove)
    * @param event mouse event
    */
-  const ListOnClick = useCallback(
+  const listOnClick = useCallback(
     async (event: MouseEvent) => {
       try {
         const dataId = (event.target as HTMLElement)
@@ -79,12 +112,17 @@ const StudentPage: React.FC = () => {
         alert((err as Error).message);
       }
     },
-    [dispatch, url, mutateAsync]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [url]
   );
 
-  const DropDownMenuOnClick = (e: React.MouseEvent) => {
+  /**
+   * Delegated onClick to select sort option
+   * @param event Mouse event
+   */
+  const dropDownMenuOnClick = (event: React.MouseEvent) => {
     try {
-      const value = (e.target as HTMLElement)
+      const value = (event.target as HTMLElement)
         .closest('li')
         ?.getAttribute('value');
 
@@ -97,12 +135,12 @@ const StudentPage: React.FC = () => {
   };
 
   return (
-    <>
+    <Profiler id="student-page" onRender={profilerRender}>
       <article className="px-8 min-w-min">
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <span className="action-bar flex gap-5">
-            <SortMenu icon={sort} onClick={DropDownMenuOnClick}>
+            <SortMenu onClick={dropDownMenuOnClick}>
               <SortOption value="name" active={sortBy === 'name'}>
                 name
               </SortOption>
@@ -137,7 +175,7 @@ const StudentPage: React.FC = () => {
             isError={isError}
             isLoading={isLoading}
             error={error as Error}
-            onClick={ListOnClick}
+            onClick={listOnClick}
           >
             {data && data.length ? (
               data.map((item) => <StudentListItem key={item.id} data={item} />)
@@ -154,7 +192,7 @@ const StudentPage: React.FC = () => {
           student={formState.title === 'edit' ? formState.student : undefined}
         />
       )}
-    </>
+    </Profiler>
   );
 };
 

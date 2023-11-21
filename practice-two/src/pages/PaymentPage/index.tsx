@@ -3,7 +3,7 @@ import { SearchQueryContext } from '@contexts/SearchQuery';
 import useDebounce from '@hooks/useDebounce';
 import { DATABASE_RESOURCES } from '@constants/services';
 import { useQuery } from 'react-query';
-import { TPayment } from '@utils/types';
+import { TPayment } from 'src/types';
 import api from '@services/apiRequest';
 import List from '@components/List';
 import PaymentListItem from './components/PaymentListItem';
@@ -14,7 +14,7 @@ const PaymentPage = () => {
   const debouncedSearchQuery = useDebounce(searchQuery);
 
   // Get payments
-  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.PAYMENTS}`;
+  const url = `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.PAYMENTS}`;
   const query = `?_expand=student&?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
 
   const { data, isError, error, isLoading } = useQuery(

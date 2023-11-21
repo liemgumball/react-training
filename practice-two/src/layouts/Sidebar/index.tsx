@@ -76,8 +76,8 @@ const Sidebar: React.FC = () => {
       </div>
       <nav className="p-5">
         <ul>
-          {NavList.map((item, index) => (
-            <li key={index}>
+          {NavList.map((item) => (
+            <li key={item.innerText}>
               {/* NavLink already implement active in ClassName */}
               <NavLink className="nav-link" to={item.to}>
                 <img src={item.imgSrc} alt={item.alt} loading="eager" />

@@ -20,9 +20,7 @@ const MainLayout = () => {
           {/* Error Boundary */}
           <ErrorBoundary
             FallbackComponent={ErrorFallback}
-            onReset={() => {
-              window.location.reload(); // reload window to reset error
-            }}
+            onReset={() => window.location.reload()} // reload window to reset error
           >
             {/* Client query  */}
             <QueryClientProvider client={queryClient}>

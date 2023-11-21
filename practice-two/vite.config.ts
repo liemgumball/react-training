@@ -25,6 +25,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@utils': '/src/utils',
       '@contexts': '/src/contexts',
+      '@layouts': '/src/layouts',
     },
   },
   define: { 'process.env': process.env },

@@ -3,10 +3,10 @@ import Button from '.';
 
 describe('Button component', () => {
   it('should render a primary focused button with text "OK"', () => {
-    let counter = 0;
+    const mockOnClick = vi.fn();
 
     render(
-      <Button variant="primary" autoFocus onClick={() => counter++}>
+      <Button variant="primary" autoFocus onClick={mockOnClick}>
         OK
       </Button>
     );
@@ -23,14 +23,14 @@ describe('Button component', () => {
       buttonElement.click();
     });
 
-    expect(counter).toEqual(1);
+    expect(mockOnClick).toHaveBeenCalled();
   });
 
   it('should render a disabled button', () => {
-    let counter = 0;
+    const mockOnClick = vi.fn();
 
     render(
-      <Button disabled onClick={() => counter++}>
+      <Button disabled onClick={mockOnClick}>
         OK
       </Button>
     );
@@ -43,6 +43,6 @@ describe('Button component', () => {
       buttonElement.click();
     });
 
-    expect(counter).toEqual(0);
+    expect(mockOnClick).not.toHaveBeenCalled();
   });
 });
