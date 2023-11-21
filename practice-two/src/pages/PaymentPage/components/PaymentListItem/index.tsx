@@ -1,27 +1,17 @@
 import Button from '@components/Button';
-import formatAmount from '@utils/formatAmount';
-import { TPayment } from '@utils/types';
+import { formatDate, formatAmount } from '@services/format';
+import { TPayment } from 'src/types';
 import eye from '@assets/eye.svg';
-import { formatDate } from '@utils/formatDate';
 
 type PaymentListItemProps = {
   data: TPayment;
-  isFetching?: boolean;
 };
 
-const PaymentListItem = ({ data, isFetching }: PaymentListItemProps) => {
+const PaymentListItem = ({ data }: PaymentListItemProps) => {
   const { id, student, billNumber, paid, balance, createdAt } = data;
 
   return (
-    <li
-      data-id={id}
-      className={`payment-list-item relative group ${
-        isFetching ? 'opacity-50' : ''
-      }`}
-    >
-      {/* prevent onClick if fetching */}
-      {isFetching && <div className="absolute inset-0 z-50"></div>}
-
+    <li data-id={id} className="payment-list-item relative group">
       <p className="truncate">{student?.name}</p>
       <p className="truncate">first</p>
       <p className="truncate">{billNumber}</p>

@@ -16,12 +16,14 @@ describe('useLocalStorage', () => {
   });
 
   it('should return the value from localStorage if available', () => {
+    // set the value in localStorage
     localStorage.setItem('testKey', JSON.stringify('storedValue'));
 
     const { result } = renderHook(() =>
       useLocalStorage('testKey', 'initialValue')
     );
 
+    // check if the value same as storedValue
     expect(result.current[0]).toBe('storedValue');
   });
 
@@ -31,10 +33,12 @@ describe('useLocalStorage', () => {
     );
     const [, setValue] = result.current;
 
+    // change the value
     act(() => {
       setValue('newStoredValue');
     });
 
+    // check if the storedValue same as currentValue
     expect(result.current[0]).toBe('newStoredValue');
     expect(JSON.parse(localStorage.getItem('testKey')!)).toBe('newStoredValue');
   });
@@ -44,6 +48,7 @@ describe('useLocalStorage', () => {
       useLocalStorage('testKey', () => 'initialValueFn')
     );
 
+    // test function case
     expect(result.current[0]).toBe('initialValueFn');
   });
 });

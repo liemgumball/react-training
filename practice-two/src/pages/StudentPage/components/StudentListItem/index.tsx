@@ -1,31 +1,19 @@
 import Button from '@components/Button';
-import { TStudent } from '@utils/types';
+import { TStudent } from 'src/types';
 
 import pen from '@assets/pen.svg';
 import trash from '@assets/trash.svg';
-import { formatDate } from '@utils/formatDate';
+import { formatDate } from '@services/format';
 
 type StudentListItemProps = {
   data: TStudent;
-  isFetching?: boolean;
 };
 
-const StudentListItem: React.FC<StudentListItemProps> = ({
-  data,
-  isFetching,
-}) => {
+const StudentListItem: React.FC<StudentListItemProps> = ({ data }) => {
   const { avatar, createdAt, email, enrollNumber, id, name, phone } = data;
 
   return (
-    <li
-      data-id={id}
-      className={`student-list-item relative group  ${
-        isFetching ? 'opacity-50' : ''
-      }`}
-    >
-      {/* prevent onClick if fetching */}
-      {isFetching && <div className="absolute inset-0 z-50"></div>}
-
+    <li data-id={id} className="student-list-item relative group">
       <div>
         <img src={avatar} alt="student avatar" width={60} height={60} />
       </div>

@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useStudentForm from './';
-import { StudentInputs } from '@utils/types';
+import { StudentInputs } from 'src/types';
 
 describe('useStudentForm', () => {
   it('should initialize with closed status', () => {

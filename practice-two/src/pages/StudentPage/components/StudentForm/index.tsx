@@ -11,7 +11,7 @@ import {
   nameRegex,
   phoneNumberRegex,
 } from '@constants/regex';
-import { StudentInputs } from '@utils/types';
+import { StudentInputs } from 'src/types';
 import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 
 export type StudentFormProps = {

@@ -2,7 +2,7 @@ import useToggle from '@hooks/useToggle';
 import sort from '@assets/sort.svg';
 
 type SortMenuProps = {
-  onClick: (event: React.MouseEvent) => void;
+  onClick?: (event: React.MouseEvent) => void;
   children?: React.ReactNode;
 };
 

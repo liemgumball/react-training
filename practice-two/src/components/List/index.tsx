@@ -14,13 +14,17 @@ const List: React.FC<ListProps> = (props) => {
   // show error
   if (isError)
     return (
-      <p role="alert" className="text-red-500 text-center">
+      <p role="alert" className="text-red-500 text-center font-600">
         {error?.message || 'Unexpected error'}
       </p>
     );
   // loading
   else if (isLoading)
-    return <p className="text-custom-gray text-center">Loading...</p>;
+    return (
+      <p className="text-custom-dark-gray text-center animate-bounce">
+        Loading...
+      </p>
+    );
   // fetch successfully
   else return <ul onClick={onClick}>{children}</ul>;
 };

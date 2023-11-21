@@ -7,7 +7,7 @@ import useStudentForm from './hooks/useStudentForm';
 
 //context & constants
 import { SearchQueryContext } from '@contexts/SearchQuery';
-import { StudentInputs, TStudent } from '@utils/types';
+import { StudentInputs, TStudent } from 'src/types';
 import { DATABASE_RESOURCES } from '@constants/services';
 import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
 import api from '@services/apiRequest';
@@ -32,8 +32,8 @@ const StudentPage: React.FC = () => {
   const [sortBy, setSortBy] = useState('name');
 
   // Get students
-  const url = `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`;
-  const query = `?_sort=${sortBy}&_order=asc&q=${debouncedSearchQuery}`;
+  const url = `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}`;
+  const query = `?_sort=${sortBy}&q=${debouncedSearchQuery}`;
 
   const { data, isError, error, isLoading } = useQuery(
     ['students', debouncedSearchQuery, sortBy],
@@ -66,8 +66,7 @@ const StudentPage: React.FC = () => {
     baseDuration: number,
     startTime: number,
     commitTime: number,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    interactions: any
+    interactions: Set<unknown>
   ) => {
     console.log({
       id,

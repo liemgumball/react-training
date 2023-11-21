@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import PaymentListItem from '.';
-import { TPayment } from '@utils/types';
+import { TPayment } from 'src/types';
 
 const data = {
   createdAt: '2023-09-08T02:12:26.455Z',

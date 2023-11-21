@@ -1,15 +1,17 @@
 import api from '@services/apiRequest';
 import { DATABASE_RESOURCES } from '@constants/services';
-import { StudentInputs } from '@utils/types';
+import { StudentInputs } from 'src/types';
 
 export const saveStudent = (inputData: StudentInputs) => {
   return inputData.id
     ? api.patch(
-        `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}/${inputData.id}`,
+        `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}/${
+          inputData.id
+        }`,
         inputData
       )
     : api.post(
-        `${process.env.API_GATEWAY}/${DATABASE_RESOURCES.STUDENTS}`,
+        `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}`,
         inputData
       );
 };
