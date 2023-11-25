@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import SortMenu from '.';
 
@@ -23,18 +22,5 @@ describe('SortMenu component', () => {
 
     // Dropdown menu should be invisible again
     expect(menu).toHaveClass('invisible');
-  });
-
-  it('calls the onClick callback when the dropdown menu is clicked', () => {
-    const mockOnClick = vi.fn();
-
-    const { getByText } = render(
-      <SortMenu onClick={mockOnClick}>Menu content</SortMenu>
-    );
-
-    fireEvent.click(getByText('Menu content'));
-
-    // Verify that the onClick callback is called
-    expect(mockOnClick).toHaveBeenCalled();
   });
 });

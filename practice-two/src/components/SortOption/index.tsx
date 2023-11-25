@@ -1,12 +1,21 @@
+import { Dispatch, SetStateAction } from 'react';
+
 type SortOptionProps = {
   active?: boolean;
   value: string;
   children?: React.ReactNode;
+  setActive: Dispatch<SetStateAction<string>>;
 };
 
-const SortOption = ({ value, children, active }: SortOptionProps) => {
+const SortOption = (props: SortOptionProps) => {
+  const { value, children, setActive, active } = props;
+
   return (
-    <li value={value} className={`sort-option ${active ? 'active' : ''}`}>
+    <li
+      value={value}
+      className={`sort-option ${active ? 'active' : ''}`}
+      onClick={() => setActive(value)}
+    >
       {children}
     </li>
   );

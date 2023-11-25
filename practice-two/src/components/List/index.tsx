@@ -1,6 +1,6 @@
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 
-type ListProps = {
+export type ListProps = {
   isError?: boolean;
   error?: Error;
   isLoading?: boolean;
@@ -18,15 +18,17 @@ const List: React.FC<ListProps> = (props) => {
         {error?.message || 'Unexpected error'}
       </p>
     );
+
   // loading
-  else if (isLoading)
+  if (isLoading)
     return (
       <p className="text-custom-dark-gray text-center animate-bounce">
         Loading...
       </p>
     );
+
   // fetch successfully
-  else return <ul onClick={onClick}>{children}</ul>;
+  return <ul onClick={onClick}>{children}</ul>;
 };
 
 export default List;

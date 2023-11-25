@@ -15,6 +15,12 @@ describe('List component', () => {
     expect(getByRole('alert')).toHaveTextContent('Error of list');
   });
 
+  it('should render isError but no error', () => {
+    const { getByRole } = render(<List isError isLoading />);
+
+    expect(getByRole('alert')).toHaveTextContent('Unexpected error');
+  });
+
   it('should render loading message', () => {
     const { getByText } = render(
       <List isLoading>
