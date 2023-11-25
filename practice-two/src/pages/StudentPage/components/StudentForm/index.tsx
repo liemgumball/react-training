@@ -175,13 +175,25 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
         )}
 
         <Button
-          disabled={(!isValid && isSubmitted) || isSubmitting}
+          disabled={
+            (!isValid && isSubmitted && !errors.root) ||
+            (!errors.root && isSubmitting)
+          }
           variant="primary"
           className="mt-10 w-1/2 justify-self-center uppercase text-md"
           type="submit"
         >
-          {isSubmitting ? 'submitting...' : 'done'}
+          {errors.root ? 'retry' : isSubmitting ? 'submitting...' : 'done'}
         </Button>
+
+        {errors.root && (
+          <p
+            className="text-red-500 text-sm text-center mt-1 transition-all delay-300"
+            role="alert"
+          >
+            {errors.root.message}
+          </p>
+        )}
       </form>
     </div>
   );

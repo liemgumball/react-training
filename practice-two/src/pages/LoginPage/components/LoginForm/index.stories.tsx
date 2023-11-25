@@ -4,6 +4,7 @@ import AuthProvider from '@contexts/Authentication';
 
 export default {
   title: 'LoginPage/LoginForm',
+  decorators: [(Story) => <AuthProvider>{Story()}</AuthProvider>],
   component: LoginForm,
   parameters: {
     layout: 'centered',
@@ -13,10 +14,4 @@ export default {
 
 type Story = StoryObj<typeof LoginForm>;
 
-export const Default: Story = () => (
-  <AuthProvider>
-    <LoginForm />
-  </AuthProvider>
-);
-
-Default.args = {};
+export const Default: Story = {};
