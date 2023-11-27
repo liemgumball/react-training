@@ -1,3 +1,4 @@
+import '@fontsource/montserrat';
 import '../src/index.css';
 import type { Preview } from '@storybook/react';
 

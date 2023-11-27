@@ -1,9 +1,9 @@
-import { DATABASE_RESOURCES } from '@constants/services';
+import { STUDENTS_URL } from '@constants/services';
 import api from '@services/apiRequest';
 import { saveStudent } from './saveStudent';
 import { StudentInputs } from 'src/types';
 
-vi.mock('@services/apiRequest', () => ({
+vi.mock('./apiRequest', () => ({
   __esModule: true,
   default: {
     post: vi.fn(),
@@ -40,10 +40,7 @@ describe('saveStudent function', () => {
 
     await saveStudent(mockStudentInput);
 
-    expect(mockApiPost).toHaveBeenCalledWith(
-      `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}`,
-      mockStudentInput
-    );
+    expect(mockApiPost).toHaveBeenCalledWith(STUDENTS_URL, mockStudentInput);
   });
 
   it('should update an existing student using PATCH', async () => {
@@ -68,9 +65,7 @@ describe('saveStudent function', () => {
     await saveStudent(mockStudentInput);
 
     expect(mockApiPatch).toHaveBeenCalledWith(
-      `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}/${
-        mockStudentInput.id
-      }`,
+      `${STUDENTS_URL}/${mockStudentInput.id}`,
       mockStudentInput
     );
   });

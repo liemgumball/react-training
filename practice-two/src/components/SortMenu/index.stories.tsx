@@ -9,7 +9,7 @@ export default {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: { onClick: { action: 'clicked' } },
+  argTypes: {},
 } satisfies Meta<typeof SortMenu>;
 
 type Story = StoryObj<typeof SortMenu>;
@@ -18,6 +18,7 @@ const children = [
   {
     value: 'name',
     children: 'name',
+    active: true,
   },
   {
     value: 'email',
@@ -32,7 +33,12 @@ const children = [
 export const Default: Story = {
   args: {
     children: children.map((child) => (
-      <SortOption key={child.value} value={child.value}>
+      <SortOption
+        key={child.value}
+        value={child.value}
+        active={child.active}
+        setActive={() => {}}
+      >
         {child.children}
       </SortOption>
     )),

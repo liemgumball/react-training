@@ -1,16 +1,12 @@
-import { MouseEvent, Profiler, useCallback, useContext, useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { Profiler, useContext, useState } from 'react';
 
 // hooks
 import useDebounce from '@hooks/useDebounce';
 import useStudentForm from './hooks/useStudentForm';
+import useStudentsQuery from './hooks/useStudentQuery';
 
 //context & constants
 import { SearchQueryContext } from '@contexts/SearchQuery';
-import { StudentInputs, TStudent } from 'src/types';
-import { DATABASE_RESOURCES } from '@constants/services';
-import { CONFIRM_MSG, ERROR_MSG } from '@constants/messages';
-import api from '@services/apiRequest';
 
 //components
 import Button from '@components/Button';
@@ -32,106 +28,21 @@ const StudentPage: React.FC = () => {
   const [sortBy, setSortBy] = useState('name');
 
   // Get students
-  const url = `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.STUDENTS}`;
   const query = `?_sort=${sortBy}&q=${debouncedSearchQuery}`;
 
-  const { data, isError, error, isLoading } = useQuery(
-    ['students', debouncedSearchQuery, sortBy],
-    async () => (await api.get(url + query)) as TStudent[]
-  );
-
-  // Mutations
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
-    mutationFn: (id: string) => api.remove(url + '/' + id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['students'] }); // invalidate & refetch on mutation success
-    },
+  const { students, isError, error, isLoading } = useStudentsQuery({
+    query: query,
   });
 
   /**
-   * Profiler on rendering
-   * @param id of Profiler
-   * @param phase of render (mount | update)
-   * @param actualDuration
-   * @param baseDuration
-   * @param startTime
-   * @param commitTime
-   * @param interactions
+   * Profiler log information on rendering
    */
   const profilerRender = (
     id: string,
     phase: string,
-    actualDuration: number,
-    baseDuration: number,
-    startTime: number,
-    commitTime: number,
-    interactions: Set<unknown>
+    actualDuration: number
   ) => {
-    console.log({
-      id,
-      phase,
-      actualDuration,
-      baseDuration,
-      startTime,
-      commitTime,
-      interactions,
-    });
-  };
-
-  /**
-   * Delegated list onClick handle (edit || remove)
-   * @param event mouse event
-   */
-  const listOnClick = useCallback(
-    async (event: MouseEvent) => {
-      try {
-        const dataId = (event.target as HTMLElement)
-          .closest('li')
-          ?.getAttribute('data-id');
-        const btn = (event.target as HTMLUListElement).closest('button');
-
-        if (dataId) {
-          if (btn && btn.classList.contains('btn-edit')) {
-            dispatch({
-              status: 'editing',
-              student: (await api.get(url + '/' + dataId)) as StudentInputs,
-            });
-          }
-
-          if (btn && btn.classList.contains('btn-remove')) {
-            // show alert confirm message
-            if (window.confirm(CONFIRM_MSG.REMOVE_STUDENT)) {
-              await mutateAsync(dataId); // remove and refetch the students
-            }
-          }
-        } else {
-          throw new Error(ERROR_MSG.MISSING_ID);
-        }
-      } catch (err) {
-        alert((err as Error).message);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [url]
-  );
-
-  /**
-   * Delegated onClick to select sort option
-   * @param event Mouse event
-   */
-  const dropDownMenuOnClick = (event: React.MouseEvent) => {
-    try {
-      const value = (event.target as HTMLElement)
-        .closest('li')
-        ?.getAttribute('value');
-
-      if (value) {
-        setSortBy(value);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    console.log(`Profiler [${id}] - ${phase} - ${actualDuration} ms`);
   };
 
   return (
@@ -140,27 +51,41 @@ const StudentPage: React.FC = () => {
         <header className="py-3 flex justify-between items-center bg-white border-b">
           <h1 className="text-3xl font-700">students list</h1>
           <span className="action-bar flex gap-5">
-            <SortMenu onClick={dropDownMenuOnClick}>
-              <SortOption value="name" active={sortBy === 'name'}>
+            <SortMenu>
+              <SortOption
+                value="name"
+                active={sortBy === 'name'}
+                setActive={setSortBy}
+              >
                 name
               </SortOption>
-              <SortOption value="email" active={sortBy === 'email'}>
+              <SortOption
+                value="email"
+                active={sortBy === 'email'}
+                setActive={setSortBy}
+              >
                 email
               </SortOption>
-              <SortOption value="createdAt" active={sortBy === 'createdAt'}>
+              <SortOption
+                value="createdAt"
+                active={sortBy === 'createdAt'}
+                setActive={setSortBy}
+              >
                 date of admission
               </SortOption>
             </SortMenu>
             <Button
               className="uppercase"
-              variant="primary"
+              primary
               onClick={() => dispatch({ status: 'adding' })}
             >
               add new student
             </Button>
           </span>
         </header>
+
         <hr />
+
         <section className="students py-3">
           <header className="student-list-heading grid text-custom-medium-gray font-600 whitespace-nowrap">
             <span />
@@ -171,20 +96,23 @@ const StudentPage: React.FC = () => {
             <span>date of admission</span>
             <span />
           </header>
-          <List
-            isError={isError}
-            isLoading={isLoading}
-            error={error as Error}
-            onClick={listOnClick}
-          >
-            {data && data.length ? (
-              data.map((item) => <StudentListItem key={item.id} data={item} />)
+
+          <List isError={isError} isLoading={isLoading} error={error as Error}>
+            {students && students.length ? (
+              students.map((item) => (
+                <StudentListItem
+                  key={item.id}
+                  student={item}
+                  setStudentFormState={dispatch}
+                />
+              ))
             ) : (
               <p className="text-custom-dark-gray text-center">not found</p>
             )}
           </List>
         </section>
       </article>
+
       {formState.shown && (
         <StudentForm
           setFormState={dispatch}

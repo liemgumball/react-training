@@ -6,7 +6,7 @@ describe('Button component', () => {
     const mockOnClick = vi.fn();
 
     render(
-      <Button variant="primary" autoFocus onClick={mockOnClick}>
+      <Button primary autoFocus onClick={mockOnClick}>
         OK
       </Button>
     );

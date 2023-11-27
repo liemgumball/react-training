@@ -14,3 +14,11 @@ export const PATH_NAME = {
   SETTINGS: '/settings',
   EMPTY_PAGE: '/empty-page',
 };
+
+export const STUDENTS_URL = `${import.meta.env.VITE_API_URL}/${
+  DATABASE_RESOURCES.STUDENTS
+}`;
+
+export const PAYMENTS_URL = `${import.meta.env.VITE_API_URL}/${
+  DATABASE_RESOURCES.PAYMENTS
+}`;

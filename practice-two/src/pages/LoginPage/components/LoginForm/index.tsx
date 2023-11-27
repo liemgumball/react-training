@@ -97,7 +97,7 @@ const LoginForm: React.FC = () => {
       )}
 
       <Button
-        variant="primary"
+        primary
         type="submit"
         className="text-white uppercase text-700 mt-8"
         disabled={(!isValid && isSubmitted) || isSubmitting}

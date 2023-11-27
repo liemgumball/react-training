@@ -1,12 +1,9 @@
 import { useContext } from 'react';
 import { SearchQueryContext } from '@contexts/SearchQuery';
 import useDebounce from '@hooks/useDebounce';
-import { DATABASE_RESOURCES } from '@constants/services';
-import { useQuery } from 'react-query';
-import { TPayment } from 'src/types';
-import api from '@services/apiRequest';
 import List from '@components/List';
 import PaymentListItem from './components/PaymentListItem';
+import usePaymentQuery from './hooks/usePaymentQuery';
 
 const PaymentPage = () => {
   // Debounce the search query change
@@ -14,13 +11,11 @@ const PaymentPage = () => {
   const debouncedSearchQuery = useDebounce(searchQuery);
 
   // Get payments
-  const url = `${import.meta.env.VITE_API_URL}/${DATABASE_RESOURCES.PAYMENTS}`;
   const query = `?_expand=student&?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;
 
-  const { data, isError, error, isLoading } = useQuery(
-    ['payments', debouncedSearchQuery],
-    async () => (await api.get(url + query)) as TPayment[]
-  );
+  const { payments, isError, error, isLoading } = usePaymentQuery({
+    query: query,
+  });
 
   return (
     <article className="px-8 min-w-min">
@@ -39,8 +34,10 @@ const PaymentPage = () => {
           <span></span>
         </div>
         <List isError={isError} isLoading={isLoading} error={error as Error}>
-          {data && data.length ? (
-            data.map((item) => <PaymentListItem key={item.id} data={item} />)
+          {payments && payments.length ? (
+            payments.map((item) => (
+              <PaymentListItem key={item.id} payment={item} />
+            ))
           ) : (
             <p className="text-custom-dark-gray text-center">not found</p>
           )}

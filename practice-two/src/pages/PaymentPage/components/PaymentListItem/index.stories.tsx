@@ -33,5 +33,5 @@ const data = {
 } as TPayment;
 
 export const Default: Story = {
-  args: { data: data },
+  args: { payment: data },
 };

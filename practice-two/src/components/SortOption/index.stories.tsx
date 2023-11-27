@@ -11,6 +11,7 @@ export default {
   argTypes: {
     value: { control: 'text' },
     active: { control: 'boolean' },
+    setActive: { action: 'clicked' },
   },
 } satisfies Meta<typeof SortOption>;
 
@@ -20,5 +21,6 @@ export const Default: Story = {
   args: {
     value: 'name',
     children: 'Name',
+    active: true,
   },
 };

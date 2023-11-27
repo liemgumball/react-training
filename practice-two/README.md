@@ -1,27 +1,100 @@
-# React + TypeScript + Vite
+# React-training
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Target:
 
-Currently, two official plugins are available:
+- Apply knowledge of React/TypeScript (with ES6 syntax).
+- Understand and apply React Advanced.
+- Understand and apply UNIT testing.
+- Apply Storybook.
+- Apply TailwindCSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Design on figma:
 
-## Expanding the ESLint configuration
+[Figma](https://www.figma.com/file/IOcRRwJGcAWrGZaHUp3F7p/React-practice?type=design&node-id=1%3A63&mode=dev)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Information:
 
-- Configure the top-level `parserOptions` property like this:
+- Time line: 2023/11/01 – 2023/11/26
+- Editor: Visual Studio Code
+- Supported browser: Chrome, Firefox, MS Edge, Opera, Safari lasted
+- Supported screen: Screen width 996px or larger
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+## Team size:
+
+- 1 dev: Liem Nguyen
+
+## Develop Environment:
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- React & TypeScript
+- [Github](https://github.com/)
+
+## Folder structure:
+
+```
+.
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── constants/
+│   ├── contexts/
+│   ├── data/
+│   ├── pages/
+│   │   ├── LoginPage/
+│   │       ├── components/
+│   │       ├── hooks/
+│   │       ├── services/
+│   │       ├── index.tsx
+│   ├── hooks/
+│   ├── routers/
+│   ├── services/
+│   ├── types/
+│   ├── utils/
+│   └── App.tsx
+│   └── main.tsx
+└── README.md
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Getting started
+
+- Step 01: Clone repository with HTTPS
+
+```bash
+git clone https://github.com/liemgumball/react-training.git
+```
+
+- Step 02: Change to branch feature/practice-two
+
+```bash
+git checkout feature/practice-two
+```
+
+- Step 03: Install packages
+
+```bash
+pnpm install
+```
+
+- Step 04: Run json-server
+
+```bash
+node server/index.js
+```
+
+- Step 05: Move to folder which just cloned in your computer
+
+```bash
+cd practice-two
+```
+
+- Step 06: Install packages
+
+```bash
+pnpm install
+```
+
+- Step 07: Run
+
+```bash
+pnpm dev
+```

@@ -12,7 +12,7 @@ export default {
   argTypes: {
     onClick: { action: 'clicked' },
     onMouseOver: { action: 'mouseOvered' },
-    variant: { control: 'radio', options: ['primary', undefined] },
+    primary: { control: 'boolean' },
   },
 } satisfies Meta<typeof Button>;
 
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   args: {
-    variant: 'primary',
+    primary: true,
     disabled: false,
     children: 'Submit',
   },

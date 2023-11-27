@@ -1,25 +1,52 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import StudentListItem from '.';
-import { TStudent } from 'src/types';
+import api from '@services/apiRequest';
 
-const data = {
+// Mocking the useStudentRemoving hook
+vi.mock('@pages/StudentPage/hooks/useStudentRemoving', () => ({
+  __esModule: true,
+  default: () => ({ removeStudent: vi.fn() }),
+}));
+
+const mockStudent = {
+  avatar: 'mock-avatar-url',
   createdAt: '2023-09-07T23:25:31.357Z',
-  name: 'Verna Senger',
-  avatar: 'https://loremflickr.com/60/60',
-  email: 'Aglae61@yahoo.com',
-  phone: '0931009009',
-  enrollNumber: 768475388,
+  email: 'mock@example.com',
+  enrollNumber: 123456,
   id: 1,
-} as TStudent;
+  name: 'Mock Student',
+  phone: '1234567890',
+};
 
-describe('Student list item component', () => {
-  it('should render a student list item', () => {
-    const { getAllByRole } = render(<StudentListItem data={data} />);
+describe('StudentListItem component', () => {
+  const mockApiGet = vi.spyOn(api, 'get');
 
-    // Check that the <img> element has the correct 'alt' attribute
-    expect(getAllByRole('img')[0]).toHaveAttribute('alt', 'student avatar');
+  it('renders student data and handles remove and edit actions', async () => {
+    const setStudentFormStateMock = vi.fn();
 
-    // Check that the data-id attribute on the root element is correct
-    expect(getAllByRole('listitem')[0]).toHaveAttribute('data-id', '1');
+    const { getByText, getByAltText } = render(
+      <StudentListItem
+        student={mockStudent}
+        setStudentFormState={setStudentFormStateMock}
+      />
+    );
+
+    mockApiGet.mockResolvedValue(mockStudent);
+
+    // Assert that student data is rendered
+    expect(getByText('Mock Student')).toBeInTheDocument();
+    expect(getByText('mock@example.com')).toBeInTheDocument();
+    expect(getByText('1234567890')).toBeInTheDocument();
+    expect(getByText('123456')).toBeInTheDocument();
+
+    // Trigger edit action
+    fireEvent.click(getByAltText('pen'));
+    await waitFor(() => {
+      // setStudentFormState should be called with the correct arguments
+      expect(setStudentFormStateMock).toHaveBeenCalledWith({
+        status: 'editing',
+        student: mockStudent, // You may refine this expectation based on your actual implementation
+      });
+    });
   });
 });

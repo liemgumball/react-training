@@ -2,10 +2,18 @@ import { Meta, StoryObj } from '@storybook/react';
 import List from '.';
 import { TStudent } from 'src/types';
 import StudentListItem from '@pages/StudentPage/components/StudentListItem';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 export default {
   title: 'Components/List',
   component: List,
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>{Story()}</QueryClientProvider>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },
@@ -65,7 +73,11 @@ const data = [
 export const Default: Story = {
   args: {
     children: (data as TStudent[]).map((item, index) => (
-      <StudentListItem data={item} key={index} />
+      <StudentListItem
+        student={item}
+        key={index}
+        setStudentFormState={() => {}}
+      />
     )),
     error: new Error('Testing error message'),
   },
@@ -76,7 +88,11 @@ export const IsError: Story = {
     isError: true,
     error: new Error('Testing error message'),
     children: (data as TStudent[]).map((item, index) => (
-      <StudentListItem data={item} key={index} />
+      <StudentListItem
+        student={item}
+        key={index}
+        setStudentFormState={() => {}}
+      />
     )),
   },
 };
@@ -85,7 +101,11 @@ export const IsLoading: Story = {
   args: {
     isLoading: true,
     children: (data as TStudent[]).map((item, index) => (
-      <StudentListItem data={item} key={index} />
+      <StudentListItem
+        student={item}
+        key={index}
+        setStudentFormState={() => {}}
+      />
     )),
   },
 };

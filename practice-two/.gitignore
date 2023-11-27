@@ -25,4 +25,3 @@ storybook-static
 *.sln
 *.sw?
 .vercel
-.env

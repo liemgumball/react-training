@@ -1,8 +1,9 @@
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import PaymentListItem from '.';
+import { NOTIFIES_MSG } from '@constants/messages';
 import { TPayment } from 'src/types';
 
-const data = {
+const mockPayment = {
   createdAt: '2023-09-08T02:12:26.455Z',
   studentId: 1,
   billNumber: 832734803,
@@ -20,14 +21,31 @@ const data = {
   },
 } as TPayment;
 
-describe('Payment list item component', () => {
-  it('should render a payment list item', () => {
-    const { getAllByRole } = render(<PaymentListItem data={data} />);
+describe('PaymentListItem component', () => {
+  // Mock window.alert
+  const originalAlert = window.alert;
+  beforeEach(() => {
+    window.alert = vi.fn();
+  });
 
-    // Check that the <img> element has the correct 'alt' attribute
-    expect(getAllByRole('img')[0]).toHaveAttribute('alt', 'eye');
+  afterEach(() => {
+    window.alert = originalAlert;
+  });
 
-    // Check that the data-id attribute on the root element is correct
-    expect(getAllByRole('listitem')[0]).toHaveAttribute('data-id', '1');
+  it('renders payment data and handles view details click', () => {
+    render(<PaymentListItem payment={mockPayment} />);
+
+    // Assert that payment data is rendered
+    expect(screen.getByText('Verna Senger')).toBeInTheDocument();
+    expect(screen.getByText('832734803')).toBeInTheDocument();
+    expect(screen.getByText('inr 436,135,112')).toBeInTheDocument();
+    expect(screen.getByText('inr 704,937,932')).toBeInTheDocument();
+    expect(screen.getByText('Sep 08, 2023')).toBeInTheDocument();
+
+    // Trigger view details click
+    fireEvent.click(screen.getByAltText('eye'));
+
+    // Assert that the alert message is called
+    expect(window.alert).toHaveBeenCalledWith(NOTIFIES_MSG.FUTURE_FEATURE);
   });
 });
