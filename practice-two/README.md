@@ -78,7 +78,7 @@ pnpm install
 - Step 04: Run json-server
 
 ```bash
-node data/index.js
+node server/index.js
 ```
 
 - Step 05: Move to folder which just cloned in your computer
