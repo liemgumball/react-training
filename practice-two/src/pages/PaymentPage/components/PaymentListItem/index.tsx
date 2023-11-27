@@ -2,7 +2,7 @@ import Button from '@components/Button';
 import { formatDate, formatAmount } from '@services/format';
 import { TPayment } from 'src/types';
 import eye from '@assets/eye.svg';
-import { NOTIFICATION_MESSAGE } from '@constants/messages';
+import { NOTIFIES_MSG } from '@constants/messages';
 
 type PaymentListItemProps = {
   payment: TPayment;
@@ -12,7 +12,7 @@ const PaymentListItem = ({ payment }: PaymentListItemProps) => {
   const { id, student, billNumber, paid, balance, createdAt } = payment;
 
   const viewDetailClick = () => {
-    alert(NOTIFICATION_MESSAGE.FUTURE_FEATURE);
+    alert(NOTIFIES_MSG.FUTURE_FEATURE);
   };
 
   return (

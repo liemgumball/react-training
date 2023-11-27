@@ -179,7 +179,7 @@ const StudentForm: React.FC<StudentFormProps> = (props: StudentFormProps) => {
             (!isValid && isSubmitted && !errors.root) ||
             (!errors.root && isSubmitting)
           }
-          variant="primary"
+          primary
           className="mt-10 w-1/2 justify-self-center uppercase text-md"
           type="submit"
         >

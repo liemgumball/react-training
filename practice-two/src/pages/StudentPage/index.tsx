@@ -76,7 +76,7 @@ const StudentPage: React.FC = () => {
             </SortMenu>
             <Button
               className="uppercase"
-              variant="primary"
+              primary
               onClick={() => dispatch({ status: 'adding' })}
             >
               add new student

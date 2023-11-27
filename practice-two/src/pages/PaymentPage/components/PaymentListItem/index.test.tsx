@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import PaymentListItem from '.';
-import { NOTIFICATION_MESSAGE } from '@constants/messages';
+import { NOTIFIES_MSG } from '@constants/messages';
 import { TPayment } from 'src/types';
 
 const mockPayment = {
@@ -46,8 +46,6 @@ describe('PaymentListItem component', () => {
     fireEvent.click(screen.getByAltText('eye'));
 
     // Assert that the alert message is called
-    expect(window.alert).toHaveBeenCalledWith(
-      NOTIFICATION_MESSAGE.FUTURE_FEATURE
-    );
+    expect(window.alert).toHaveBeenCalledWith(NOTIFIES_MSG.FUTURE_FEATURE);
   });
 });
