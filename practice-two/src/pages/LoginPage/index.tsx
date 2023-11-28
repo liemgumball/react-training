@@ -34,7 +34,7 @@ const LoginPage = () => {
           Forgot your password?{' '}
           <Link
             className="text-custom-yellow underline"
-            to={PATH_NAME.EMPTY_PAGE}
+            to={PATH_NAME.RESET_PASSWORD}
           >
             Reset Password
           </Link>

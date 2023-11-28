@@ -1,5 +1,6 @@
-import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import { lazy } from 'react';
+import { PATH_NAME } from '@constants/services';
 
 const router = createBrowserRouter([
   {
@@ -9,15 +10,15 @@ const router = createBrowserRouter([
         Component: lazy(() => import('@layouts/MainLayout')),
         children: [
           {
-            path: '/',
+            path: PATH_NAME.HOME,
             Component: lazy(() => import('@pages/DashBoardPage')),
           },
           {
-            path: '/students',
+            path: PATH_NAME.STUDENTS,
             Component: lazy(() => import('@pages/StudentPage')),
           },
           {
-            path: '/payments',
+            path: PATH_NAME.PAYMENTS,
             Component: lazy(() => import('@pages/PaymentPage')),
           },
           {
@@ -29,8 +30,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/login',
+    path: PATH_NAME.LOGIN,
     Component: lazy(() => import('@pages/LoginPage')),
+  },
+  {
+    path: PATH_NAME.RESET_PASSWORD,
+    Component: lazy(() => import('@pages/EmptyPage')),
   },
 ]);
 

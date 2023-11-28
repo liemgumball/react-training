@@ -12,6 +12,7 @@ export const PATH_NAME = {
   COURSES: '/courses',
   REPORTS: '/reports',
   SETTINGS: '/settings',
+  RESET_PASSWORD: '/reset-password',
   EMPTY_PAGE: '/empty-page',
 };
 
