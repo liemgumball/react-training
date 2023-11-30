@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { Suspense, lazy } from 'react';
 import Loader from '@utils/Loader';
@@ -11,6 +11,8 @@ const Sidebar = lazy(() => import('./Sidebar'));
 const queryClient = new QueryClient();
 
 const MainLayout = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-white flex capitalize h-screen">
       <Sidebar />
@@ -18,7 +20,7 @@ const MainLayout = () => {
         {/* Error Boundary */}
         <ErrorBoundary
           FallbackComponent={ErrorFallback}
-          onReset={() => window.location.reload()} // reload window to reset error
+          onReset={() => navigate({ search: '', hash: '' }, { replace: true })} // reset search and hash
         >
           {/* Client query  */}
           <QueryClientProvider client={queryClient}>
