@@ -28,9 +28,11 @@ const LoginForm: React.FC = () => {
       if (auth && setAuth) setAuth(auth); // if login successfully
     } catch (err) {
       const errorMessage = (err as Error).message;
-      // set errors for inputs field
-      setError('email', { type: 'value', message: errorMessage });
-      setError('password', { type: 'value', message: errorMessage });
+      if (errorMessage === ERROR_MSG.WRONG_EMAIL_OR_PASSWORD) {
+        // set errors for inputs field
+        setError('email', { type: 'value', message: errorMessage });
+        setError('password', { type: 'value', message: errorMessage });
+      }
     }
   };
 
