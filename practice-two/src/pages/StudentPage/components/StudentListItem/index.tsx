@@ -87,4 +87,6 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
   );
 };
 
+StudentListItem.whyDidYouRender = true;
+
 export default StudentListItem;
