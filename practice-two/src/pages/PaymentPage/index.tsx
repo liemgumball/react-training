@@ -1,14 +1,13 @@
-import { useContext } from 'react';
-import { SearchQueryContext } from '@contexts/SearchQuery';
 import useDebounce from '@hooks/useDebounce';
 import List from '@components/List';
 import PaymentListItem from './components/PaymentListItem';
 import usePaymentQuery from './hooks/usePaymentQuery';
+import { useSearchParams } from 'react-router-dom';
 
 const PaymentPage = () => {
   // Debounce the search query change
-  const { searchQuery } = useContext(SearchQueryContext);
-  const debouncedSearchQuery = useDebounce(searchQuery);
+  const [searchParams] = useSearchParams({ q: '' });
+  const debouncedSearchQuery = useDebounce(searchParams.get('q') || '');
 
   // Get payments
   const query = `?_expand=student&?_sort=createdAt&_order=desc&q=${debouncedSearchQuery}`;

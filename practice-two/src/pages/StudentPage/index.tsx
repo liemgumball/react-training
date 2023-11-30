@@ -1,12 +1,9 @@
-import { Profiler, useContext, useState } from 'react';
+import { Profiler } from 'react';
 
 // hooks
 import useDebounce from '@hooks/useDebounce';
 import useStudentForm from './hooks/useStudentForm';
 import useStudentsQuery from './hooks/useStudentQuery';
-
-//context & constants
-import { SearchQueryContext } from '@contexts/SearchQuery';
 
 //components
 import Button from '@components/Button';
@@ -15,20 +12,20 @@ import SortMenu from '@components/SortMenu';
 import SortOption from '@components/SortOption';
 import StudentListItem from './components/StudentListItem';
 import StudentForm from './components/StudentForm';
+import { useSearchParams } from 'react-router-dom';
 
 const StudentPage: React.FC = () => {
   // Student form reducer
   const [formState, dispatch] = useStudentForm();
 
   // Debounce the search query change
-  const { searchQuery } = useContext(SearchQueryContext);
-  const debouncedSearchQuery = useDebounce(searchQuery);
+  const [searchParams] = useSearchParams({ q: '', sort: 'name' });
 
-  // Sort field
-  const [sortBy, setSortBy] = useState('name');
+  const debouncedSearchQuery = useDebounce(searchParams.get('q') || '');
+  const sortQuery = searchParams.get('sort') || '';
 
   // Get students
-  const query = `?_sort=${sortBy}&q=${debouncedSearchQuery}`;
+  const query = `?_sort=${sortQuery}&q=${debouncedSearchQuery}`;
 
   const { students, isError, error, isLoading } = useStudentsQuery({
     query: query,
@@ -52,25 +49,13 @@ const StudentPage: React.FC = () => {
           <h1 className="text-3xl font-700">students list</h1>
           <span className="action-bar flex gap-5">
             <SortMenu>
-              <SortOption
-                value="name"
-                active={sortBy === 'name'}
-                setActive={setSortBy}
-              >
+              <SortOption value="name" active={sortQuery === 'name'}>
                 name
               </SortOption>
-              <SortOption
-                value="email"
-                active={sortBy === 'email'}
-                setActive={setSortBy}
-              >
+              <SortOption value="email" active={sortQuery === 'email'}>
                 email
               </SortOption>
-              <SortOption
-                value="createdAt"
-                active={sortBy === 'createdAt'}
-                setActive={setSortBy}
-              >
+              <SortOption value="createdAt" active={sortQuery === 'createdAt'}>
                 date of admission
               </SortOption>
             </SortMenu>

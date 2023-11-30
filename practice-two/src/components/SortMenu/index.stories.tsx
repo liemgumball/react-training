@@ -1,10 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import SortMenu from '.';
 import SortOption from '@components/SortOption';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'Components/SortMenu',
   component: SortMenu,
+  decorators: [(Story) => <MemoryRouter>{Story()}</MemoryRouter>],
   parameters: {
     layout: 'centered',
   },
@@ -33,12 +35,7 @@ const children = [
 export const Default: Story = {
   args: {
     children: children.map((child) => (
-      <SortOption
-        key={child.value}
-        value={child.value}
-        active={child.active}
-        setActive={() => {}}
-      >
+      <SortOption key={child.value} value={child.value}>
         {child.children}
       </SortOption>
     )),
