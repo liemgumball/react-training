@@ -6,10 +6,12 @@ import trash from '@assets/trash.svg';
 import { formatDate } from '@services/format';
 import useStudentRemoving from '@pages/StudentPage/hooks/useStudentRemoving';
 import { CONFIRM_MSG } from '@constants/messages';
-import { Dispatch } from 'react';
+import { Dispatch, useState } from 'react';
 import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
 import api from '@services/apiRequest';
 import { STUDENTS_URL } from '@constants/services';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 type StudentListItemProps = {
   student: TStudent;
@@ -22,6 +24,8 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
 }) => {
   const { avatar, createdAt, email, enrollNumber, id, name, phone } = student;
 
+  const [isFetching, setIsFetching] = useState(false);
+
   const { removeStudent } = useStudentRemoving();
 
   const onClickRemove = () => {
@@ -29,9 +33,14 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
   };
 
   const onClickEdit = async () => {
+    setIsFetching(true);
+
+    const student = (await api.get(STUDENTS_URL + '/' + id)) as StudentInputs;
+    if (student) setIsFetching(false);
+
     setStudentFormState({
       status: 'editing',
-      student: (await api.get(STUDENTS_URL + '/' + id)) as StudentInputs,
+      student: student,
     });
   };
 
@@ -52,14 +61,26 @@ const StudentListItem: React.FC<StudentListItemProps> = ({
         <Button
           className="btn-remove group-hover:hover:bg-white group-hover:bg-custom-light-pink"
           onClick={onClickRemove}
+          style={{ height: '45px' }}
         >
           <img src={trash} alt="trash" />
         </Button>
         <Button
           className="btn-edit group-hover:hover:bg-white group-hover:bg-custom-light-pink"
           onClick={onClickEdit}
+          style={{ height: '45px' }}
         >
-          <img src={pen} alt="pen" />
+          {isFetching ? (
+            <FontAwesomeIcon
+              icon={faSpinner}
+              spinPulse
+              className="text-custom-yellow"
+              height={14}
+              width={19}
+            />
+          ) : (
+            <img src={pen} alt="pen" />
+          )}
         </Button>
       </div>
     </li>

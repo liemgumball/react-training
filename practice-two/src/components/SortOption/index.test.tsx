@@ -1,35 +1,49 @@
-import { fireEvent, render } from '@testing-library/react';
-import SortOption from '.';
+import { render, fireEvent } from '@testing-library/react';
+import SortOption from './';
+import * as ReactRouterDom from 'react-router-dom';
 
-describe('SortOption component', () => {
-  it('renders with active class when active prop is true', () => {
-    const { container } = render(
-      <SortOption value="option1" active setActive={() => {}}>
-        Option 1
-      </SortOption>
-    );
-    expect(container.firstChild).toHaveClass('active');
-  });
-
-  it('does not render active class when active prop is false', () => {
-    const { container } = render(
-      <SortOption value="option1" active={false} setActive={() => {}}>
-        Option 1
-      </SortOption>
-    );
-    expect(container.firstChild).not.toHaveClass('active');
-  });
-
-  it('renders the correct value prop', () => {
-    const mockOnClick = vi.fn();
+describe('SortOption', () => {
+  it('renders SortOption component correctly', () => {
     const { getByText } = render(
-      <SortOption value="option1" setActive={mockOnClick}>
-        Option 1
-      </SortOption>
+      <ReactRouterDom.MemoryRouter>
+        <SortOption value="asc">Ascending</SortOption>
+      </ReactRouterDom.MemoryRouter>
     );
-    expect(getByText('Option 1')).toHaveAttribute('value', 'option1');
 
-    fireEvent.click(getByText('Option 1'));
-    expect(mockOnClick).toHaveBeenCalledOnce();
+    const sortOptionElement = getByText('Ascending');
+    expect(sortOptionElement).toBeInTheDocument();
+  });
+
+  it('applies "active" class when active prop is true', () => {
+    const { container } = render(
+      <ReactRouterDom.MemoryRouter>
+        <SortOption value="asc" active>
+          Ascending
+        </SortOption>
+      </ReactRouterDom.MemoryRouter>
+    );
+
+    const sortOptionElement = container.querySelector('.sort-option');
+    expect(sortOptionElement).toHaveClass('active');
+  });
+
+  it('calls setSearchParams with the correct parameters on click', () => {
+    const setSearchParamsMock = vi.fn();
+
+    // Mock the useSearchParams hook with a mock function
+    vi.spyOn(ReactRouterDom, 'useSearchParams').mockReturnValue([
+      new URLSearchParams(),
+      setSearchParamsMock,
+    ]);
+
+    const { getByText } = render(
+      <SortOption value="asc">Ascending</SortOption>
+    );
+    const sortOptionElement = getByText('Ascending');
+    fireEvent.click(sortOptionElement);
+
+    expect(setSearchParamsMock).toHaveBeenCalledWith(expect.any(Function), {
+      replace: true,
+    });
   });
 });

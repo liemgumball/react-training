@@ -1,11 +1,21 @@
-import { useContext } from 'react';
-import { SearchQueryContext } from '@contexts/SearchQuery';
 import Input from '@components/Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useSearchParams } from 'react-router-dom';
 
 const Header = () => {
-  const { searchQuery, setSearchQuery } = useContext(SearchQueryContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('q') || '';
+
+  const setSearchQuery = (value: string) => {
+    setSearchParams(
+      (prev) => {
+        prev.set('q', value);
+        return prev;
+      },
+      { replace: true }
+    );
+  };
 
   if (searchQuery.length > 50) throw new Error('Search query length error');
 
