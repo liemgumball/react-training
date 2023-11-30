@@ -1,5 +1,5 @@
 import { Mock } from 'vitest';
-import api from './apiRequest';
+import api from '.';
 
 beforeEach(() => {
   (global.fetch as Mock) = vi.fn(); // redirect fetch() to the Mock

@@ -28,7 +28,7 @@ const get = async (path: string) => {
   return await request(path, 'GET');
 };
 
-const post = async <T,>(path: string, body: T) => {
+const post = async <T>(path: string, body: T) => {
   return await request(path, 'POST', body);
 };
 
@@ -36,11 +36,11 @@ const remove = async (path: string) => {
   return await request(path, 'DELETE');
 };
 
-const patch = async <T,>(path: string, body: T) => {
+const patch = async <T>(path: string, body: T) => {
   return await request(path, 'PATCH', body);
 };
 
-const put = async <T,>(path: string, body: T) => {
+const put = async <T>(path: string, body: T) => {
   return await request(path, 'PUT', body);
 };
 
