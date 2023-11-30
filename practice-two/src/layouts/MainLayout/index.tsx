@@ -1,12 +1,12 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Header';
 import { Suspense, lazy } from 'react';
 import Loader from '@utils/Loader';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '@utils/ErrorFallback';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-const Sidebar = lazy(() => import('./Sidebar'));
+const Sidebar = lazy(() => import('../Sidebar'));
 
 const queryClient = new QueryClient();
 
