@@ -5,5 +5,6 @@ if (import.meta.env.DEV == true) {
   whyDidYouRender(React, {
     trackAllPureComponents: true,
     trackHooks: true,
+    hotReloadBufferMs: 10,
   });
 }

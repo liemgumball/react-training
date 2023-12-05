@@ -83,7 +83,7 @@ const StudentPage: React.FC = () => {
           </header>
 
           <List isError={isError} isLoading={isLoading} error={error as Error}>
-            {students && students.length ? (
+            {students?.length ? (
               students.map((item) => (
                 <StudentListItem
                   key={item.id}

@@ -1,5 +1,5 @@
 import { STUDENTS_URL } from '@constants/services';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 import { useQuery } from 'react-query';
 import { TStudent } from 'src/types';
 

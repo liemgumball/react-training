@@ -1,5 +1,5 @@
 import { PAYMENTS_URL } from '@constants/services';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 import { useQuery } from 'react-query';
 import { TPayment } from 'src/types';
 

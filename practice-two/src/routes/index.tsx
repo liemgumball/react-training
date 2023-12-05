@@ -4,10 +4,10 @@ import { PATH_NAME } from '@constants/services';
 
 const router = createBrowserRouter([
   {
-    Component: lazy(() => import('@utils/PrivateRoutes')),
+    Component: lazy(() => import('@components/PrivateRoutes')),
     children: [
       {
-        Component: lazy(() => import('@layouts/MainLayout')),
+        Component: lazy(() => import('@components/MainLayout')),
         children: [
           {
             path: PATH_NAME.HOME,

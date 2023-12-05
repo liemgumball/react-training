@@ -1,6 +1,6 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import StudentListItem from '.';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 
 // Mocking the useStudentRemoving hook
 vi.mock('@pages/StudentPage/hooks/useStudentRemoving', () => ({

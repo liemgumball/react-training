@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { Suspense } from 'react';
 
-import Loader from '@utils/Loader';
+import Loader from '@components/Loader';
 import router from './routes';
 import AuthProvider from '@contexts/Authentication';
 

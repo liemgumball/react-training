@@ -33,7 +33,7 @@ const PaymentPage = () => {
           <span></span>
         </div>
         <List isError={isError} isLoading={isLoading} error={error as Error}>
-          {payments && payments.length ? (
+          {payments?.length ? (
             payments.map((item) => (
               <PaymentListItem key={item.id} payment={item} />
             ))
