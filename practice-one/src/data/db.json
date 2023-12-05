@@ -1,0 +1,204 @@
+{
+  "users": [
+    {
+      "email": "admin1@mail.com",
+      "password": "$2a$10$OnDGYB4ZRan.1v1zTIa/zuvZ54QF5W.2l4hHf5zGwLTW6x4M1jYya",
+      "name": "admin1",
+      "id": 1
+    }
+  ],
+  "students": [
+    {
+      "createdAt": "2023-09-07T23:25:31.357Z",
+      "name": "Verna Senger",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Aglae61@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 768475388,
+      "id": 1
+    },
+    {
+      "createdAt": "2023-09-07T19:49:09.602Z",
+      "name": "Andres Rath",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Florida63@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 507549695,
+      "id": 2
+    },
+    {
+      "createdAt": "2023-09-07T05:45:23.661Z",
+      "name": "Charlotte Walker",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Timmy_Cummerata@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 413719441,
+      "id": 3
+    },
+    {
+      "createdAt": "2023-09-08T02:15:27.377Z",
+      "name": "Otis Strosin",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Ryleigh_Barton@hotmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 271711717,
+      "id": 4
+    },
+    {
+      "createdAt": "2023-09-08T02:02:47.634Z",
+      "name": "Cecelia Jerde",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Harley41@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 941188683,
+      "id": 5
+    },
+    {
+      "createdAt": "2023-09-08T00:35:41.271Z",
+      "name": "Shari Buckridge MD",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Mikel.Howell53@hotmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 445193967,
+      "id": 6
+    },
+    {
+      "createdAt": "2023-09-07T10:54:22.127Z",
+      "name": "Shannon Rosenbaum",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Guillermo_Emmerich53@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 694451845,
+      "id": 7
+    },
+    {
+      "createdAt": "2023-09-07T20:33:18.567Z",
+      "name": "Clyde Grimes PhD",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Pansy.McLaughlin@hotmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 586002797,
+      "id": 8
+    },
+    {
+      "createdAt": "2023-09-07T22:35:16.912Z",
+      "name": "Lola Green",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Dessie_Jast@gmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 794397485,
+      "id": 9
+    },
+    {
+      "createdAt": "2023-09-07T19:26:12.409Z",
+      "name": "Eduardo Streich",
+      "avatar": "https://loremflickr.com/60/60",
+      "email": "Kody.Weimann@yahoo.com",
+      "phone": "0930000000",
+      "enrollNumber": 238807936,
+      "id": 10
+    },
+    {
+      "name": "Nguyễn Thanh Liêm",
+      "email": "liem1762001@gmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 313131323112,
+      "createdAt": "2023-09-20T04:00:29.758Z",
+      "avatar": "https://loremflickr.com/60/60",
+      "id": 11
+    },
+    {
+      "name": "Nguyễn Thanh Liêm",
+      "email": "liem1762001@gmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 198983013802,
+      "createdAt": "2023-09-27T03:41:56.952Z",
+      "avatar": "https://loremflickr.com/60/60",
+      "id": 12
+    },
+    {
+      "name": "Nguyễn Thanh Liêm",
+      "email": "liem1762001@gmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 131231314,
+      "createdAt": "2023-09-28T02:50:15.162Z",
+      "avatar": "https://loremflickr.com/60/60",
+      "id": 13
+    },
+    {
+      "name": "Nguyễn Thanh Liêm",
+      "email": "liem1762001@gmail.com",
+      "phone": "0930000000",
+      "enrollNumber": 11111112,
+      "createdAt": "2023-10-03T10:32:12.220Z",
+      "avatar": "https://loremflickr.com/60/60",
+      "id": 14
+    }
+  ],
+  "payments": [
+    {
+      "createdAt": "2023-09-08T02:12:26.455Z",
+      "studentId": 1,
+      "billNumber": 832734803,
+      "paid": 436135112,
+      "balance": 704937932,
+      "id": 1
+    },
+    {
+      "createdAt": "2023-09-07T12:52:54.274Z",
+      "studentId": 1,
+      "billNumber": 947533517,
+      "paid": 524336742,
+      "balance": 306855218,
+      "id": 2
+    },
+    {
+      "createdAt": "2023-09-07T21:27:09.008Z",
+      "studentId": 3,
+      "billNumber": 265288926,
+      "paid": 189635325,
+      "balance": 239370271,
+      "id": 3
+    },
+    {
+      "createdAt": "2023-09-07T21:05:44.772Z",
+      "studentId": 2,
+      "billNumber": 998810852,
+      "paid": 626798181,
+      "balance": 966368556,
+      "id": 5
+    },
+    {
+      "createdAt": "2023-09-07T18:45:23.301Z",
+      "studentId": 1,
+      "billNumber": 679770415,
+      "paid": 928247220,
+      "balance": 927176059,
+      "id": 6
+    },
+    {
+      "createdAt": "2023-09-07T05:17:21.744Z",
+      "studentId": 8,
+      "billNumber": 460696423,
+      "paid": 981842701,
+      "balance": 193541696,
+      "id": 7
+    },
+    {
+      "createdAt": "2023-09-08T02:30:19.087Z",
+      "studentId": 7,
+      "billNumber": 179170298,
+      "paid": 264329242,
+      "balance": 876698235,
+      "id": 9
+    },
+    {
+      "createdAt": "2023-09-07T20:55:33.280Z",
+      "studentId": 7,
+      "billNumber": 410224573,
+      "paid": 679885245,
+      "balance": 201626115,
+      "id": 10
+    }
+  ]
+}
