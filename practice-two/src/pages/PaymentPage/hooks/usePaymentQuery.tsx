@@ -1,5 +1,6 @@
 import { PAYMENTS_URL } from '@constants/services';
 import api from '@services/api-request';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { TPayment } from 'src/types';
 
@@ -16,7 +17,7 @@ const usePaymentQuery = (options: PaymentQueryOptions) => {
     error,
     isLoading,
   } = useQuery<TPayment[], Error>(
-    ['payments', query],
+    ['payments', useMemo(() => query, [query])],
     async () => (await api.get(PAYMENTS_URL + query)) as TPayment[]
   );
 

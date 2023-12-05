@@ -3,6 +3,7 @@ import List from '@components/List';
 import PaymentListItem from './components/PaymentListItem';
 import usePaymentQuery from './hooks/usePaymentQuery';
 import { useSearchParams } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const PaymentPage = () => {
   // Debounce the search query change
@@ -33,12 +34,16 @@ const PaymentPage = () => {
           <span></span>
         </div>
         <List isError={isError} isLoading={isLoading} error={error as Error}>
-          {payments?.length ? (
-            payments.map((item) => (
-              <PaymentListItem key={item.id} payment={item} />
-            ))
-          ) : (
-            <p className="text-custom-dark-gray text-center">not found</p>
+          {useMemo(
+            () =>
+              payments?.length ? (
+                payments.map((item) => (
+                  <PaymentListItem key={item.id} payment={item} />
+                ))
+              ) : (
+                <p className="text-custom-dark-gray text-center">not found</p>
+              ),
+            [payments]
           )}
         </List>
       </div>

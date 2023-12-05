@@ -1,4 +1,4 @@
-import { Profiler } from 'react';
+import { Profiler, startTransition, useMemo } from 'react';
 
 // hooks
 import useDebounce from '@hooks/useDebounce';
@@ -34,13 +34,10 @@ const StudentPage: React.FC = () => {
   /**
    * Profiler log information on rendering
    */
-  const profilerRender = (
-    id: string,
-    phase: string,
-    actualDuration: number
-  ) => {
-    console.log(`Profiler [${id}] - ${phase} - ${actualDuration} ms`);
-  };
+  const profilerRender = (id: string, phase: string, actualDuration: number) =>
+    startTransition(() => {
+      console.log(`Profiler [${id}] - ${phase} - ${actualDuration} ms`);
+    });
 
   return (
     <Profiler id="student-page" onRender={profilerRender}>
@@ -83,16 +80,21 @@ const StudentPage: React.FC = () => {
           </header>
 
           <List isError={isError} isLoading={isLoading} error={error as Error}>
-            {students?.length ? (
-              students.map((item) => (
-                <StudentListItem
-                  key={item.id}
-                  student={item}
-                  setStudentFormState={dispatch}
-                />
-              ))
-            ) : (
-              <p className="text-custom-dark-gray text-center">not found</p>
+            {useMemo(
+              () =>
+                students?.length ? (
+                  students.map((item) => (
+                    <StudentListItem
+                      key={item.id}
+                      student={item}
+                      setStudentFormState={dispatch}
+                    />
+                  ))
+                ) : (
+                  <p className="text-custom-dark-gray text-center">not found</p>
+                ),
+              // eslint-disable-next-line react-hooks/exhaustive-deps
+              [students?.length]
             )}
           </List>
         </section>
