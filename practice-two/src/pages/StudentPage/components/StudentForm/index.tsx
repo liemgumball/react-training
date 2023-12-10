@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { saveStudent } from '@pages/StudentPage/services/saveStudent';
+import { saveStudent } from '@services/save-student';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import { ERROR_MSG } from '@constants/messages';

@@ -1,4 +1,4 @@
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 import { STUDENTS_URL } from '@constants/services';
 import { StudentInputs } from 'src/types';
 

@@ -1,6 +1,6 @@
 import { STUDENTS_URL } from '@constants/services';
-import api from '@services/apiRequest';
-import { saveStudent } from './saveStudent';
+import api from '@services/api-request';
+import { saveStudent } from '.';
 import { StudentInputs } from 'src/types';
 
 vi.mock('./apiRequest', () => ({

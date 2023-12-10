@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import StudentForm from '.';
 import { act } from 'react-dom/test-utils';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 import { STUDENTS_URL } from '@constants/services';
 
 // Create a QueryClient instance for testing

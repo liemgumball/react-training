@@ -27,4 +27,6 @@ const DashBoardCard: React.FC<DashBoardCardProps> = (props) => {
   );
 };
 
+DashBoardCard.whyDidYouRender = true;
+
 export default DashBoardCard;

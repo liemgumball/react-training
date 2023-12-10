@@ -1,6 +1,6 @@
-import api from '@services/apiRequest';
-import { login } from './login'; // Update with the correct path
-import { LoginInputs } from '../components/LoginForm';
+import api from '@services/api-request';
+import { login } from '.'; // Update with the correct path
+import { LoginInputs } from '../../pages/LoginPage/components/LoginForm';
 import { ERROR_MSG } from '@constants/messages';
 
 vi.mock('@services/apiRequest', () => ({

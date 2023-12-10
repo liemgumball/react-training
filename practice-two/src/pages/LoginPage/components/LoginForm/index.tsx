@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { login } from '../../services/login';
+import { login } from '@services/login';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import { AuthContext } from '@contexts/Authentication';

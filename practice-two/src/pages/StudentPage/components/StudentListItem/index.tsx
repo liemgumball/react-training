@@ -8,7 +8,7 @@ import useStudentRemoving from '@pages/StudentPage/hooks/useStudentRemoving';
 import { CONFIRM_MSG } from '@constants/messages';
 import { Dispatch, useState } from 'react';
 import { StudentFormAction } from '@pages/StudentPage/hooks/useStudentForm';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
 import { STUDENTS_URL } from '@constants/services';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';

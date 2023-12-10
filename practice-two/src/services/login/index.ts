@@ -1,5 +1,5 @@
-import { LoginInputs } from '../components/LoginForm';
-import api from '@services/apiRequest';
+import { LoginInputs } from '../../pages/LoginPage/components/LoginForm';
+import api from '@services/api-request';
 import { AuthType } from '@contexts/Authentication';
 import { ERROR_MSG } from '@constants/messages';
 

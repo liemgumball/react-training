@@ -1,5 +1,6 @@
 import { STUDENTS_URL } from '@constants/services';
-import api from '@services/apiRequest';
+import api from '@services/api-request';
+import { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { TStudent } from 'src/types';
 
@@ -16,7 +17,7 @@ const useStudentsQuery = (options: StudentQueryOptions) => {
     error,
     isLoading,
   } = useQuery<TStudent[], Error>(
-    ['students', query],
+    ['students', useMemo(() => query, [query])],
     async () => (await api.get(STUDENTS_URL + query)) as TStudent[]
   );
 
