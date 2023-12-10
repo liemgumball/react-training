@@ -43,7 +43,8 @@ const PaymentPage = () => {
               ) : (
                 <p className="text-custom-dark-gray text-center">not found</p>
               ),
-            [payments]
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            [payments?.length]
           )}
         </List>
       </div>
